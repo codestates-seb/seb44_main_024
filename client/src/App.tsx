@@ -1,9 +1,8 @@
 import './App.css';
+import Test from './components/Test.tsx';
 
 function App() {
-  return <></>;
+  return <Test />;
 }
 
 export default App;
-
-// 커밋테스트
