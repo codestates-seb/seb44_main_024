@@ -1,8 +1,12 @@
 import './App.css';
-import Test from './components/Test.tsx';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  return <Test />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
 
 export default App;
