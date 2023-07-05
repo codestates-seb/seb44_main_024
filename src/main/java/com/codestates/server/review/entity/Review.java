@@ -1,15 +1,17 @@
 package com.codestates.server.review.entity;
 
+import com.codestates.server.like.entity.ReviewLike;
 import com.codestates.server.tag.entity.ReviewTag;
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -46,6 +48,9 @@ public class Review {
     @LastModifiedDate
     @Column(nullable = false, columnDefinition = "DATETIME(0)")
     private LocalDateTime update_at;
+
+    @OneToMany(mappedBy = "review")
+    private List<ReviewLike> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "review")
     private Set<ReviewTag> reviewTags = new HashSet<>();

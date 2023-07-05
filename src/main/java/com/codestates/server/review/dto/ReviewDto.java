@@ -36,5 +36,6 @@ public class ReviewDto {
         private int score;
         private String content;
         private Set<String> tags;
+        private long likes;
     }
 }
