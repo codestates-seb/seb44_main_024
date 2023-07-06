@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-import kakao from '../../ui/login-button/kakao.svg';
-import naver from '../../ui/login-button/naver.svg';
-import facebook from '../../ui/login-button/facebook.svg';
-import apple from '../../ui/login-button/apple.svg';
+import SocialLogin from './component/SocialLogin.tsx';
 
 const SignupPage: React.FC = () => {
   const [displayName, setDisplayName] = useState('');
@@ -205,14 +201,7 @@ const SignupPage: React.FC = () => {
         </button>
 
         <button className="mt-2 w-full bg-darkGray px-1 py-2 text-white">이미 가입하셨나요?</button>
-
-        <div className="mb-4 mt-6 text-center text-xl">SNS 계정으로 로그인하기</div>
-        <div className="flex justify-center gap-5">
-          <img className="cursor-pointer" src={kakao} alt="kakao_icon" />
-          <img className="cursor-pointer" src={naver} alt="naver_icon" />
-          <img className="cursor-pointer" src={facebook} alt="facebook_icon" />
-          <img className="cursor-pointer" src={apple} alt="apple_icon" />
-        </div>
+        <SocialLogin />
       </form>
     </div>
   );
