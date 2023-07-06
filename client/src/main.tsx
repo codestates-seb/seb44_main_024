@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import Test from './components/Test.tsx';
+import DetailsPage from './components/pages/DetailsPage/DetailsPage.tsx';
 import './index.css';
 import { store } from './redux-toolkit/store.ts';
 import { Provider } from 'react-redux';
@@ -15,15 +16,12 @@ const router = createBrowserRouter([
     // 에러페이지 라우터 적용 예시
     // errorElement: <ErrorPage />,
 
-    // 기본 '/' 루트 렌더링 화면 (메인페이지)
     children: [
       { index: true, element: <Test /> },
-
-      // 기타 라우터 적용 예시
-      // {
-      //   path: '/login',
-      //   element: <Login />,
-      // },
+      {
+        path: '/details',
+        element: <DetailsPage />,
+      },
     ],
   },
 ]);
