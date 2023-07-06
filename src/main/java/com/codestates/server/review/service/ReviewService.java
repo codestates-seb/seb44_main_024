@@ -2,8 +2,7 @@ package com.codestates.server.review.service;
 
 import com.codestates.server.review.entity.Review;
 import com.codestates.server.review.repository.ReviewRepository;
-import com.codestates.server.tag.entity.ReviewTag;
-import com.codestates.server.tag.repository.ReviewTagRepository;
+import com.codestates.server.tag.service.ReviewTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,19 +16,50 @@ public class ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
-    ReviewTagRepository reviewTagRepository;
+    ReviewTagService reviewTagService;
 
+    @Transactional(readOnly = true)
     public Review getReview(Long reviewId) {
 //        Review review = reviewRepository.findById(reviewId).get();
         return reviewRepository.findById(reviewId).get();
     }
 
-    public Review createReview(Review review, Long movieId) {
+
+    public Review createReview(Review post, Long movieId, Set<String> tags) {
+        Review review = reviewRepository.save(post);
+        // ReviewTag 테이블에 Review와 tags 추가
+        reviewTagService.addReviewTag(review, tags);
         // 로그인한 회원 정보
         // review.setMember(authenticationMember());
         // 영화 정보
         // review.setMovie(movieRepository.findById(movieId));
+        return review;
+    }
+
+
+    @Transactional
+    public Review updateReview(Review postToReview, Long reviewId, Set<String> tags) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("Review not found with id: " + reviewId));
+
+        if (review.getScore() != postToReview.getScore())
+            review.setScore(postToReview.getScore());
+        if (review.getContent() != postToReview.getContent())
+            review.setContent(postToReview.getContent());
+
+        Set<String> reviewTags = review.getReviewTags().stream()
+                .map(i -> i.getTagId())
+                .collect(Collectors.toSet());
+
+        if (!tags.equals(reviewTags)) {
+            reviewTagService.updateReviewTag(review, tags);
+        }
         return reviewRepository.save(review);
+    }
+
+    public void deleteReview(Long reviewId) {
+        Review review = findverifyReview(reviewId);
+        reviewRepository.delete(review);
     }
 
 
@@ -42,4 +72,13 @@ public class ReviewService {
 //        // 로그인한 ID(이매일)로 Member를 찾아서 반환
 //        return memberService.findVerifiedMember(username);
 //    }
+
+
+    // 등록된 리뷰 중 해당 Id를 가진 리뷰 리턴
+    public Review findverifyReview(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("Review not found with id: " + reviewId));
+//                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+        return review;
+    }
 }

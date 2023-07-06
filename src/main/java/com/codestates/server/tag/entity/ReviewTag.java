@@ -25,4 +25,9 @@ public class ReviewTag {
 
     @Column(name = "tag_id")
     private String tagId;
+
+    public ReviewTag(Review review, String tagId) {
+        this.review = review;
+        this.tagId = tagId;
+    }
 }

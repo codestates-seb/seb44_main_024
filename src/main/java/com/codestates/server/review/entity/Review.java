@@ -9,10 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -49,11 +47,17 @@ public class Review {
     @Column(nullable = false, columnDefinition = "DATETIME(0)")
     private LocalDateTime update_at;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<ReviewLike> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "review")
-    private Set<ReviewTag> reviewTags = new HashSet<>();
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<ReviewTag> reviewTags = new LinkedHashSet<>();
+
+    public void addTag(Set<String> tags) {
+        this.reviewTags  = tags.stream()
+                .map(i -> new ReviewTag(this, i))
+                .collect(Collectors.toSet());
+    }
 
 //    @ElementCollection
 //    @CollectionTable(name = "review_tags",

@@ -26,28 +26,51 @@ public class ReviewController {
     // 리뷰 작성
     @PostMapping("/movies/{movie-id}/reviews")
     public ResponseEntity postReview(@Valid @RequestBody ReviewDto.Post post,
-                                     @PathVariable("movie-id")Long movieId) {
+                                     @PathVariable("movie-id") Long movieId) {
         Set<String> tags = post.getTags();
-        Review review = reviewService.createReview(reviewMapper.postToReview(post), movieId);
-        reviewTagService.addReviewTag(review, tags);
+        Review review = reviewService.createReview(reviewMapper.postToReview(post), movieId, tags);
+
 
         // 해당 영화의 상세페이지로 리다이렉트
         return ResponseEntity.status(HttpStatus.SEE_OTHER)
-                .location(URI.create("/movies/" + movieId))
+                .location(URI.create("/movies"))
                 .build();
     }
 
-    // 임시 메서드.
-    @GetMapping("/movies/{movie-id}")
-    public ResponseEntity getMovie(@PathVariable("movie-id")Long movieId) {
-        return new ResponseEntity("haha", HttpStatus.OK);
+    @PatchMapping("/reviews/{review-id}")
+    public ResponseEntity patchReview(@Valid @RequestBody ReviewDto.Post patch,
+                                      @PathVariable("review-id") Long revieweId) {
+        Set<String> tags = patch.getTags();
+        Review review = reviewService.updateReview(reviewMapper.postToReview(patch), revieweId, tags);
+
+//        reviewTagService.updateReviewTag(review, tags);
+
+        // 해당 영화의 상세페이지로 리다이렉트
+        return ResponseEntity.status(HttpStatus.SEE_OTHER)
+                .location(URI.create("/movies"))
+                .build();
     }
 
     // 한개의 리뷰 확인
     @GetMapping("/review/{review-id}")
-    public ResponseEntity getReview(@PathVariable("review-id")Long reviewId) {
-        Review review  = reviewService.getReview(reviewId);
+    public ResponseEntity getReview(@PathVariable("review-id") Long reviewId) {
+        Review review = reviewService.getReview(reviewId);
 
         return new ResponseEntity(reviewMapper.reviewToResponse(review), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/reviews/{review-id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteReview(@PathVariable("review-id") Long reviewId) {
+        reviewService.deleteReview(reviewId);
+    }
+
+
+    // 임시 메서드.
+    @GetMapping("/movies")
+
+    public ResponseEntity getMovie() {
+        return new ResponseEntity("haha", HttpStatus.OK);
     }
 }
