@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import Test from './components/Test.tsx';
 import SignupPage from './components/SignupPage/SignupPage.tsx';
+import LoginPage from './components/LoginPage/LoginPage.tsx';
 import './index.css';
 import { store } from './redux-toolkit/store.ts';
 import { Provider } from 'react-redux';
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       //   element: <Login />,
       // },
       { path: '/signup', element: <SignupPage /> },
+      { path: '/login', element: <LoginPage /> },
     ],
   },
 ]);

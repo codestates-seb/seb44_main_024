@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import SocialLogin from './component/SocialLogin.tsx';
 
@@ -200,7 +200,9 @@ const SignupPage: React.FC = () => {
           회원가입
         </button>
 
-        <button className="mt-2 w-full bg-darkGray px-1 py-2 text-white">이미 가입하셨나요?</button>
+        <button className="mt-2 w-full bg-darkGray px-1 py-2 text-white">
+          <Link to="/login">이미 가입하셨나요?</Link>
+        </button>
         <SocialLogin />
       </form>
     </div>
