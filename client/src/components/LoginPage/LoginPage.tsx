@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (userEmail.trim() === '' || userPassword.trim() === '') {
+    if (userEmail.length === 0 || userPassword.length === 0) {
       setShowInputError(true);
       return;
     }
@@ -73,7 +73,7 @@ const LoginPage: React.FC = () => {
           />
         </div>
 
-        {showInputError && <p className="text-red-500">이메일과 비밀번호를 입력해주세요.</p>}
+        {showInputError && <p className="mb-2 text-red-500">이메일과 비밀번호를 입력해주세요.</p>}
 
         <button
           className="w-full bg-gray px-1 py-2 text-white hover:bg-darkGray"
