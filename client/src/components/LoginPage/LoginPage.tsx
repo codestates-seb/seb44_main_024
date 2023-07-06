@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
     <div className="flex flex-col items-center justify-center">
       <form>
         <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 text-center text-2xl">회원가입</div>
+        <div className="mb-6 border-b-2 text-center text-2xl">로그인</div>
 
         <div className="mb-4">
           <input
