@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import SocialLogin from '../../components/SocialLogin.tsx';
+import SocialLogin from '../../components/SocialLogin';
 
 const LoginPage: React.FC = () => {
   const [userEmail, setUserEmail] = useState('');
@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
     <div className="flex flex-col items-center justify-center">
       <form>
         <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 text-center text-2xl">로그인</div>
+        <div className="mb-6 border-b-2 border-darkGray text-center text-2xl">로그인</div>
 
         <div className="mb-4">
           <input
@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
         {showInputError && <p className="mb-2 text-red-500">이메일과 비밀번호를 입력해주세요.</p>}
 
         <button
-          className="w-full bg-gray px-1 py-2 text-white hover:bg-darkGray"
+          className="w-full bg-Gray px-1 py-2 text-white hover:bg-darkGray"
           type="submit"
           onClick={(e) => handleLogin(e)}
         >

@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import Test from './components/Test.tsx';
-import SignupPage from './pages/SignupPage/SignupPage.tsx';
-import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import './index.css';
-import { store } from './redux-toolkit/store.ts';
+import { store } from './redux-toolkit/store';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App';
+import Test from './components/Test';
+import SignupPage from './pages/SignupPage/SignupPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import DetailsPage from './pages/DetailsPage/DetailsPage';
 
 const router = createBrowserRouter([
   {
@@ -17,17 +18,14 @@ const router = createBrowserRouter([
     // 에러페이지 라우터 적용 예시
     // errorElement: <ErrorPage />,
 
-    // 기본 '/' 루트 렌더링 화면 (메인페이지)
     children: [
       { index: true, element: <Test /> },
-
-      // 기타 라우터 적용 예시
-      // {
-      //   path: '/login',
-      //   element: <Login />,
-      // },
       { path: '/signup', element: <SignupPage /> },
       { path: '/login', element: <LoginPage /> },
+      {
+        path: '/details',
+        element: <DetailsPage />,
+      },
     ],
   },
 ]);

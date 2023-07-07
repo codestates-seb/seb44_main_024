@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import SocialLogin from '../../components/SocialLogin.tsx';
+import SocialLogin from '../../components/SocialLogin';
 
 const SignupPage: React.FC = () => {
   const [displayName, setDisplayName] = useState('');
@@ -118,7 +118,7 @@ const SignupPage: React.FC = () => {
     <div className="flex flex-col items-center justify-center">
       <form>
         <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 text-center text-2xl">회원가입</div>
+        <div className="mb-6 border-b-2 border-darkGray text-center text-2xl">회원가입</div>
 
         <div className="mb-4">
           <input
@@ -197,7 +197,7 @@ const SignupPage: React.FC = () => {
 
         <button
           className={`${
-            isValid ? 'bg-darkGray' : 'cursor-not-allowed bg-gray'
+            isValid ? 'bg-darkGray' : 'cursor-not-allowed bg-Gray'
           } w-full px-1 py-2 text-white`}
           type="submit"
           onClick={(e) => signupOnClickHandler(e)}

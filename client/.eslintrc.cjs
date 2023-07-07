@@ -28,17 +28,21 @@ module.exports = {
       'error',
       'always',
       {
+        '': 'never',
+
         js: 'never',
         jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
     ],
+    'react/prop-types': 'off', //프롭스 타입 지정을 OFF하는 rule
   },
   settings: {
     'import/resolver': {
       node: {
         paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
   },
