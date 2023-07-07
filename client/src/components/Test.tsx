@@ -1,6 +1,6 @@
-import { useAppSelector, useAppDispatch } from '../redux-toolkit/hooks.ts';
+import { useAppSelector, useAppDispatch } from '../redux-toolkit/hooks';
 
-import { decrement, increment, selectTest } from '../redux-toolkit/slices/testSlice.ts';
+import { decrement, increment, selectTest } from '../redux-toolkit/slices/testSlice';
 
 const Test = () => {
   const test = useAppSelector(selectTest);
