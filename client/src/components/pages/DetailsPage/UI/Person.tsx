@@ -1,6 +1,6 @@
 interface PersonProps {
   img: string;
-  name: string;
+  name: string | undefined;
 }
 
 const Person = ({ img, name }: PersonProps) => {

@@ -3,8 +3,13 @@ import ReviewTop from './ReviewTop/ReviewTop.tsx';
 import ReviewBottom from './ReviewBottom/ReviewBottom.tsx';
 import Comment from './Comment/Comment.tsx';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
+import { ReviewContent } from '../assets/types/movieTypes.ts';
 
-const Review = () => {
+export interface ReviewProps {
+  review: ReviewContent;
+}
+
+const Review = ({ review }: ReviewProps) => {
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const expandOpenHandler: () => void = () => {
     setIsExandOpen(!isExpandOpen);
@@ -13,9 +18,9 @@ const Review = () => {
     <>
       <div className="mb-10">
         <div className="mb-0.5 w-full border-4 border-solid border-theme4 p-4">
-          <ReviewTop />
-          <p className="p-7">아름다운 영화입니다..</p>
-          <ReviewBottom />
+          <ReviewTop review={review} />
+          <p className="p-7">{review.content}</p>
+          <ReviewBottom review={review} />
         </div>
         <div className="flex items-center">
           {isExpandOpen ? (
@@ -24,7 +29,7 @@ const Review = () => {
             <IoMdArrowDropdown onClick={expandOpenHandler} className="cursor-pointer text-2xl" />
           )}
 
-          <p>댓글 2개</p>
+          <p>댓글 (댓글 개수)개</p>
         </div>
         {isExpandOpen ? (
           <>
