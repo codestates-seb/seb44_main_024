@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Tag from '../../UI/Tag.tsx';
+import Tag from '../../UI/Tag';
 import { MdOutlineThumbUp, MdOutlineThumbDown } from 'react-icons/md';
-import { ReviewProps } from '../Review.tsx';
+import { ReviewProps } from '../Review';
 
 const ReviewBottom = ({ review }: ReviewProps) => {
   const [isLogin, setIsLogin] = useState<boolean>(false); // 나중에 실제 로그인 상태 이용

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import ReviewTop from './ReviewTop/ReviewTop.tsx';
-import ReviewBottom from './ReviewBottom/ReviewBottom.tsx';
-import Comment from './Comment/Comment.tsx';
+import ReviewTop from './ReviewTop/ReviewTop';
+import ReviewBottom from './ReviewBottom/ReviewBottom';
+import Comment from './Comment/Comment';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
-import { ReviewContent } from '../assets/types/movieTypes.ts';
+import { ReviewContent } from '../assets/types/movieTypes';
 
 export interface ReviewProps {
   review: ReviewContent;

@@ -1,6 +1,6 @@
 import mainImg from '../assets/mockup-main-img.jpg';
-import { useAppSelector } from '../../../../redux-toolkit/hooks.ts';
-import { selectMovieDetails } from '../../../../redux-toolkit/slices/movieDetailSlice.ts';
+import { useAppSelector } from '../../../redux-toolkit/hooks';
+import { selectMovieDetails } from '../../../redux-toolkit/slices/movieDetailSlice';
 
 const MovieTitle = () => {
   const movieDetail = useAppSelector(selectMovieDetails);

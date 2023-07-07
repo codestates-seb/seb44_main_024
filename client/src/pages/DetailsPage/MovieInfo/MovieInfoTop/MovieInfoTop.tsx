@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../../../../redux-toolkit/hooks.ts';
-import { selectMovieDetails } from '../../../../../redux-toolkit/slices/movieDetailSlice.ts';
-import Person from '../../UI/Person.tsx';
+import { useAppSelector } from '../../../../redux-toolkit/hooks';
+import { selectMovieDetails } from '../../../../redux-toolkit/slices/movieDetailSlice';
+import Person from '../../UI/Person';
 import directorImg from '../../assets/director-img.jpg';
 import actress1Img from '../../assets/actress-1.jpg';
 import actor1Img from '../../assets/actor-1.jpg';

@@ -1,5 +1,5 @@
 import profileImg from '../assets/profile.jpg';
-import { ReviewProps } from '../Review/Review.tsx';
+import { ReviewProps } from '../Review/Review';
 
 const UserForPost = ({ review }: ReviewProps) => {
   return (

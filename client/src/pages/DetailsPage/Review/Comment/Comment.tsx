@@ -1,4 +1,4 @@
-import UserForComment from '../../UI/UserForComment.tsx';
+import UserForComment from '../../UI/UserForComment';
 
 const Comment = () => {
   return (

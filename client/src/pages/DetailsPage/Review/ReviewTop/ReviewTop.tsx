@@ -1,7 +1,7 @@
-import UserForPost from '../../UI/UserForPost.tsx';
+import UserForPost from '../../UI/UserForPost';
 import { AiFillStar } from 'react-icons/ai';
 import { FaStarHalf } from 'react-icons/fa';
-import { ReviewProps } from '../Review.tsx';
+import { ReviewProps } from '../Review';
 
 const ReviewTop = ({ review }: ReviewProps) => {
   return (

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store.ts';
-import { MovieDataResponse } from '../../components/pages/DetailsPage/assets/types/movieTypes.ts';
+import type { RootState } from '../store';
+import { MovieDataResponse } from '../../pages/DetailsPage/assets/types/movieTypes';
 
 interface MovieDetailState {
   data: MovieDataResponse | null;

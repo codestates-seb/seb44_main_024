@@ -1,5 +1,5 @@
-import MovieInfoTop from './MovieInfoTop/MovieInfoTop.tsx';
-import MovieInfoBottom from './MovieInfoBottom/MovieInfoBottom.tsx';
+import MovieInfoTop from './MovieInfoTop/MovieInfoTop';
+import MovieInfoBottom from './MovieInfoBottom/MovieInfoBottom';
 
 const MovieInfo = () => {
   return (

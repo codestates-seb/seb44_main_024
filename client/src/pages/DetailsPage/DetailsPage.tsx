@@ -1,14 +1,11 @@
-import { useAppSelector, useAppDispatch } from '../../../redux-toolkit/hooks.ts';
-import {
-  fetchMovieSuccess,
-  selectMovieDetails,
-} from '../../../redux-toolkit/slices/movieDetailSlice.ts';
+import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
+import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
-import { getMovies } from './assets/api/movieApi.ts';
-import MovieTitle from './MovieTitle/MovieTitle.tsx';
-import MovieInfo from './MovieInfo/MovieInfo.tsx';
-import Review from './Review/Review.tsx';
-import CreateReviewModal from './UI/CreateReviewModal.tsx';
+import { getMovies } from './assets/api/movieApi';
+import MovieTitle from './MovieTitle/MovieTitle';
+import MovieInfo from './MovieInfo/MovieInfo';
+import Review from './Review/Review';
+import CreateReviewModal from './UI/CreateReviewModal';
 
 const DetailsPage = () => {
   const dispatch = useAppDispatch();

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import Test from './components/Test.tsx';
-import DetailsPage from './components/pages/DetailsPage/DetailsPage.tsx';
+import App from './App';
+import Test from './components/Test';
+import DetailsPage from './pages/DetailsPage/DetailsPage';
 import './index.css';
-import { store } from './redux-toolkit/store.ts';
+import { store } from './redux-toolkit/store';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 

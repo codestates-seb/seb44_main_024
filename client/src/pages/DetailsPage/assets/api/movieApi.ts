@@ -8,7 +8,7 @@
 // };
 
 import axios from 'axios';
-import { MovieDataResponse } from '../types/movieTypes.ts';
+import { MovieDataResponse } from '../types/movieTypes';
 
 export const getMovies = async (): Promise<MovieDataResponse> => {
   const response = await axios.get<MovieDataResponse>('/mockupdata/moviedetails.json');
