@@ -215,8 +215,3 @@ const SignupPage: React.FC = () => {
 };
 
 export default SignupPage;
-
-// 중복 이름, 이메일 확인 로직 추가 해야...
-// post 요청 잘 되나 확인
-// 이미 가입하셨나요? 버튼에 로그인 페이지 연결
-// 잠만 근데 oauth 로그인이랑 회원가입이랑 뭐가 다른거지? 일단 로그인이라 정함
