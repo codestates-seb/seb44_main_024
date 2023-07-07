@@ -61,7 +61,7 @@ const DetailsPage = () => {
           <div>영화</div>
         </div>
       </div>
-      {isModalOpen && <CreateReviewModal />}
+      {isModalOpen && <CreateReviewModal closeModal={closeModal} />}
     </>
   );
 };
