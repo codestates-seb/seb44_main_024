@@ -28,7 +28,7 @@ const SignupPage: React.FC = () => {
     if (displayName.length === 0) {
       setDisplayNameValid(false);
       setDisplayNameError('');
-    } else if (displayName.length > 2) {
+    } else if (displayName.length >= 2) {
       setDisplayNameValid(true);
       setDisplayNameError('');
     } else {
@@ -54,7 +54,7 @@ const SignupPage: React.FC = () => {
   }, [userEmail]);
 
   useEffect(() => {
-    const regex2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const regex2 = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
     if (userPassword.length === 0) {
       setUserPasswordValid(false);
@@ -162,6 +162,11 @@ const SignupPage: React.FC = () => {
             </p>
             <p className={`${/\d/.test(userPassword) ? 'text-darkBlue' : 'text-zinc-400'}`}>
               숫자 ✓
+            </p>
+            <p
+              className={`${/[^A-Za-z0-9]/.test(userPassword) ? 'text-darkBlue' : 'text-zinc-400'}`}
+            >
+              특수기호 ✓
             </p>
           </div>
           {userPasswordError && <p className="text-red-500">{userPasswordError}</p>}
