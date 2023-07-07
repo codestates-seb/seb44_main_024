@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import SocialLogin from './component/SocialLogin.tsx';
+import SocialLogin from '../../components/SocialLogin.tsx';
 
 const SignupPage: React.FC = () => {
   const [displayName, setDisplayName] = useState('');

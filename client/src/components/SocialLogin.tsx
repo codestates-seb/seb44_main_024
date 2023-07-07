@@ -1,7 +1,7 @@
-import kakao from '../../../ui/login-button/kakao.svg';
-import naver from '../../../ui/login-button/naver.svg';
-import facebook from '../../../ui/login-button/facebook.svg';
-import apple from '../../../ui/login-button/apple.svg';
+import kakao from '../pages/UI/login-button/kakaoBtn.svg';
+import naver from '../pages/UI/login-button/naverBtn.svg';
+import facebook from '../pages/UI/login-button/facebookBtn.svg';
+import apple from '../pages/UI/login-button/appleBtn.svg';
 
 const SocialLogin = () => {
   return (

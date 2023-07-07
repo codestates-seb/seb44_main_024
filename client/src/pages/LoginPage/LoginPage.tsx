@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import SocialLogin from '../SignupPage/component/SocialLogin.tsx';
+import SocialLogin from '../../components/SocialLogin.tsx';
 
 const LoginPage: React.FC = () => {
   const [userEmail, setUserEmail] = useState('');
