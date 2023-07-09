@@ -5,7 +5,7 @@ import { ReviewProps } from '../Review';
 
 const ReviewBottom = ({ review }: ReviewProps) => {
   const [isLogin, setIsLogin] = useState<boolean>(false); // 나중에 실제 로그인 상태 이용
-  const [likes, setLikes] = useState<number>(review.like);
+  const [likes, setLikes] = useState<number>(review.like); // 리다이렉트를 사용하면, 상태를 이렇게 수동으로 변경하지 않아도 될 수도..
 
   const handleLike: () => void = () => {
     if (!isLogin) {
