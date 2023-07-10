@@ -49,6 +49,8 @@ const ModalForm = ({ movieId, review }: ModalFormProps) => {
     setScore(newRating);
   };
 
+  // post 요청
+
   // const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
 
