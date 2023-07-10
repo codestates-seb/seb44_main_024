@@ -22,7 +22,7 @@ const SignupPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const URL = '';
+  const URL = 'http://localhost:3000';
 
   useEffect(() => {
     if (displayName.length === 0) {
@@ -89,7 +89,7 @@ const SignupPage: React.FC = () => {
     if (isValid) {
       try {
         const response = await axios.post(
-          `${URL}/signup`, //api 나오는 대로 변경
+          `${URL}/register`, //api 나오는 대로 변경
           JSON.stringify({
             name: displayName,
             email: userEmail,

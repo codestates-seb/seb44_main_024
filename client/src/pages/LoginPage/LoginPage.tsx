@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginVerified, logoutVerified } from '../../redux-toolkit/slices/loginState';
 import axios from 'axios';
 import SocialLogin from '../../components/SocialLogin';
 
@@ -9,8 +11,9 @@ const LoginPage: React.FC = () => {
   const [showInputError, setShowInputError] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const URL = '';
+  const URL = 'http://localhost:3000';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +39,11 @@ const LoginPage: React.FC = () => {
         }
       );
 
+      const { user } = response.data;
+
       console.log(response.headers);
-      window.alert('님, 환영합니다!');
+      window.alert(`${user.name} 님, 환영합니다!`);
+      dispatch(loginVerified());
       navigate('/');
     } catch (err) {
       console.log(err);
@@ -88,6 +94,15 @@ const LoginPage: React.FC = () => {
         </button>
         <SocialLogin />
       </form>
+      <div className="mt-8">
+        <p>클릭!</p>
+        <button className="bg-blue-300" type="button" onClick={() => dispatch(loginVerified())}>
+          로그인상태로 변경하기
+        </button>
+        <button className="bg-red-300" type="button" onClick={() => dispatch(logoutVerified())}>
+          로그아웃상태로 변경하기
+        </button>
+      </div>
     </div>
   );
 };
