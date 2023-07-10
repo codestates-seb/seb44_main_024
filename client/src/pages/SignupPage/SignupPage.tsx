@@ -118,7 +118,7 @@ const SignupPage: React.FC = () => {
     <div className="flex flex-col items-center justify-center">
       <form>
         <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 border-darkGray text-center text-2xl">회원가입</div>
+        <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
 
         <div className="mb-4">
           <input
@@ -127,7 +127,7 @@ const SignupPage: React.FC = () => {
             placeholder="닉네임 입력"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           {displayNameError && <p className="text-red-500">{displayNameError}</p>}
         </div>
@@ -139,7 +139,7 @@ const SignupPage: React.FC = () => {
             placeholder="이메일 입력"
             value={userEmail}
             onChange={(e) => setUserEmail(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           {userEmailError && <p className="text-red-500">{userEmailError}</p>}
         </div>
@@ -151,7 +151,7 @@ const SignupPage: React.FC = () => {
             placeholder="비밀번호 입력"
             value={userPassword}
             onChange={(e) => setUserPassword(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2 flex gap-3">
             <p className={`${userPassword.length >= 8 ? 'text-darkBlue' : 'text-zinc-400'}`}>
@@ -179,7 +179,7 @@ const SignupPage: React.FC = () => {
             placeholder="비밀번호 확인"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2">
             <p
@@ -197,7 +197,7 @@ const SignupPage: React.FC = () => {
 
         <button
           className={`${
-            isValid ? 'bg-darkGray' : 'cursor-not-allowed bg-Gray'
+            isValid ? 'bg-mainblack' : 'cursor-not-allowed bg-maindarkgray'
           } w-full px-1 py-2 text-white`}
           type="submit"
           onClick={(e) => signupOnClickHandler(e)}
@@ -205,7 +205,7 @@ const SignupPage: React.FC = () => {
           회원가입
         </button>
 
-        <button className="mt-2 w-full bg-darkGray px-1 py-2 text-white">
+        <button className="mt-2 w-full bg-mainblack px-1 py-2 text-white">
           <Link to="/login">이미 가입하셨나요?</Link>
         </button>
         <SocialLogin />
