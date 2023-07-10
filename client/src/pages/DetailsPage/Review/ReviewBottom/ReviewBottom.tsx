@@ -4,15 +4,11 @@ import { MdOutlineThumbUp, MdOutlineThumbDown } from 'react-icons/md';
 import { ReviewProps } from '../Review';
 
 const ReviewBottom = ({ review }: ReviewProps) => {
-  const [isLogin, setIsLogin] = useState<boolean>(false); // 나중에 실제 로그인 상태 이용
+  // const [isLogin, setIsLogin] = useState<boolean>(false); // 나중에 실제 로그인 상태 이용
   const [likes, setLikes] = useState<number>(review.like); // 리다이렉트를 사용하면, 상태를 이렇게 수동으로 변경하지 않아도 될 수도..
 
   const handleLike: () => void = () => {
-    if (!isLogin) {
-      alert('로그인을 해주세요');
-    } else {
-      setLikes((prev) => prev + 1);
-    }
+    setLikes((prev) => prev + 1);
   };
   return (
     <div className="flex justify-between">

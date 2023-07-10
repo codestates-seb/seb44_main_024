@@ -29,6 +29,7 @@ const ModalForm = ({ movieId, review }: ModalFormProps) => {
   const [score, setScore] = useState<number>(review ? review.score : 0);
 
   console.log(selectedTags);
+  console.log(movieId);
 
   const addTagHandler = (tag: string) => {
     const updatedTags = [...selectedTags];
@@ -48,6 +49,8 @@ const ModalForm = ({ movieId, review }: ModalFormProps) => {
   const handleStarClick = (newRating: number) => {
     setScore(newRating);
   };
+
+  // post 요청
 
   // const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
