@@ -26,12 +26,8 @@ export interface ReviewContent {
   score: number;
   username: string;
   content: string;
-  tags: Tag[];
+  tags: string[];
   like: number;
-}
-
-export interface Tag {
-  tag: string;
 }
 
 export interface Recommend {

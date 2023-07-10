@@ -1,16 +1,20 @@
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getMovies } from './assets/api/movieApi';
 import MovieTitle from './MovieTitle/MovieTitle';
 import MovieInfo from './MovieInfo/MovieInfo';
 import Review from './Review/Review';
-import CreateReviewModal from './UI/CreateReviewModal';
+import CreateReviewModal from './UI/CreateReviewModal/CreateReviewModal';
 
 const DetailsPage = () => {
   const dispatch = useAppDispatch();
   const movieDetail = useAppSelector(selectMovieDetails);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { movieId } = useParams();
+
+  //로그인 상태이용해서 modal창 open or 로그인/회원가입 요구
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -61,7 +65,7 @@ const DetailsPage = () => {
           <div>영화</div>
         </div>
       </div>
-      {isModalOpen && <CreateReviewModal />}
+      {isModalOpen && <CreateReviewModal movieId={movieId} closeModal={closeModal} />}
     </>
   );
 };
