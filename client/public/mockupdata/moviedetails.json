@@ -28,12 +28,8 @@
         "username": "dongbin420",
         "content": "아름다운 영화입니다..",
         "tags": [
-          {
-            "tag": "#감동"
-          },
-          {
-            "tag": "#가족"
-          }
+          "#감동",
+          "#가족"
         ],
         "like": 20
       },
@@ -42,12 +38,7 @@
         "username": "치히로",
         "content": "재밌네요",
         "tags": [
-          {
-            "tag": "#힐링"
-          },
-          {
-            "tag": "#킬링타임"
-          }
+          "#힐링", "#킬링타임"
         ],
         "like": 17
       },
@@ -56,12 +47,8 @@
         "username": "센",
         "content": "또 보고 싶어요",
         "tags": [
-          {
-            "tag": "tag1"
-          },
-          {
-            "tag": "tag2"
-          }
+          "tag1",
+          "tag2"
         ],
         "like": 12
       },
@@ -70,12 +57,7 @@
         "username": "하쿠",
         "content": "굿",
         "tags": [
-          {
-            "tag": "tag1"
-          },
-          {
-            "tag": "tag2"
-          }
+          "tag1", "tag2"
         ],
         "like": 10
       },
@@ -84,12 +66,7 @@
         "username": "마크주커버그",
         "content": "짱",
         "tags": [
-          {
-            "tag": "tag1"
-          },
-          {
-            "tag": "tag2"
-          }
+          "tag1", "tag2"
         ],
         "like": 5
       },
@@ -98,12 +75,7 @@
         "username": "미야자키 하야오",
         "content": "오",
         "tags": [
-          {
-            "tag": "tag1"
-          },
-          {
-            "tag": "tag2"
-          }
+          "tag1", "tag2"
         ],
         "like": 1
       }

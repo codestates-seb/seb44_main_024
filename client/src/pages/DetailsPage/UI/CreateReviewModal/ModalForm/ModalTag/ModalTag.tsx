@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-interface TagProps {
+interface ModalTagProps {
   tag: string;
   addTagHandler: (tag: string) => void;
+  isSelected: boolean;
 }
 
-const ModalTag = ({ tag, addTagHandler }: TagProps) => {
-  const [tagSelected, setTagSelected] = useState<boolean>(false);
+const ModalTag = ({ tag, addTagHandler, isSelected }: ModalTagProps) => {
+  const [tagSelected, setTagSelected] = useState<boolean>(isSelected);
 
   const handleTagClick = () => {
     setTagSelected(!tagSelected);

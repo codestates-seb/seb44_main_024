@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ModalTag from './ModalTag/ModalTag';
 import RatingStars from 'react-rating-stars-component';
+import { ReviewContent } from '../../../assets/types/movieTypes';
 // import { postReview } from '../../../assets/api/movieApi';
 // import { redirect } from 'react-router-dom';
 
@@ -19,12 +20,15 @@ const tags: string[] = [
 
 interface ModalFormProps {
   movieId: string | undefined;
+  review?: ReviewContent;
 }
 
-const ModalForm = ({ movieId }: ModalFormProps) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [reviewContent, setReviewContent] = useState<string>('');
-  const [score, setScore] = useState<number>(0);
+const ModalForm = ({ movieId, review }: ModalFormProps) => {
+  const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
+  const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
+  const [score, setScore] = useState<number>(review ? review.score : 0);
+
+  console.log(selectedTags);
 
   const addTagHandler = (tag: string) => {
     const updatedTags = [...selectedTags];
@@ -49,6 +53,7 @@ const ModalForm = ({ movieId }: ModalFormProps) => {
   //   event.preventDefault();
 
   //   const createdReviewData = {
+  //     movieId: 1,
   //     userId: 1,
   //     userImg: '',
   //     userName: '',
@@ -69,7 +74,7 @@ const ModalForm = ({ movieId }: ModalFormProps) => {
 
   return (
     <form className="h-full w-full">
-      <div className="mb-1.5 flex justify-between">
+      <div className="mb-1.5 flex items-center justify-between">
         <div>
           <RatingStars
             count={5}
@@ -77,19 +82,25 @@ const ModalForm = ({ movieId }: ModalFormProps) => {
             activeColor="#000000"
             isHalf={true}
             onChange={handleStarClick}
+            value={score}
           />
         </div>
-        <button>리뷰 등록</button>
+        <button className="bg-theme2 px-7 py-1.5 text-white hover:bg-theme3">리뷰 등록</button>
       </div>
       <textarea
         onChange={handleContentChange}
         value={reviewContent}
-        className="mb-3 h-[250px] w-full"
+        className="mb-3 h-[250px] w-full resize-none pl-1"
         placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."
       ></textarea>
       <div>
         {tags.map((tag, index) => (
-          <ModalTag tag={tag} key={index} addTagHandler={addTagHandler} />
+          <ModalTag
+            tag={tag}
+            key={index}
+            addTagHandler={addTagHandler}
+            isSelected={selectedTags.includes(tag)}
+          />
         ))}
       </div>
     </form>

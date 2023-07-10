@@ -1,12 +1,14 @@
 import ModalForm from './ModalForm/ModalForm';
+import { ReviewContent } from './../../assets/types/movieTypes';
 
 type CloseModalFn = () => void;
-interface CloseModalProps {
+interface ModalProps {
   closeModal: CloseModalFn;
   movieId: string | undefined;
+  review?: ReviewContent;
 }
 
-const CreateReviewModal = ({ closeModal, movieId }: CloseModalProps) => {
+const CreateReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
   const preventModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
@@ -19,9 +21,9 @@ const CreateReviewModal = ({ closeModal, movieId }: CloseModalProps) => {
       <div
         role="presentation"
         onClick={preventModalClick}
-        className="h-[450px] w-[500px] bg-white p-7"
+        className="h-[450px] w-[500px] bg-white p-5"
       >
-        <ModalForm movieId={movieId} />
+        <ModalForm movieId={movieId} review={review} />
       </div>
     </div>
   );
