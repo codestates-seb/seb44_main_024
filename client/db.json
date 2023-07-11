@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "email": "potato@mail.com",
+      "password": "$2a$10$/V/PhfsPtYazsM9yLWUldefgUMRGQqaerpB8TZgt6jPJETToZyWvS",
+      "name": "감자",
+      "id": 1
+    }
+  ]
+}
