@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        `${URL}/login`, // API 주소
+        `${URL}/login`,
         JSON.stringify({
           email: userEmail,
           password: userPassword,
@@ -40,8 +40,8 @@ const LoginPage: React.FC = () => {
       );
 
       const { user } = response.data;
+      localStorage.setItem('accessToken', response.data.accessToken);
 
-      console.log(response.headers);
       window.alert(`${user.name} 님, 환영합니다!`);
       dispatch(loginVerified());
       navigate('/');
