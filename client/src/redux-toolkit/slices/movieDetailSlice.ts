@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { MovieDataResponse } from '../../pages/DetailsPage/assets/types/movieTypes';
+import { MovieDetailData } from '../../pages/DetailsPage/assets/types/movieTypes';
 
 interface MovieDetailState {
-  data: MovieDataResponse | null;
+  data: MovieDetailData | null;
 }
 
 const initialState: MovieDetailState = {
@@ -15,7 +15,7 @@ export const movieDetailSlice = createSlice({
   name: 'movieDetail',
   initialState,
   reducers: {
-    fetchMovieSuccess: (state, action: PayloadAction<MovieDataResponse>) => {
+    fetchMovieSuccess: (state, action: PayloadAction<MovieDetailData>) => {
       state.data = action.payload;
     },
   },

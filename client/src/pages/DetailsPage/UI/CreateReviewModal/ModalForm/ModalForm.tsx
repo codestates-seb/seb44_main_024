@@ -1,36 +1,32 @@
-import { useState } from 'react';
-import ModalTag from './ModalTag/ModalTag';
+// import api from './assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+import axios from 'axios';
 import RatingStars from 'react-rating-stars-component';
-import { ReviewContent } from '../../../assets/types/movieTypes';
-// import { postReview } from '../../../assets/api/movieApi';
-// import { redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { ModalProps } from '../CreateReviewModal';
+import ModalTag from './ModalTag/ModalTag';
 
 const tags: string[] = [
-  '#태그1',
-  '#태그2',
-  '#태그3',
-  '#태그4',
-  '#태그5',
-  '#태그6',
-  '#태그7',
-  '#태그8',
-  '#태그9',
-  '#태그10',
+  '#감동',
+  '#가족',
+  '#힐링',
+  '#킬링타임',
+  '#모험',
+  '#몰입감',
+  '#기분업',
+  '#영감',
+  '#긴장감',
+  '#반전',
 ];
 
-interface ModalFormProps {
-  movieId: string | undefined;
-  review?: ReviewContent;
-}
-
-const ModalForm = ({ movieId, review }: ModalFormProps) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
+const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
+  console.log(movieId);
+  const [selectedTags, setSelectedTags] = useState<string[]>(
+    review ? review.tags.map((obj) => obj.tag) : []
+  );
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
   const [score, setScore] = useState<number>(review ? review.score : 0);
 
-  console.log(selectedTags);
-  console.log(movieId);
-
+  // 폼에서 태그 추가
   const addTagHandler = (tag: string) => {
     const updatedTags = [...selectedTags];
     if (updatedTags.includes(tag)) {
@@ -42,41 +38,46 @@ const ModalForm = ({ movieId, review }: ModalFormProps) => {
     setSelectedTags(updatedTags);
   };
 
+  // 폼에서 리뷰내용 추가
   const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReviewContent(event.target.value);
   };
 
+  // 폼에서 별점 추가
   const handleStarClick = (newRating: number) => {
     setScore(newRating);
   };
 
-  // post 요청
+  // 새로운 리뷰 등록 post 요청 // 예상 endpoint: `/movies/{movie-id}/reviews`
+  const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  // const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+    const createReviewData = {
+      score: score,
+      content: reviewContent,
+      tags: selectedTags,
+    };
 
-  //   const createdReviewData = {
-  //     movieId: 1,
-  //     userId: 1,
-  //     userImg: '',
-  //     userName: '',
-  //     score: score,
-  //     content: reviewContent,
-  //     tags: selectedTags,
-  //     likes: 0,
-  //     comments: [],
-  //   };
-
-  //   try {
-  //     const redirectLocation = await postReview(createdReviewData, movieId);
-  //     return redirect(redirectLocation);
-  //   } catch (err) {
-  //     console.error('Error submitting review:', err);
-  //   }
-  // };
+    try {
+      const response = await axios.post(
+        'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io',
+        createReviewData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${token}`
+          },
+        }
+      );
+      closeModal();
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <form className="h-full w-full">
+    <form onSubmit={handleReviewFormSubmit} className="h-full w-full">
       <div className="mb-1.5 flex items-center justify-between">
         <div>
           <RatingStars
