@@ -25,6 +25,4 @@ const loginSlice = createSlice({
 
 export const { loginVerified, logoutVerified } = loginSlice.actions;
 
-export const changeLoginState = (state: { login: LoginState }) => state.login.value;
-
 export default loginSlice.reducer;
