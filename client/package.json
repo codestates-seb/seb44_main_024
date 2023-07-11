@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "lint:debug": "eslint ./src --debug",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "server": "json-server-auth --watch db.json --port 3000"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
