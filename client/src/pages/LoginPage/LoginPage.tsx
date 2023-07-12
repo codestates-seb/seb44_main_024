@@ -53,10 +53,10 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <form>
-        <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
+      <div className="text-center text-xl">LOGO</div>
+      <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
 
+      <form onSubmit={(e) => handleLogin(e)}>
         <div className="mb-4">
           <input
             type="email"
@@ -84,16 +84,17 @@ const LoginPage: React.FC = () => {
         <button
           className="w-full bg-maindarkgray px-1 py-2 text-white hover:bg-mainblack"
           type="submit"
-          onClick={(e) => handleLogin(e)}
         >
           로그인
         </button>
-
-        <button className="mt-2 w-full bg-mainblack px-1 py-2 text-white">
-          <Link to="/signup"> 아직 계정이 없으신가요? </Link>
-        </button>
-        <SocialLogin />
       </form>
+
+      <button className="mt-2 w-96 bg-mainblack px-1 py-2 text-white">
+        <Link to="/signup"> 아직 계정이 없으신가요? </Link>
+      </button>
+      <SocialLogin />
+
+      {/* 나중에 삭제 */}
       <div className="mt-8">
         <p>클릭!</p>
         <button className="bg-blue-300" type="button" onClick={() => dispatch(loginVerified())}>

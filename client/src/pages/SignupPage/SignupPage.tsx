@@ -38,13 +38,13 @@ const SignupPage: React.FC = () => {
   }, [displayName]);
 
   useEffect(() => {
-    const regex1 =
+    const emailValidationRegex =
       /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
     if (userEmail.length === 0) {
       setUserEmailValid(false);
       setUserEmailError('');
-    } else if (regex1.test(userEmail)) {
+    } else if (emailValidationRegex.test(userEmail)) {
       setUserEmailValid(true);
       setUserEmailError('');
     } else {
@@ -54,12 +54,12 @@ const SignupPage: React.FC = () => {
   }, [userEmail]);
 
   useEffect(() => {
-    const regex2 = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const pwValidationRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
     if (userPassword.length === 0) {
       setUserPasswordValid(false);
       setUserPasswordError('');
-    } else if (regex2.test(userPassword)) {
+    } else if (pwValidationRegex.test(userPassword)) {
       setUserPasswordValid(true);
       setUserPasswordError('');
     } else {
@@ -83,13 +83,13 @@ const SignupPage: React.FC = () => {
 
   const isValid = userEmailValid && displayNameValid && userPasswordValid && confirmPasswordValid;
 
-  const signupOnClickHandler = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isValid) {
       try {
         const response = await axios.post(
-          `${URL}/register`, //api 나오는 대로 변경
+          `${URL}/register`,
           JSON.stringify({
             name: displayName,
             email: userEmail,
@@ -115,11 +115,11 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <form>
-        <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
+    <div className="flex flex-col items-center justify-center ">
+      <div className="text-center text-xl">LOGO</div>
+      <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
 
+      <form onSubmit={handleSignup}>
         <div className="mb-4">
           <input
             type="text"
@@ -200,16 +200,15 @@ const SignupPage: React.FC = () => {
             isValid ? 'bg-mainblack' : 'cursor-not-allowed bg-maindarkgray'
           } w-full px-1 py-2 text-white`}
           type="submit"
-          onClick={(e) => signupOnClickHandler(e)}
         >
           회원가입
         </button>
-
-        <button className="mt-2 w-full bg-mainblack px-1 py-2 text-white">
-          <Link to="/login">이미 가입하셨나요?</Link>
-        </button>
-        <SocialLogin />
       </form>
+
+      <button className="mt-2 w-96 bg-mainblack px-1 py-2 text-white">
+        <Link to="/login">이미 가입하셨나요?</Link>
+      </button>
+      <SocialLogin />
     </div>
   );
 };
