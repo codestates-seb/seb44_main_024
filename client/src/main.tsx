@@ -16,17 +16,11 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
 
-    // 에러페이지 라우터 적용 예시
-    // errorElement: <ErrorPage />,
-
     children: [
       { index: true, element: <Test /> },
       { path: '/signup', element: <SignupPage /> },
       { path: '/login', element: <LoginPage /> },
-      {
-        path: '/movies/:movieId',
-        element: <DetailsPage />,
-      },
+      { path: '/movies/:movieId', element: <DetailsPage /> },
     ],
   },
 ]);
