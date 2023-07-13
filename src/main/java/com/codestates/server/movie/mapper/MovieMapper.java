@@ -18,8 +18,6 @@ public interface  MovieMapper {
 
     default MovieResponseDto.ResponseDetail movieToResponseDetail(Movie movie, Double avg, List<ReviewDto.Response> reviewList) {
         Movie.Data.Result result = movie.getData().get(0).getResult().get(0);
-        ReviewService reviewService = new ReviewService();
-
 
         return MovieResponseDto.ResponseDetail.builder()
                 .docId(result.getDocId())
@@ -32,11 +30,11 @@ public interface  MovieMapper {
                 .nation(result.getNation())
                 .rating(result.getRating())
                 .directorNm(result.getDirectors().getDirector().get(0).getDirectorNm())
-//                .actors(result.getActors().getActor().stream().map(i -> i.getActorNm()).collect(Collectors.toList()))
                 .actors(MovieActors.movieActors(movie).stream().limit(10L).collect(Collectors.toList()))
                 .posterUrl(result.getPosters().split("\\|")[0])
                 .stills(Arrays.stream(result.getStlls().split("\\|")).limit(4L).collect(Collectors.toList()))
                 .score(avg)
+                .review_count(reviewList.size())
                 .reviews(reviewList)
                 .build();
     }

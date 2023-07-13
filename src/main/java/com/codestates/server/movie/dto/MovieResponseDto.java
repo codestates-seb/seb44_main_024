@@ -47,6 +47,7 @@ public class MovieResponseDto {
         private String posterUrl;
         private List<String> stills;
         private Double score;
+        private int review_count;
         private List<ReviewDto.Response> reviews;
     }
 }

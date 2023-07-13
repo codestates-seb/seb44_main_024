@@ -9,11 +9,11 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class MultiResponseDto<T> {
-    T data;
+    T movie;
     private PageInfo pageInfo;
 
-    public MultiResponseDto(T data, Page page){
-        this.data = data;
+    public MultiResponseDto(T movie, Page page){
+        this.movie = movie;
         this.pageInfo = new PageInfo(page.getNumber() + 1,
                 page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
