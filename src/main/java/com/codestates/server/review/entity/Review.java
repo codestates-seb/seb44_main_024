@@ -22,6 +22,8 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private String docId;
 
     // Member 와 1:N 연관관계 설정
     // 어떤 회원이 해당 리뷰를 작성했는지

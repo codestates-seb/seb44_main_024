@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class ReviewService {
     }
 
 
-    public Review createReview(Review post, Long movieId, Set<String> tags) {
+    public Review createReview(Review post, Set<String> tags) {
         Review review = reviewRepository.save(post);
         // ReviewTag 테이블에 Review와 tags 추가
         reviewTagService.addReviewTag(review, tags);
@@ -80,5 +81,19 @@ public class ReviewService {
                 .orElseThrow(() -> new IllegalArgumentException("Review not found with id: " + reviewId));
 //                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
         return review;
+    }
+
+    public List<Review> findReviewBydocId(String docId) {
+        List<Review> reviews = reviewRepository.findByDocId(docId);
+        System.out.println("#".repeat(50));
+        System.out.println("review");
+        reviews.stream().forEach(i -> i.toString());
+
+        return reviews;
+    }
+
+    // 등록된 리뷰 중 docId를 가지고 평균 평점 구하기
+    public Double getAverageScore(String docId) {
+        return reviewRepository.getAverageScoreByDocId(docId).orElse(0.0);
     }
 }

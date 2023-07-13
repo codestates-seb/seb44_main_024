@@ -1,9 +1,6 @@
 package com.codestates.server.review.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -22,6 +19,7 @@ public class ReviewDto {
         @Max(5)
         @NotNull
         private int score;
+        private String docId;
         @NotBlank
         private String content;
         private Set<String> tags;
@@ -31,8 +29,10 @@ public class ReviewDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    @Builder
     public static class Response {
-        private Long id;
+        private Long reviewId;
+        private String docId;
         private int score;
         private String content;
         private Set<String> tags;

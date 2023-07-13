@@ -26,9 +26,10 @@ public class ReviewController {
     // 리뷰 작성
     @PostMapping("/movies/{movie-id}/reviews")
     public ResponseEntity postReview(@Valid @RequestBody ReviewDto.Post post,
-                                     @PathVariable("movie-id") Long movieId) {
+                                     @PathVariable("movie-id") String docId) {
         Set<String> tags = post.getTags();
-        Review review = reviewService.createReview(reviewMapper.postToReview(post), movieId, tags);
+        post.setDocId(docId);
+        Review review = reviewService.createReview(reviewMapper.postToReview(post), tags);
 
 
         // 해당 영화의 상세페이지로 리다이렉트

@@ -12,3 +12,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+api:
+  key : 78VM16BGS9427RH1MGSE
