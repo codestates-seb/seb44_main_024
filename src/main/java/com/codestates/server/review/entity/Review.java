@@ -3,6 +3,7 @@ package com.codestates.server.review.entity;
 import com.codestates.server.like.entity.ReviewLike;
 import com.codestates.server.tag.entity.ReviewTag;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -51,6 +52,9 @@ public class Review {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<ReviewLike> likes = new ArrayList<>();
+
+    @Formula("(SELECT COUNT(*) FROM REVIEW_LIKE rl WHERE rl.review_id = id)")
+    private Long likeCount;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<ReviewTag> reviewTags = new LinkedHashSet<>();

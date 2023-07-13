@@ -4,6 +4,10 @@ import com.codestates.server.review.entity.Review;
 import com.codestates.server.review.repository.ReviewRepository;
 import com.codestates.server.tag.service.ReviewTagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,13 +87,8 @@ public class ReviewService {
         return review;
     }
 
-    public List<Review> findReviewBydocId(String docId) {
-        List<Review> reviews = reviewRepository.findByDocId(docId);
-        System.out.println("#".repeat(50));
-        System.out.println("review");
-        reviews.stream().forEach(i -> i.toString());
-
-        return reviews;
+    public Page<Review> getReviewsByDocId(int page,String docId) {
+        return reviewRepository.findByDocId(PageRequest.of(page, 5, Sort.Direction.DESC, "likeCount"), docId);
     }
 
     // 등록된 리뷰 중 docId를 가지고 평균 평점 구하기

@@ -1,5 +1,6 @@
 package com.codestates.server.movie.controller;
 
+import com.codestates.server.dto.MultiResponseDto;
 import com.codestates.server.movie.entity.Movie;
 import com.codestates.server.movie.mapper.MovieMapper;
 import com.codestates.server.review.entity.Review;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -59,7 +59,8 @@ public class MovieApiController {
     }
 
     @GetMapping("/{docid}")
-    public ResponseEntity getMovieByDocid(@PathVariable("docid") String docid) {
+    public ResponseEntity getMovieByDocid(@PathVariable("docid") String docid,
+                                          @RequestParam("page") int page) {
         try {
             String movieId = docid.substring(0, 1);
             String movieSeq = docid.substring(1);
@@ -73,12 +74,17 @@ public class MovieApiController {
 
             Movie movie = executeGetRequest(uri);
 
-            List<Review> reviewList = reviewService.findReviewBydocId(movie.getData().get(0).getResult().get(0).getDocId());
+            Page<Review> reviewPage = reviewService.getReviewsByDocId(
+                    page
+                    ,movie.getData().get(0).getResult().get(0).getDocId());
 
-            return new ResponseEntity<>(movieMapper.movieToResponseDetail(
-                    movie,
-                    reviewService.getAverageScore(movie.getData().get(0).getResult().get(0).getDocId()),
-                    reviewMapper.reviewsToResponses(reviewList)),
+            List<Review> reviews = reviewPage.getContent();
+
+            return new ResponseEntity<>(new MultiResponseDto<>(
+                    movieMapper.movieToResponseDetail(
+                            movie,
+                            reviewService.getAverageScore(movie.getData().get(0).getResult().get(0).getDocId()),
+                            reviewMapper.reviewsToResponses(reviews)), reviewPage),
                     HttpStatus.OK);
         } catch (HttpClientErrorException e) {
             HttpStatus statusCode = e.getStatusCode();
