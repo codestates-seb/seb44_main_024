@@ -5,11 +5,12 @@ import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slice
 import { useEffect, useState } from 'react';
 // import { useSelector } from 'react-redux'; // 로그인 기능 완성시 사용
 // import { RootState } from '../../redux-toolkit/store'; // 로그인 기능 완성시 사용
-import { useParams, useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import MovieTitle from './MovieTitle/MovieTitle';
 import MovieInfo from './MovieInfo/MovieInfo';
 import Review from './Review/Review';
 import CreateReviewModal from './UI/CreateReviewModal/CreateReviewModal';
+import Pagination from './UI/Pagination';
 
 const DetailsPage = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
@@ -19,27 +20,13 @@ const DetailsPage = () => {
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
-  const navigate = useNavigate();
   const { movieId } = useParams();
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page');
-  const pageNumber = Number(page || 1); // 쿼리파라미터가 없는 경우에 default값 1
 
   // 페이지네이션
-  const [pageWindow, setPageWindow] = useState([1, 2, 3, 4, 5]);
+  const pageNumber = Number(page || 1); // 쿼리파라미터가 없는 경우에 default값 1
   const [totalReviews, setTotalReviews] = useState(0);
-  const reviewPerPage = 5;
-  const totalPages = Math.ceil(totalReviews / reviewPerPage);
-  const nextPages = () => {
-    const newPageWindow = pageWindow.map((page) => page + 5);
-    setPageWindow(newPageWindow);
-    navigate(`/movies/${movieId}?page=${newPageWindow[0]}`);
-  };
-  const previousPages = () => {
-    const newPageWindow = pageWindow.map((page) => page - 5);
-    setPageWindow(newPageWindow);
-    navigate(`/movies/${movieId}?page=${newPageWindow[4]}`);
-  };
 
   // 해당 영화데이터 get 요청 // 예상 endpoint: `/movies/{movieId}/page={pageNumber}`
   useEffect(() => {
@@ -93,28 +80,7 @@ const DetailsPage = () => {
             })}
 
             <div className="flex justify-center text-3xl">
-              {pageNumber > 5 && (
-                <button className="mr-3 text-xl" onClick={previousPages}>
-                  &lt;
-                </button>
-              )}
-              {pageWindow.map(
-                (page) =>
-                  page <= totalPages && (
-                    <Link
-                      key={page}
-                      to={`/movies/${movieId}?page=${page}`}
-                      className={`px-2 ${pageNumber === page ? 'rounded-full bg-yellow-200' : ''}`}
-                    >
-                      {page}
-                    </Link>
-                  )
-              )}
-              {totalPages > 5 && totalPages > pageWindow[4] && (
-                <button className="ml-3 text-xl" onClick={nextPages}>
-                  &gt;
-                </button>
-              )}
+              <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
             </div>
 
             {/* 컴포넌트로 들어갈 예정 */}
