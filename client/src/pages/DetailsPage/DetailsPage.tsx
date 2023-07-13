@@ -127,6 +127,7 @@ const DetailsPage = () => {
               <div>영화</div>
             </div>
           </div>
+
           {isModalOpen && <CreateReviewModal movieId={movieId} closeModal={closeModal} />}
         </>
       )}

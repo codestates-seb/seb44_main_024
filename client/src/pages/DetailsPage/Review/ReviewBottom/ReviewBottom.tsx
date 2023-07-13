@@ -1,8 +1,8 @@
 // import api from '../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
 import axios from 'axios';
 import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../../../../redux-toolkit/store';
+// import { useSelector } from 'react-redux'; // 로그인 기능 완성시 사용
+// import { RootState } from '../../../../redux-toolkit/store'; // 로그인 기능 완성시 사용
 import Tag from '../../UI/Tag';
 import { MdOutlineThumbUp } from 'react-icons/md';
 import { ReviewProps } from '../Review';
@@ -57,7 +57,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
 
   return (
     <div className="flex justify-between">
-      <div className="flex">
+      <div className="flex flex-wrap gap-1">
         {review.tags.map((tag, index) => (
           <Tag key={index} tag={tag.tag} />
         ))}
