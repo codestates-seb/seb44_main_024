@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { setCookie } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { loginVerified, logoutVerified } from '../../redux-toolkit/slices/loginState';
-import axios from 'axios';
+import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
 const LoginPage: React.FC = () => {
@@ -13,8 +14,6 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const URL = 'http://localhost:3000';
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -24,39 +23,30 @@ const LoginPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${URL}/login`,
-        JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            withCredentials: true,
-          },
-        }
-      );
+      const response = await api.post('/login', {
+        email: userEmail,
+        password: userPassword,
+      });
 
-      const { user } = response.data;
-      localStorage.setItem('accessToken', response.data.accessToken);
+      const { user, accessToken } = response.data;
+      setCookie('accessToken', accessToken, { path: '/' });
+      // setCookie('refreshToken', refreshToken, { path: '/' });
 
       window.alert(`${user.name} 님, 환영합니다!`);
       dispatch(loginVerified());
       navigate('/');
     } catch (err) {
       console.log(err);
-      window.alert('로그인에 실패하였습니다.');
+      window.alert('아이디 또는 비밀번호를 다시 확인해 주세요.');
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <form>
-        <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
+      <div className="text-center text-xl">LOGO</div>
+      <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
 
+      <form onSubmit={(e) => handleLogin(e)}>
         <div className="mb-4">
           <input
             type="email"
@@ -84,16 +74,17 @@ const LoginPage: React.FC = () => {
         <button
           className="w-full bg-maindarkgray px-1 py-2 text-white hover:bg-mainblack"
           type="submit"
-          onClick={(e) => handleLogin(e)}
         >
           로그인
         </button>
-
-        <button className="mt-2 w-full bg-mainblack px-1 py-2 text-white">
-          <Link to="/signup"> 아직 계정이 없으신가요? </Link>
-        </button>
-        <SocialLogin />
       </form>
+
+      <button className="mt-2 w-96 bg-mainblack px-1 py-2 text-white">
+        <Link to="/signup"> 아직 계정이 없으신가요? </Link>
+      </button>
+      <SocialLogin />
+
+      {/* 나중에 삭제 */}
       <div className="mt-8">
         <p>클릭!</p>
         <button className="bg-blue-300" type="button" onClick={() => dispatch(loginVerified())}>

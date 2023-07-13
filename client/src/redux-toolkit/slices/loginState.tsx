@@ -6,7 +6,7 @@ interface LoginState {
 
 const initialState: LoginState = {
   value: Boolean(localStorage.getItem('isLoggedIn')) || false,
-}; //초기상태를 로컬 스토리지에서 가져옴 (새로고침시 로그아웃 방지)
+}; //isLoggedIn 값이 있으면 가져옴, 없거나 null, undefined이면 false, 새로고침시 로그아웃 방지
 
 const loginSlice = createSlice({
   name: 'login',
