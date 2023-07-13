@@ -9,7 +9,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import MovieTitle from './MovieTitle/MovieTitle';
 import MovieInfo from './MovieInfo/MovieInfo';
 import Review from './Review/Review';
-import CreateReviewModal from './UI/CreateReviewModal/CreateReviewModal';
+import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
 
 const DetailsPage = () => {
@@ -74,15 +74,12 @@ const DetailsPage = () => {
                 리뷰작성
               </button>
             </div>
-
             {movieDetail?.review.rev.map((review, index) => {
               return <Review key={index} review={review} />;
             })}
-
             <div className="flex justify-center text-3xl">
               <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
             </div>
-
             {/* 컴포넌트로 들어갈 예정 */}
             <p className="pt-5">비슷한 장르의 영화</p>
             <div className="flex justify-between">
@@ -93,8 +90,7 @@ const DetailsPage = () => {
               <div>영화</div>
             </div>
           </div>
-
-          {isModalOpen && <CreateReviewModal movieId={movieId} closeModal={closeModal} />}
+          {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
         </>
       )}
     </>

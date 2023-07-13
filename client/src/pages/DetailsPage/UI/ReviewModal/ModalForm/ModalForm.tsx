@@ -2,7 +2,7 @@
 import axios from 'axios';
 import RatingStars from 'react-rating-stars-component';
 import { useState } from 'react';
-import { ModalProps } from '../CreateReviewModal';
+import { ModalProps } from '../ReviewModal';
 import ModalTag from './ModalTag/ModalTag';
 
 const tags: string[] = [
@@ -48,27 +48,30 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
     setScore(newRating);
   };
 
-  // 새로운 리뷰 등록 post 요청 // 예상 endpoint: `/movies/{movie-id}/reviews`
+  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST)
   const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const createReviewData = {
+    const reviewData = {
       score: score,
       content: reviewContent,
       tags: selectedTags,
     };
+    const url = review
+      ? 'https://9eafe059-f15b-42b9-8571-1c6297da44fa.mock.pstmn.io'
+      : 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io';
+    const method = review ? 'PATCH' : 'POST';
 
     try {
-      const response = await axios.post(
-        'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io',
-        createReviewData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
-          },
-        }
-      );
+      const response = await axios({
+        method: method,
+        url: url,
+        data: reviewData,
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${token}`
+        },
+      });
       closeModal();
       console.log(response);
     } catch (err) {
@@ -89,7 +92,9 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
             value={score}
           />
         </div>
-        <button className="bg-theme2 px-7 py-1.5 text-white hover:bg-theme3">리뷰 등록</button>
+        <button className="bg-theme2 px-7 py-1.5 text-white hover:bg-theme3">
+          {review ? '리뷰수정' : '리뷰등록'}
+        </button>
       </div>
       <textarea
         onChange={handleContentChange}

@@ -1,5 +1,5 @@
 import ModalForm from './ModalForm/ModalForm';
-import { ReviewContent } from './../../assets/types/movieTypes';
+import { ReviewContent } from '../../assets/types/movieTypes';
 
 type CloseModalFn = () => void;
 export interface ModalProps {
@@ -8,7 +8,7 @@ export interface ModalProps {
   review?: ReviewContent;
 }
 
-const CreateReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
+const ReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
   const preventModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
@@ -29,4 +29,4 @@ const CreateReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
   );
 };
 
-export default CreateReviewModal;
+export default ReviewModal;
