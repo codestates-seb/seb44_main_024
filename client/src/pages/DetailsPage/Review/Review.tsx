@@ -1,3 +1,5 @@
+import axios from 'axios';
+// import api from '../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
 import { useState } from 'react';
 import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';
@@ -22,6 +24,26 @@ const Review = ({ review }: ReviewProps) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  //리뷰 삭제(DELETE 요청) // reviewId 이용
+  const handleReviewDelete = async () => {
+    try {
+      const response = await axios.delete(
+        'https://7824fe4c-db17-4a35-8a83-3480e0f32f69.mock.pstmn.io',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${token}`
+          },
+        }
+      );
+      console.log(response);
+      alert('삭제되었습니다.');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <div className="mb-10">
@@ -33,7 +55,9 @@ const Review = ({ review }: ReviewProps) => {
               <button onClick={openModal} className="mr-3">
                 수정
               </button>
-              <button className="text-red-500">삭제</button>
+              <button onClick={handleReviewDelete} className="text-red-500">
+                삭제
+              </button>
             </div>
           </div>
           <ReviewBottom review={review} />

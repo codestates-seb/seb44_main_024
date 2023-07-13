@@ -20,9 +20,7 @@ const tags: string[] = [
 
 const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
   console.log(movieId);
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    review ? review.tags.map((obj) => obj.tag) : []
-  );
+  const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
   const [score, setScore] = useState<number>(review ? review.score : 0);
 
@@ -48,7 +46,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
     setScore(newRating);
   };
 
-  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST)
+  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 reviewId이용
   const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -74,6 +72,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
       });
       closeModal();
       console.log(response);
+      alert('등록되었습니다.');
     } catch (err) {
       console.error(err);
     }

@@ -7,7 +7,7 @@ const MovieTitle = () => {
     <div className="relative h-[500px] w-full">
       <img
         className="h-full w-full object-cover"
-        src={movieDetail?.movie.stills[0].still}
+        src={movieDetail?.movie.stills[0]}
         alt="Main Img"
       />
       <div className="absolute left-0 top-2/3 z-10 h-full w-full">
@@ -19,7 +19,7 @@ const MovieTitle = () => {
             {movieDetail?.movie.nation}
           </p>
           <p className="font-medium text-white">
-            {movieDetail?.movie.runtime} · {movieDetail?.movie.rating}
+            {movieDetail?.movie.runtime}분 · {movieDetail?.movie.rating}
           </p>
         </div>
       </div>

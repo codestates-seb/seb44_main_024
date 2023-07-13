@@ -74,7 +74,7 @@ const DetailsPage = () => {
                 리뷰작성
               </button>
             </div>
-            {movieDetail?.review.rev.map((review, index) => {
+            {movieDetail?.movie.reviews.map((review, index) => {
               return <Review key={index} review={review} />;
             })}
             <div className="flex justify-center text-3xl">

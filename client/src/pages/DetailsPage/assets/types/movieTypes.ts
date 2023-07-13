@@ -1,45 +1,35 @@
 export interface Movie {
-  docId: number;
+  docId: string;
   title: string;
   titleEng: string;
   description: string;
   genre: string;
-  runtime: string; // number로 들어올 수도 있음
-  repRlsDate: string; // number로 들어올 수도 있음
+  runtime: string;
+  repRlsDate: string;
   nation: string;
   rating: string;
   posterUrl: string;
   score: number;
-  review_count: number; // string으로 들어올 수도 있음
+  review_count: number;
   directorNm: string;
   actors: Actor[];
-  stills: Still[];
+  stills: string[];
+  reviews: ReviewContent[];
 }
 
 export interface Actor {
   actor: string;
-}
-
-export interface Still {
-  still: string;
-}
-
-export interface ReviewList {
-  rev: ReviewContent[];
+  role: string;
 }
 
 export interface ReviewContent {
-  docId: number;
+  docId: string;
   reviewId: number;
   score: number;
   content: string;
-  like: number; // string으로 들어올 수도 있음
-  tags: Tag[];
-  user: User[];
-}
-
-export interface Tag {
-  tag: string;
+  like: number;
+  tags: string[];
+  user: User; // 백엔드쪽에서 아직구현x
 }
 
 export interface User {
@@ -49,15 +39,22 @@ export interface User {
 }
 
 export interface Recommend {
-  docId: number;
+  docId: string;
   title: string;
-  reqRlsDate: string; // number로 들어올 수도 있음
+  reqRlsDate: string;
   score: number;
   posterUrl: string;
 }
 
+export interface PageInfo {
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+}
+
 export interface MovieDetailData {
   movie: Movie;
-  review: ReviewList;
+  pageInfo: PageInfo;
   recommend: Recommend[];
 }

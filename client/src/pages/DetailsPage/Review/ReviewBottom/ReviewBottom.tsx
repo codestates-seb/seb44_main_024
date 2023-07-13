@@ -59,7 +59,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
     <div className="flex justify-between">
       <div className="flex flex-wrap gap-1">
         {review.tags.map((tag, index) => (
-          <Tag key={index} tag={tag.tag} />
+          <Tag key={index} tag={tag} />
         ))}
       </div>
       <div className="flex text-lg">

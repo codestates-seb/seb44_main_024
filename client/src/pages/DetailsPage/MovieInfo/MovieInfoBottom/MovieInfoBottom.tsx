@@ -9,7 +9,7 @@ const MovieInfoBottom = () => {
       <div className="flex justify-between">
         {movieDetail?.movie.stills.map((still, index) => (
           <div key={index} className="w-[300px]">
-            <img className="h-full w-full" src={still.still} alt="still"></img>
+            <img className="h-full w-full" src={still} alt="still"></img>
           </div>
         ))}
       </div>

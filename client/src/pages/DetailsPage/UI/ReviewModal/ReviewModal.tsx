@@ -12,6 +12,7 @@ const ReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
   const preventModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
+
   return (
     <div
       role="presentation"
