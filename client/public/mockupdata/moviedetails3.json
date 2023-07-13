@@ -1,0 +1,161 @@
+{
+    "movie": {
+      "docId": "K28660",
+      "title": "센과 치히로의 행방불명",
+      "titleEng": "Spirited Away",
+      "description": "평범한 열 살 짜리 소녀 치히로 식구는 이사 가던 중 길을 잘못 들어 낡은 터널을 지나가게 된다. 터널 저편엔 폐허가 된 놀이공원이 있었고 그곳엔 이상한 기운이 흘렀다. 인기척 하나 없는 이 마을의 낯선 분위기에 불길한 기운을 느낀 치히로는 부모님에게 돌아가자고 조르지만 부모님은 호기심에 들떠 마을 곳곳을 돌아다니기 시작한다. 어느 음식점에 도착한 치히로의 부모님은 그 곳에 차려진 음식들을 보고 즐거워하며 허겁지겁 먹어대다가 돼지로 변해버린다. 겁에 질려 당황하는 치히로에게 낯선 소년 하쿠가 나타나 빨리 이곳을 나가라고 소리치는데...",
+      "genre": "애니메이션/판타지/가족",
+      "runtime": "126",
+      "repRlsDate": "20010720",
+      "nation": "일본",
+      "rating": "전체",
+      "posterUrl": "https://upload.wikimedia.org/wikipedia/ko/b/bc/%EC%84%BC%EA%B3%BC_%EC%B9%98%ED%9E%88%EB%A1%9C%EC%9D%98_%ED%96%89%EB%B0%A9%EB%B6%88%EB%AA%85_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg",
+      "score": 4.3,
+      "review_count": 30,
+      "directorNm": "미야자키 하야오",
+      "actors": [
+        { "actor": "히이라기 루미", "role": "센" },
+        { "actor": "이리노 미유", "role": "하쿠" }
+      ],
+      "stills": [
+        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150114_199%2F1421214476536PIwHg_JPEG%2Fmovie_image.jpg",
+        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_12%2F1324523436632RMEX7_JPEG%2Fmovie_image.jpg",
+        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_227%2F13245234480448qNfK_JPEG%2Fmovie_image.jpg",
+        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150108_83%2F1420706407615GKsAa_JPEG%2Fmovie_image.jpg"
+      ],
+      "reviews": [
+        {
+          "docId": "K28660",
+          "reviewId": 11,
+          "score": 2,
+          "content": "별로에요",
+          "like": 1,
+          "tags": [],
+          "user": 
+            {
+              "userId": 6,
+              "username": "징징이",
+              "profile_Img": "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/646/b447de09bcdc8174046f61581355d374.jpeg"
+            }
+        },
+        {
+          "docId": "K28660",
+          "reviewId": 12,
+          "score": 4.5,
+          "content": "그닥....",
+          "like": 6,
+          "tags": [
+            "#힐링",
+            "#킬링타임"
+          ],
+          "user": 
+            {
+              "userId": 7,
+              "username": "짱구",
+              "profile_Img": "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/646/b447de09bcdc8174046f61581355d374.jpeg"
+            }
+        },
+        {
+          "docId": "K28660",
+          "reviewId": 13,
+          "score": 2,
+          "content": "너무 재밌어요",
+          "like": 3,
+          "tags": [
+            "#힐링"
+          ],
+          "user": 
+            {
+              "userId": 8,
+              "username": "ironman",
+              "profile_Img": "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/646/b447de09bcdc8174046f61581355d374.jpeg"
+            }
+        },
+        {
+          "docId": "K28660",
+          "reviewId": 14,
+          "score": 5,
+          "content": "와우",
+          "like": 4,
+          "tags": [
+            "#킬링타임",
+            "#가족",
+            "#힐링",
+            "#모험",
+            "#몰입감",
+            "#기분업",
+            "#영감",
+            "#긴장감",
+            "#반전",
+            "#감동"
+          ],
+          "user": 
+            {
+              "userId": 9,
+              "username": "미야자키 하야오",
+              "profile_Img": "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/646/b447de09bcdc8174046f61581355d374.jpeg"
+            }
+        },
+        {
+          "docId": "K28660",
+          "reviewId": 15,
+          "score": 5,
+          "content": "시간아까움",
+          "like": 3,
+          "tags": [
+            "#감동",
+            "#가족"
+          ],
+          "user": 
+            {
+              "userId": 10,
+              "username": "일론머스크",
+              "profile_Img": "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/646/b447de09bcdc8174046f61581355d374.jpeg"
+            }
+        }
+      ]
+    },
+    "pageInfo": {
+      "page": 1,
+      "size": 5,
+      "totalElements": 2,
+      "totalPages": 1
+    },
+    "recommend": [
+      {
+        "docId": "K28661",
+        "title": "스파이더맨: 어크로스 더 유니버스",
+        "repRlsDate": "20230602",
+        "score": 4.6,
+        "posterUrl": "https://i.namu.wiki/i/YaOX0b7cNnR9sLNgLAncoYcIHJ71PLcvP1FC89HWvwGxoXG6wuUlXAsBFHI_f6lvahFXRhljZis-zI4PFA1ys4wJtoBgYIINQCAPNWqW-uo2Lk3nNu_NMLvMI9vbWPhfBoqYdY8s5C7NOtKPMFiqGA.webp"
+      },
+      {
+        "docId": "K28662",
+        "title": "인터스텔라",
+        "repRlsDate": "20141107",
+        "score": 4.5,
+        "posterUrl": "https://i.namu.wiki/i/ei0XJc1X5aV2Z9rEN1L9BnJVfQ0VfizGdGK3QTFwhz5QXOxGSeZ2zWcJsvFZ2FjXl23ajEOeCE4msO1EZ6xHFMDi_YafkaoFB9jPS7HExnYJMmwbJxh2XStOdh4Wtp24sTKvTAsltpYceUiOcgwa-Q.webp"
+      },
+      {
+        "docId": "K28663",
+        "title": "겨울왕국",
+        "repRlsDate": "20131127",
+        "score": 4.3,
+        "posterUrl": "https://i.namu.wiki/i/mvGynWOsOvDngjMlad2Kz5JxZQ1BqcTtPkAg2P3oE5FA6RAvYTAlcbt8rP8iNjBC4kQ3z4JLJRg1m6IzLkKrOjAmss32AVu_4uedeWfsjmunm61tfxeDGQd-VYt51nhpJjMaoxTwhm9KLmxcMJrsdQ.webp"
+      },
+      {
+        "docId": "K28664",
+        "title": "범죄와의 전쟁",
+        "repRlsDate": "20120202",
+        "score": 4.1,
+        "posterUrl": "영화 포스터 url"
+      },
+      {
+        "docId": "K28665",
+        "title": "해리포터와 마법사의 돌",
+        "repRlsDate": "20011114",
+        "score": 4.0,
+        "posterUrl": "https://i.namu.wiki/i/_pr1mVcm6gjM8u7gz6kDuVfUSOn0UeYrXDPNWNHAVRS0FikoDjTpg9hBOBo3erF-FK5FRkkJgqZd8GmfHia3Y-8JpbWdXxBqF0vQCAD--iXiAb1D2O82ZgHCZlxS1whQdPiwgTxvCV4BN9bxdXZTYQ.webp"
+      }
+    ]
+  }

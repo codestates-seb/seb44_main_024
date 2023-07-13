@@ -7,27 +7,15 @@ import actor1Img from '../../assets/actor-1.jpg';
 import { AiFillStar } from 'react-icons/ai';
 import { FaPlay } from 'react-icons/fa';
 
-const people = [
-  {
-    name: '미야자키 하야오',
-    img: directorImg,
-  },
-  {
-    name: '히이라기 루미',
-    img: actress1Img,
-  },
-  {
-    name: '이리노 미유',
-    img: actor1Img,
-  },
-];
+// 감독, 배우 이미지 api에 없어서 수동으로 넣음.
+const people = [directorImg, actress1Img, actor1Img];
 
 const MovieInfoTop = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
   return (
     <div className="mb-5 flex">
       <div className="mr-7 shrink-0">
-        <img className=" mb-4 h-[400px]" src={movieDetail?.movie.poster_url} alt="Poster Img" />
+        <img className=" mb-4 h-[400px]" src={movieDetail?.movie.posterUrl} alt="Poster Img" />
         <a
           href="https://www.youtube.com/watch?v=ByXuk9QqQkk"
           className="flex h-14 w-full items-center justify-center rounded-xl bg-theme1"
@@ -45,11 +33,11 @@ const MovieInfoTop = () => {
         </div>
         <p className="mb-5">{movieDetail?.movie.description}</p>
         <p className="mb-1">감독</p>
-        <Person name={movieDetail?.movie.스태프[0].director} img={people[0].img} />
+        <Person name={movieDetail?.movie.directorNm} img={people[0]} />
         <p className="mb-1 mt-5">출연</p>
         <div className="flex">
-          {movieDetail?.movie.배우.map((actor, index) => {
-            return <Person key={index} name={actor.actor} img={people[index + 1].img} />;
+          {movieDetail?.movie.actors.map((actor, index) => {
+            return <Person key={index} name={actor.actor} img={people[1]} />;
           })}
         </div>
       </div>
