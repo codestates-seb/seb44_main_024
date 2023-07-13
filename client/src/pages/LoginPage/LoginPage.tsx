@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { setCookie } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { loginVerified, logoutVerified } from '../../redux-toolkit/slices/loginState';
-import axios from 'axios';
+import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
 const LoginPage: React.FC = () => {
@@ -13,8 +14,6 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const URL = 'http://localhost:3000';
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -24,30 +23,21 @@ const LoginPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${URL}/login`,
-        JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            withCredentials: true,
-          },
-        }
-      );
+      const response = await api.post('/login', {
+        email: userEmail,
+        password: userPassword,
+      });
 
-      const { user } = response.data;
-      localStorage.setItem('accessToken', response.data.accessToken);
+      const { user, accessToken } = response.data;
+      setCookie('accessToken', accessToken, { path: '/' });
+      // setCookie('refreshToken', refreshToken, { path: '/' });
 
       window.alert(`${user.name} 님, 환영합니다!`);
       dispatch(loginVerified());
       navigate('/');
     } catch (err) {
       console.log(err);
-      window.alert('로그인에 실패하였습니다.');
+      window.alert('아이디 또는 비밀번호를 다시 확인해 주세요.');
     }
   };
 

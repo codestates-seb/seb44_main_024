@@ -11,6 +11,12 @@
       "password": "$2a$10$rFoWRj5hZ0dp2Bn7gozjKup6/bHrXxq7HzxRfWYLD2eBORxFZGqyC",
       "name": "토마토",
       "id": 2
+    },
+    {
+      "email": "carrot@mail.com",
+      "password": "$2a$10$a9t8pXfzK4xztGawNEvep.lSPd.63VUJUuyb3Rlmpf/jxl67Pezwe",
+      "name": "당근",
+      "id": 3
     }
   ]
 }

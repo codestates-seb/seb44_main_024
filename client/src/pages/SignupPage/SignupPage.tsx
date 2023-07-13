@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import SocialLogin from '../../components/SocialLogin';
+import api from '../../utils/api';
 
 const SignupPage: React.FC = () => {
-  const [displayName, setDisplayName] = useState('');
-  const [displayNameValid, setDisplayNameValid] = useState(false);
-  const [displayNameError, setDisplayNameError] = useState('');
+  const [userName, setuserName] = useState('');
+  const [userNameValid, setuserNameValid] = useState(false);
+  const [userNameError, setuserNameError] = useState('');
 
   const [userEmail, setUserEmail] = useState('');
   const [userEmailValid, setUserEmailValid] = useState(false);
@@ -22,20 +22,18 @@ const SignupPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const URL = 'http://localhost:3000';
-
   useEffect(() => {
-    if (displayName.length === 0) {
-      setDisplayNameValid(false);
-      setDisplayNameError('');
-    } else if (displayName.length >= 2) {
-      setDisplayNameValid(true);
-      setDisplayNameError('');
+    if (userName.length === 0) {
+      setuserNameValid(false);
+      setuserNameError('');
+    } else if (userName.length >= 2) {
+      setuserNameValid(true);
+      setuserNameError('');
     } else {
-      setDisplayNameValid(false);
-      setDisplayNameError('이름은 2자 이상이어야 합니다.');
+      setuserNameValid(false);
+      setuserNameError('이름은 2자 이상이어야 합니다.');
     }
-  }, [displayName]);
+  }, [userName]);
 
   useEffect(() => {
     const emailValidationRegex =
@@ -81,28 +79,18 @@ const SignupPage: React.FC = () => {
     }
   }, [confirmPassword, userPassword]);
 
-  const isValid = userEmailValid && displayNameValid && userPasswordValid && confirmPasswordValid;
+  const isValid = userEmailValid && userNameValid && userPasswordValid && confirmPasswordValid;
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isValid) {
       try {
-        const response = await axios.post(
-          `${URL}/register`,
-          JSON.stringify({
-            name: displayName,
-            email: userEmail,
-            password: userPassword,
-          }),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-              withCredentials: true,
-            },
-          }
-        );
+        const response = await api.post('/register', {
+          name: userName,
+          email: userEmail,
+          password: userPassword,
+        });
 
         console.log(response.headers);
         window.alert('회원가입에 성공하였습니다.');
@@ -123,13 +111,13 @@ const SignupPage: React.FC = () => {
         <div className="mb-4">
           <input
             type="text"
-            id="displayName"
+            id="userName"
             placeholder="닉네임 입력"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            value={userName}
+            onChange={(e) => setuserName(e.target.value)}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
-          {displayNameError && <p className="text-red-500">{displayNameError}</p>}
+          {userNameError && <p className="text-red-500">{userNameError}</p>}
         </div>
 
         <div className="mb-4">
