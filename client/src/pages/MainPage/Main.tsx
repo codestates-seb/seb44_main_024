@@ -1,27 +1,33 @@
-import MoviePoster from '../UI/MoivePoster';
+import Header from '../UI/Header';
+import BoxOfficeMovies from '../UI/BoxOffice';
+import HighRatings from '../UI/HighRatings';
+import HighReviewCount from '../UI/HightReviewCount';
 
-const movie = {
-  title: 'Avengers: Endgame',
-  releaseDate: '2019',
-  rating: 8.4,
-  bookmarked: true,
-  posterUrl: 'https://m.media-amazon.com/images/I/91zzAMkVCUL._AC_UF894,1000_QL80_.jpg',
-};
-
-const Main = () => {
+const Main: React.FC = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="max-w-md rounded bg-white p-8 shadow">
-        <MoviePoster
-          title={movie.title}
-          releaseDate={movie.releaseDate}
-          rating={movie.rating}
-          bookmarked={movie.bookmarked}
-          posterUrl={movie.posterUrl}
-        />
-      </div>
+    <div>
+      <Header />
+      <BoxOfficeMovies />
+      <HighRatings />
+      <HighReviewCount />
     </div>
   );
 };
 
 export default Main;
+
+/*     
+별점 높은 순   - 영화 추천  data: { [title: string;
+  releaseDate: string;
+  rating: number;
+  bookmarked: boolean;
+  posterUrl: string;], }
+리뷰 많은 순
+장르
+검색 결과(배우, 감독, 영화이름)
++(태그)
+
+
+
+
+      */

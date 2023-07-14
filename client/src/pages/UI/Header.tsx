@@ -7,7 +7,7 @@ import { BsSearch } from 'react-icons/bs';
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between bg-[#FBE353] px-10 py-6 text-mainblack ">
+    <div className="flex items-center justify-between bg-[#FBE353] px-10 py-6 text-[#1A1A1A] ">
       <div className="flex flex-row">
         <div className="mr-16 cursor-pointer text-4xl font-bold hover:bg-maingray">Logo</div>
         <div className="mt-2 cursor-pointer text-2xl font-bold  hover:bg-maingray ">Categories</div>
