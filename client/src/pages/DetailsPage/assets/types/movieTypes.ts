@@ -1,45 +1,60 @@
 export interface Movie {
+  docId: string;
   title: string;
+  titleEng: string;
   description: string;
   genre: string;
-  running_time: string;
-  poster_url: string;
+  runtime: string;
+  repRlsDate: string;
+  nation: string;
+  rating: string;
+  posterUrl: string;
   score: number;
-  review_count: 6;
-  스태프: Staff[];
-  배우: Actor[];
-}
-
-export interface Staff {
-  director: string;
+  review_count: number;
+  directorNm: string;
+  actors: Actor[];
+  stills: string[];
+  reviews: ReviewContent[];
 }
 
 export interface Actor {
   actor: string;
-}
-
-export interface Review {
-  rev: ReviewContent[];
+  role: string;
 }
 
 export interface ReviewContent {
+  docId: string;
+  reviewId: number;
   score: number;
-  username: string;
   content: string;
-  tags: string[];
   like: number;
+  tags: string[];
+  user: User; // 백엔드쪽에서 아직구현x
+}
+
+export interface User {
+  userId: number;
+  username: string;
+  profile_Img: string;
 }
 
 export interface Recommend {
-  id: number;
+  docId: string;
   title: string;
-  release_date: string;
+  reqRlsDate: string;
   score: number;
-  poster_url: string;
+  posterUrl: string;
 }
 
-export interface MovieDataResponse {
+export interface PageInfo {
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+}
+
+export interface MovieDetailData {
   movie: Movie;
-  review: Review;
+  pageInfo: PageInfo;
   recommend: Recommend[];
 }
