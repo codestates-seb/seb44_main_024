@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // import axios from 'axios';
 import MoviePoster from './MoivePoster';
 import { movies } from './datalist';
 
-interface Movie {
-  title: string;
-  releaseDate: string;
-  score: number;
-  bookmarked: boolean;
-  posterUrl: string;
-}
+// interface Movie {
+//   title: string;
+//   releaseDate: string;
+//   score: number;
+//   bookmarked: boolean;
+//   posterUrl: string;
+// }
 
 const BoxOfficeMovies: React.FC = () => {
   const [showAllMovies, setShowAllMovies] = useState(false);

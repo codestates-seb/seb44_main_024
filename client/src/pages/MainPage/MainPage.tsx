@@ -1,12 +1,10 @@
-import Header from '../UI/Header';
 import BoxOfficeMovies from '../UI/BoxOffice';
 import HighRatings from '../UI/HighRatings';
 import HighReviewCount from '../UI/HightReviewCount';
 
-const Main: React.FC = () => {
+const MainPage: React.FC = () => {
   return (
     <div>
-      <Header />
       <BoxOfficeMovies />
       <HighRatings />
       <HighReviewCount />
@@ -14,7 +12,7 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default MainPage;
 
 /*     
 별점 높은 순   - 영화 추천  data: { [title: string;
