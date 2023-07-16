@@ -59,38 +59,68 @@ const DetailsPage = () => {
     setIsModalOpen(false);
   };
 
+  // css 스크롤 효과
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       {isLoading ? (
         <></>
       ) : (
         <>
-          <MovieTitle />
-          <MovieInfo />
-          <div className="mx-auto my-0 max-w-[1320px] p-8">
-            <div className="mb-6 flex justify-between">
-              <p className="text-xl font-semibold">리뷰 {movieDetail?.movie.review_count}개</p>
-              <button onClick={openModal} className="w-24 rounded-lg bg-theme1 text-white">
-                리뷰작성
-              </button>
+          <MovieTitle windowWidth={windowWidth} />
+          <div
+            className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
+            style={{ height: `${scrollPosition}px` }}
+          >
+            <MovieInfo />
+            <div className="mx-auto my-0 max-w-[1320px] p-8">
+              <div className="mb-6 flex justify-between">
+                <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
+                <button
+                  onClick={openModal}
+                  className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
+                >
+                  리뷰등록
+                </button>
+              </div>
+              {movieDetail?.movie.reviews.map((review, index) => {
+                return <Review key={index} review={review} />;
+              })}
+              <div className="flex justify-center text-3xl">
+                <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
+              </div>
+              {/* 컴포넌트로 들어갈 예정 */}
+              <p className="pt-5">비슷한 장르의 영화</p>
+              <div className="flex justify-between">
+                <div>영화</div>
+                <div>영화</div>
+                <div>영화</div>
+                <div>영화</div>
+                <div>영화</div>
+              </div>
             </div>
-            {movieDetail?.movie.reviews.map((review, index) => {
-              return <Review key={index} review={review} />;
-            })}
-            <div className="flex justify-center text-3xl">
-              <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
-            </div>
-            {/* 컴포넌트로 들어갈 예정 */}
-            <p className="pt-5">비슷한 장르의 영화</p>
-            <div className="flex justify-between">
-              <div>영화</div>
-              <div>영화</div>
-              <div>영화</div>
-              <div>영화</div>
-              <div>영화</div>
-            </div>
+            {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
           </div>
-          {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
         </>
       )}
     </>

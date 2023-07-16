@@ -49,13 +49,13 @@ const Review = ({ review }: ReviewProps) => {
       <div className="mb-10">
         <div className="mb-0.5 w-full border-4 border-solid border-theme4 p-4">
           <ReviewTop review={review} />
-          <div className="flex justify-between px-4 py-7">
-            <p>{review.content}</p>
+          <div className="flex justify-between py-7 pl-4 pr-2.5">
+            <p className="font-medium">{review.content}</p>
             <div>
-              <button onClick={openModal} className="mr-3">
+              <button onClick={openModal} className="mr-2">
                 수정
               </button>
-              <button onClick={handleReviewDelete} className="text-red-500">
+              <button onClick={handleReviewDelete} className=" p-1 text-red-500 hover:bg-red-50">
                 삭제
               </button>
             </div>
