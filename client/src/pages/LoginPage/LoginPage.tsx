@@ -14,6 +14,14 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPassword(e.target.value);
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -46,14 +54,14 @@ const LoginPage: React.FC = () => {
       <div className="text-center text-xl">LOGO</div>
       <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
 
-      <form onSubmit={(e) => handleLogin(e)}>
+      <form onSubmit={handleLogin}>
         <div className="mb-4">
           <input
             type="email"
             id="userEmail"
             placeholder="이메일 입력"
             value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
+            onChange={handleEmailChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
         </div>
@@ -64,7 +72,7 @@ const LoginPage: React.FC = () => {
             id="userPassword"
             placeholder="비밀번호 입력"
             value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
+            onChange={handlePasswordChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
         </div>
