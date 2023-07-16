@@ -6,11 +6,11 @@ import { store } from './redux-toolkit/store';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import Test from './components/Test';
 import RedirectPage from './pages/RedirectPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
+import MainPage from './pages/MainPage/MainPage';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <App />,
 
     children: [
-      { index: true, element: <Test /> },
+      { index: true, element: <MainPage /> },
       { path: '/redirect', element: <RedirectPage /> },
       { path: '/signup', element: <SignupPage /> },
       { path: '/login', element: <LoginPage /> },

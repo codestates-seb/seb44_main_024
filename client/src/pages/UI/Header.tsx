@@ -1,4 +1,5 @@
 import { BsSearch } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 // interface HeaderProps {
 //   search: string;
@@ -7,9 +8,11 @@ import { BsSearch } from 'react-icons/bs';
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between bg-[#FBE353] px-10 py-6 text-mainblack ">
+    <div className="flex items-center justify-between bg-[#FBE353] px-10 py-6 text-[#1A1A1A] ">
       <div className="flex flex-row">
-        <div className="mr-16 cursor-pointer text-4xl font-bold hover:bg-maingray">Logo</div>
+        <div className="mr-16 cursor-pointer text-4xl font-bold hover:bg-maingray">
+          <Link to="/">Logo</Link>
+        </div>
         <div className="mt-2 cursor-pointer text-2xl font-bold  hover:bg-maingray ">Categories</div>
       </div>
 
@@ -25,10 +28,10 @@ const Header = () => {
           </button>
         </div>
         <div className="mr-4 mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          Login
+          <Link to="/login">Login</Link>
         </div>
         <div className="mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          Sign Up
+          <Link to="/signup">Sign Up</Link>
         </div>
       </div>
     </div>
