@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { emailValidationRegex, pwValidationRegex } from '../../constants/constants';
 import SocialLogin from '../../components/SocialLogin';
 import api from '../../utils/api';
 
@@ -36,9 +37,6 @@ const SignupPage: React.FC = () => {
   }, [userName]);
 
   useEffect(() => {
-    const emailValidationRegex =
-      /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
     if (userEmail.length === 0) {
       setUserEmailValid(false);
       setUserEmailError('');
@@ -52,8 +50,6 @@ const SignupPage: React.FC = () => {
   }, [userEmail]);
 
   useEffect(() => {
-    const pwValidationRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-
     if (userPassword.length === 0) {
       setUserPasswordValid(false);
       setUserPasswordError('');
@@ -80,6 +76,22 @@ const SignupPage: React.FC = () => {
   }, [confirmPassword, userPassword]);
 
   const isValid = userEmailValid && userNameValid && userPasswordValid && confirmPasswordValid;
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setuserName(e.target.value);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,7 +126,7 @@ const SignupPage: React.FC = () => {
             id="userName"
             placeholder="닉네임 입력"
             value={userName}
-            onChange={(e) => setuserName(e.target.value)}
+            onChange={handleNameChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           {userNameError && <p className="text-red-500">{userNameError}</p>}
@@ -126,7 +138,7 @@ const SignupPage: React.FC = () => {
             id="userEmail"
             placeholder="이메일 입력"
             value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
+            onChange={handleEmailChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           {userEmailError && <p className="text-red-500">{userEmailError}</p>}
@@ -138,7 +150,7 @@ const SignupPage: React.FC = () => {
             id="userPassword"
             placeholder="비밀번호 입력"
             value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
+            onChange={handlePasswordChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2 flex gap-3">
@@ -166,7 +178,7 @@ const SignupPage: React.FC = () => {
             id="confirmPassword"
             placeholder="비밀번호 확인"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={handleConfirmPasswordChange}
             className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2">
