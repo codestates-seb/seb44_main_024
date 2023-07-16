@@ -39,7 +39,7 @@ const MovieInfoTop = () => {
         <p className="mb-4 mt-5 text-2xl font-bold">출연</p>
         <div className="flex">
           {movieDetail?.movie.actors.map((actor, index) => {
-            return <Person key={index} name={actor.actor} img={people[1]} />;
+            return <Person key={index} name={actor.actor} role={actor.role} img={people[1]} />;
           })}
         </div>
       </div>

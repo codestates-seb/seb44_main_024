@@ -5,7 +5,6 @@ import Header from './pages/UI/Header';
 function App() {
   return (
     <>
-      <Outlet />
       <Header />
       <Outlet />
     </>
