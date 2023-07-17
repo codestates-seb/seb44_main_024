@@ -6,11 +6,12 @@ import { store } from './redux-toolkit/store';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import RedirectPage from './pages/RedirectPage';
+import RedirectPage from './pages/RedirectPage/RedirectPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
 import MainPage from './pages/MainPage/MainPage';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/signup', element: <SignupPage /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/movies/:movieId', element: <DetailsPage /> },
+      { path: '*', element: <ErrorPage /> },
     ],
   },
 ]);
