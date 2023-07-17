@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux-toolkit/store';
+import Spinner from '../components/Spinner';
 
 //카카오로그인 리다이렉트 페이지라고 가정, 인가코드 받아서 서버에 넘기고 엑세스 토큰 받아오는 부분
 const RedirectPage = () => {
@@ -28,15 +29,9 @@ const RedirectPage = () => {
   }, []);
 
   return (
-    <div>
-      <p>로그인중</p>
-      <div>
-        {isLoggedIn ? (
-          <div className="bg-blue-300">로그인상태</div>
-        ) : (
-          <div className="bg-red-300">로그아웃상태</div>
-        )}
-      </div>
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
+      <Spinner />
+      <div className="mt-5">카카오톡에서 로그인 중!</div>
     </div>
   );
 };
