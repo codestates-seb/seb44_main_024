@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { setCookie } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { loginVerified, logoutVerified } from '../../redux-toolkit/slices/loginState';
+import { loginVerified } from '../../redux-toolkit/slices/loginState';
 import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
@@ -91,17 +91,6 @@ const LoginPage: React.FC = () => {
         <Link to="/signup"> 아직 계정이 없으신가요? </Link>
       </button>
       <SocialLogin />
-
-      {/* 나중에 삭제 */}
-      <div className="mt-8">
-        <p>클릭!</p>
-        <button className="bg-blue-300" type="button" onClick={() => dispatch(loginVerified())}>
-          로그인상태로 변경하기
-        </button>
-        <button className="bg-red-300" type="button" onClick={() => dispatch(logoutVerified())}>
-          로그아웃상태로 변경하기
-        </button>
-      </div>
     </div>
   );
 };
