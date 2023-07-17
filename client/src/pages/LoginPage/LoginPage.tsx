@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { setCookie } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { loginVerified, logoutVerified } from '../../redux-toolkit/slices/loginState';
+import { loginVerified } from '../../redux-toolkit/slices/loginState';
 import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
