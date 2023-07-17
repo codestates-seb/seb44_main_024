@@ -1,4 +1,4 @@
-// import api from './assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+// import api from '../../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
 import axios from 'axios';
 import RatingStars from 'react-rating-stars-component';
 import { useState } from 'react';

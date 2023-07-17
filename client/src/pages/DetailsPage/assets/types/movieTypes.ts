@@ -38,6 +38,7 @@ export interface User {
   profile_Img: string;
 }
 
+// search 데이터에서도 사용(같은 형태)
 export interface Recommend {
   docId: string;
   title: string;
