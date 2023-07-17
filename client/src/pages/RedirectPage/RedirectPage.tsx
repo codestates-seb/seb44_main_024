@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import Spinner from '../components/Spinner';
+import Spinner from '../../components/Spinner';
 
 //카카오로그인 리다이렉트 페이지라고 가정, 인가코드 받아서 서버에 넘기고 엑세스 토큰 받아오는 부분
 const RedirectPage = () => {
