@@ -41,7 +41,7 @@ export interface User {
 export interface Recommend {
   docId: string;
   title: string;
-  reqRlsDate: string;
+  repRlsDate: string;
   score: number;
   posterUrl: string;
 }

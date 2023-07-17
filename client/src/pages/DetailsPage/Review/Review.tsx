@@ -41,6 +41,7 @@ const Review = ({ review }: ReviewProps) => {
       alert('삭제되었습니다.');
     } catch (err) {
       console.error(err);
+      alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
     }
   };
 
@@ -52,6 +53,7 @@ const Review = ({ review }: ReviewProps) => {
           <div className="flex justify-between py-7 pl-4 pr-2.5">
             <p className="font-medium">{review.content}</p>
             <div>
+              {/* 수정 및 삭제버튼 쿠키의 유저정보(아마 id)와 해당 리뷰의 유저id가 일치하는 경우에만 렌더링 */}
               <button onClick={openModal} className="mr-2">
                 수정
               </button>

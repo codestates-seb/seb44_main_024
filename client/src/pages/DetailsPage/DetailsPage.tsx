@@ -3,20 +3,23 @@ import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux'; // 로그인 기능 완성시 사용
-// import { RootState } from '../../redux-toolkit/store'; // 로그인 기능 완성시 사용
+import { useSelector } from 'react-redux'; // 로그인 기능 완성시 사용
+import { RootState } from '../../redux-toolkit/store'; // 로그인 기능 완성시 사용
 import { useParams, useSearchParams } from 'react-router-dom';
 import MovieTitle from './MovieTitle/MovieTitle';
 import MovieInfo from './MovieInfo/MovieInfo';
 import Review from './Review/Review';
 import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
+import MoviePoster from '../UI/MoivePoster';
 
 const DetailsPage = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
-  // const isLoggedIn = useSelector((state: RootState) => state.login.value); // 로그인 기능 완성시 사용
+  const isLoggedIn = useSelector((state: RootState) => state.login.value); // 로그인 기능 완성시 사용
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState('');
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
@@ -38,6 +41,12 @@ const DetailsPage = () => {
         setIsLoading(false);
       } catch (err) {
         console.error(err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An error occurred, but the error message could not be parsed.');
+        }
+        setIsError(true);
       }
     };
     fetchMovieDetail();
@@ -45,16 +54,16 @@ const DetailsPage = () => {
 
   // 모달 열기, 닫기
   // 로그인 기능 완성시, 아래 주석 사용
-  // const openModal = () => {
-  //   if (!isLoggedIn) {
-  //     alert('로그인을 해주세요.');
-  //   } else {
-  //     setIsModalOpen(true);
-  //   }
-  // };
   const openModal = () => {
-    setIsModalOpen(true);
+    if (!isLoggedIn) {
+      alert('로그인을 해주세요.');
+    } else {
+      setIsModalOpen(true);
+    }
   };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -83,7 +92,9 @@ const DetailsPage = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isError ? (
+        <div>{error} 에러가 발생했습니다.</div> // 에러페이지 컴포넌트 만들어지면 교체(error메세지 상태 props로 넘길 수 있으면 좋을 듯)
+      ) : isLoading ? (
         <></>
       ) : (
         <>
@@ -93,6 +104,7 @@ const DetailsPage = () => {
             style={{ height: `${scrollPosition}px` }}
           >
             <MovieInfo />
+
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <div className="mb-6 flex justify-between">
                 <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
@@ -106,17 +118,24 @@ const DetailsPage = () => {
               {movieDetail?.movie.reviews.map((review, index) => {
                 return <Review key={index} review={review} />;
               })}
+
               <div className="flex justify-center text-3xl">
                 <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
               </div>
-              {/* 컴포넌트로 들어갈 예정 */}
-              <p className="pt-5">비슷한 장르의 영화</p>
+
+              <p className="pt-20 text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
-                <div>영화</div>
-                <div>영화</div>
-                <div>영화</div>
-                <div>영화</div>
-                <div>영화</div>
+                {movieDetail?.recommend.map((movie, index) => (
+                  <MoviePoster
+                    key={index}
+                    title={movie.title}
+                    releaseDate={movie.repRlsDate}
+                    score={movie.score}
+                    bookmarked={false}
+                    posterUrl={movie.posterUrl}
+                  />
+                  // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
+                ))}
               </div>
             </div>
             {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}

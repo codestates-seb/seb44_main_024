@@ -31,6 +31,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
   //       console.log(response);
   //     } catch (err) {
   //       console.error(err);
+  //       // alert로 보여주면 좋을듯
   //     }
   //     setLikes((prev) => prev + 1);
   //   }
@@ -51,6 +52,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
       console.log(response);
     } catch (err) {
       console.error(err);
+      alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
     }
     setLikes((prev) => prev + 1);
   };
