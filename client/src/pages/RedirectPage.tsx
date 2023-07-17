@@ -1,13 +1,9 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux-toolkit/store';
 import Spinner from '../components/Spinner';
 
 //카카오로그인 리다이렉트 페이지라고 가정, 인가코드 받아서 서버에 넘기고 엑세스 토큰 받아오는 부분
 const RedirectPage = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.login.value);
-
   const getAccessToken = async (kakaoAuthCode: string): Promise<void> => {
     try {
       const response = await axios.post('http://localhost:3000/login', { kakaoAuthCode }); //서버 아직 없음
