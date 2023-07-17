@@ -53,7 +53,7 @@ const DetailsPage = () => {
   }, [dispatch, pageNumber]);
 
   // 모달 열기, 닫기
-  // 로그인 기능 완성시, 아래 주석 사용
+  // 로그인 기능 완성시, 아래 주석 삭제
   const openModal = () => {
     if (!isLoggedIn) {
       alert('로그인을 해주세요.');
@@ -98,13 +98,14 @@ const DetailsPage = () => {
         <></>
       ) : (
         <>
+          {/* 영화정보 */}
           <MovieTitle windowWidth={windowWidth} />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
             style={{ height: `${scrollPosition}px` }}
           >
             <MovieInfo />
-
+            {/* 리뷰 */}
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <div className="mb-6 flex justify-between">
                 <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
@@ -118,11 +119,10 @@ const DetailsPage = () => {
               {movieDetail?.movie.reviews.map((review, index) => {
                 return <Review key={index} review={review} />;
               })}
-
               <div className="flex justify-center text-3xl">
                 <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
               </div>
-
+              {/* 추천영화 */}
               <p className="pt-20 text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
                 {movieDetail?.recommend.map((movie, index) => (
@@ -138,6 +138,7 @@ const DetailsPage = () => {
                 ))}
               </div>
             </div>
+            {/* 리뷰작성모달 */}
             {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
           </div>
         </>
