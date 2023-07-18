@@ -23,7 +23,7 @@ const ModalTag = ({ tag, addTagHandler, isSelected }: ModalTagProps) => {
           : 'mb-2 mr-2 w-20 bg-theme2 text-white hover:bg-theme3'
       }
     >
-      {tag}
+      #{tag}
     </button>
   );
 };
