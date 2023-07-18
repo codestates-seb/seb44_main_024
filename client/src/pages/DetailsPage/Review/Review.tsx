@@ -5,6 +5,7 @@ import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';
 import Comment from './Comment/Comment';
 import ReviewModal from '../UI/ReviewModal/ReviewModal';
+import CommentForm from './Comment/CommentForm/CommentForm';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { ReviewContent } from '../assets/types/movieTypes';
 
@@ -75,12 +76,8 @@ const Review = ({ review }: ReviewProps) => {
         </div>
         {isExpandOpen ? (
           <>
-            <form className="mb-3 flex w-full">
-              <textarea className="mr-3 grow resize-none border border-solid p-1 text-sm"></textarea>
-              <div className="flex items-center">
-                <button className="rounded-lg bg-theme1 px-5 py-1 text-white">등록</button>
-              </div>
-            </form>
+            <CommentForm />
+            {/* Comment 데이터 받으면, map으로 뿌려줌 */}
             <Comment />
             <Comment />
           </>
