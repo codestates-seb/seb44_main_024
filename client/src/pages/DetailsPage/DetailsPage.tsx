@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'; // 로그인 기능 완성시 사용
-import { RootState } from '../../redux-toolkit/store'; // 로그인 기능 완성시 사용
 import { useParams, useSearchParams } from 'react-router-dom';
 import MovieTitle from './MovieTitle/MovieTitle';
 import MovieInfo from './MovieInfo/MovieInfo';
@@ -13,10 +11,11 @@ import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
 import MoviePoster from '../UI/MoivePoster';
 import ErrorPage from '../ErrorPage/ErrorPage';
+// import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
 
 const DetailsPage = () => {
+  // const isLoggedIn = Boolean(getCookie('accessToken')); // 로그인 기능 완성시 사용
   const movieDetail = useAppSelector(selectMovieDetails);
-  const isLoggedIn = useSelector((state: RootState) => state.login.value); // 로그인 기능 완성시 사용
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -48,17 +47,17 @@ const DetailsPage = () => {
   }, [dispatch, pageNumber]);
 
   // 모달 열기, 닫기
-  // 로그인 기능 완성시, 아래 주석 삭제
-  const openModal = () => {
-    if (!isLoggedIn) {
-      alert('로그인을 해주세요.');
-    } else {
-      setIsModalOpen(true);
-    }
-  };
+  // 로그인 기능 완성시, 사용
   // const openModal = () => {
-  //   setIsModalOpen(true);
+  //   if (!isLoggedIn) {
+  //     alert('로그인을 해주세요.');
+  //   } else {
+  //     setIsModalOpen(true);
+  //   }
   // };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
   const closeModal = () => {
     setIsModalOpen(false);
   };
