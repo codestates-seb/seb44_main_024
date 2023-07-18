@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
 import MainPage from './pages/MainPage/MainPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import SearchPage from './pages/SearchPage/SearchPage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/redirect', element: <RedirectPage /> },
       { path: '/signup', element: <SignupPage /> },
       { path: '/login', element: <LoginPage /> },
+      { path: '/search', element: <SearchPage /> },
       { path: '/movies/:movieId', element: <DetailsPage /> },
       { path: '*', element: <ErrorPage /> },
     ],

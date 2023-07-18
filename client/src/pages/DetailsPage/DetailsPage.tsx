@@ -12,6 +12,7 @@ import Review from './Review/Review';
 import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
 import MoviePoster from '../UI/MoivePoster';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 const DetailsPage = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
@@ -19,7 +20,6 @@ const DetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [error, setError] = useState('');
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
@@ -41,11 +41,6 @@ const DetailsPage = () => {
         setIsLoading(false);
       } catch (err) {
         console.error(err);
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An error occurred, but the error message could not be parsed.');
-        }
         setIsError(true);
       }
     };
@@ -53,7 +48,7 @@ const DetailsPage = () => {
   }, [dispatch, pageNumber]);
 
   // 모달 열기, 닫기
-  // 로그인 기능 완성시, 아래 주석 사용
+  // 로그인 기능 완성시, 아래 주석 삭제
   const openModal = () => {
     if (!isLoggedIn) {
       alert('로그인을 해주세요.');
@@ -93,18 +88,19 @@ const DetailsPage = () => {
   return (
     <>
       {isError ? (
-        <div>{error} 에러가 발생했습니다.</div> // 에러페이지 컴포넌트 만들어지면 교체(error메세지 상태 props로 넘길 수 있으면 좋을 듯)
+        <ErrorPage /> // (error메세지 상태 props로 넘기기? or not)
       ) : isLoading ? (
         <></>
       ) : (
         <>
+          {/* 영화정보 */}
           <MovieTitle windowWidth={windowWidth} />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
             style={{ height: `${scrollPosition}px` }}
           >
             <MovieInfo />
-
+            {/* 리뷰 */}
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <div className="mb-6 flex justify-between">
                 <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
@@ -118,12 +114,13 @@ const DetailsPage = () => {
               {movieDetail?.movie.reviews.map((review, index) => {
                 return <Review key={index} review={review} />;
               })}
-
               <div className="flex justify-center text-3xl">
                 <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
               </div>
-
-              <p className="pt-20 text-xl font-bold">비슷한 장르의 영화</p>
+            </div>
+            {/* 추천영화 */}
+            <div className="mx-auto my-0 max-w-[1320px] p-8">
+              <p className="text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
                 {movieDetail?.recommend.map((movie, index) => (
                   <MoviePoster
@@ -138,6 +135,7 @@ const DetailsPage = () => {
                 ))}
               </div>
             </div>
+            {/* 리뷰작성모달 */}
             {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
           </div>
         </>

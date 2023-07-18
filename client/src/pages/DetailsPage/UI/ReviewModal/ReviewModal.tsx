@@ -17,7 +17,7 @@ const ReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
     <div
       role="presentation"
       onClick={closeModal}
-      className="fixed inset-0 flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-10 flex items-center justify-center bg-black/40"
     >
       <div
         role="presentation"

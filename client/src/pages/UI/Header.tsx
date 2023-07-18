@@ -1,5 +1,6 @@
 import { BsSearch } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 // interface HeaderProps {
 //   search: string;
@@ -7,6 +8,17 @@ import { Link } from 'react-router-dom';
 // const Header: React.FC<HeaderProps> = ({ search }) => {
 
 const Header = () => {
+  // 검색인풋 제출
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState('');
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+  const handleSearchInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search?keyword=${searchInput}`);
+  };
+
   return (
     <div className="flex items-center justify-between bg-[#FBE353] px-10 py-6 text-[#1A1A1A] ">
       <div className="flex flex-row">
@@ -17,16 +29,20 @@ const Header = () => {
       </div>
 
       <div className="flex items-center">
-        <div className="mr-6 flex items-center">
+        <form onSubmit={handleSearchInputSubmit} className="mr-6 flex items-center">
           <input
+            onChange={handleSearchInputChange}
             type="text"
             placeholder="검색"
             className="w-32 border-b-2 border-maindarkgray bg-mainyellow px-4 py-2" //focus:outline-none
           />
-          <button className="mt-2 border-b-2 border-maindarkgray px-4 py-2 text-mainblack hover:bg-maingray">
+          <button
+            type="submit"
+            className="mt-2 border-b-2 border-maindarkgray px-4 py-2 text-mainblack hover:bg-maingray"
+          >
             <BsSearch />
           </button>
-        </div>
+        </form>
         <div className="mr-4 mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
           <Link to="/login">Login</Link>
         </div>
