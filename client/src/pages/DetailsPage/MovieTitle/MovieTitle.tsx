@@ -24,7 +24,7 @@ const MovieTitle = ({ windowWidth }: windowWidthProps) => {
           <p className="mb-1 text-6xl font-bold text-white">{movieDetail?.movie.title}</p>
           <p className="mb-4 ml-1 text-lg text-white">{movieDetail?.movie.titleEng}</p>
           <p className="text-xl font-medium text-white">
-            {movieDetail?.movie.repRlsDate.slice(0, 4)} · {movieDetail?.movie.genre} ·{' '}
+            {movieDetail?.movie.repRlsDate} · {movieDetail?.movie.genre} ·{' '}
             {movieDetail?.movie.nation}
           </p>
           <p className="text-xl font-medium text-white">

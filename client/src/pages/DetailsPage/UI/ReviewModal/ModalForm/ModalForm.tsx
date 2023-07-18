@@ -2,6 +2,8 @@
 import axios from 'axios';
 import RatingStars from 'react-rating-stars-component';
 import { useState } from 'react';
+import { useAppSelector } from '../../../../../redux-toolkit/hooks';
+import { selectMovieDetails } from '../../../../../redux-toolkit/slices/movieDetailSlice';
 import { ModalProps } from '../ReviewModal';
 import ModalTag from './ModalTag/ModalTag';
 
@@ -20,6 +22,7 @@ const tags: string[] = [
 
 const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
   console.log(movieId);
+  const movieDetail = useAppSelector(selectMovieDetails);
   const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
   const [score, setScore] = useState<number>(review ? review.score : 0);
@@ -54,6 +57,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
       score: score,
       content: reviewContent,
       tags: selectedTags,
+      genre: movieDetail?.movie.genre,
     };
     const url = review
       ? 'https://9eafe059-f15b-42b9-8571-1c6297da44fa.mock.pstmn.io'
