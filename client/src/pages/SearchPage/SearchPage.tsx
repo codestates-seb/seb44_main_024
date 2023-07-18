@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import MoviePoster from '../UI/MoivePoster';
 import { Recommend } from '../DetailsPage/assets/types/movieTypes'; // 실제 데이터 들어오는거보고 수정 필요
-import searchErrImg from '../../../public/img/searchErr.png';
+import searchErrImg from './assets/searchErr.png';
 
 const SearchPage = () => {
   const [searchData, setSearchData] = useState<Recommend[]>([]);
@@ -24,12 +24,10 @@ const SearchPage = () => {
     const fetchSearchData = async () => {
       try {
         const searchResponse = await axios.get(`/mockupdata/searchdata.json`);
-        if (searchResponse.data.data.length === 0) {
-          const highScoreResponse = await axios.get(`/mockupdata/highscoredata.json`);
-          setHighScoreData(highScoreResponse.data.data);
-        } else {
-          setSearchData(searchResponse.data.data);
-        }
+        const highScoreResponse = await axios.get(`/mockupdata/highscoredata.json`);
+
+        setSearchData(searchResponse.data.data);
+        setHighScoreData(highScoreResponse.data.data);
         setIsLoading(false);
       } catch (err) {
         console.error(err);
@@ -74,8 +72,22 @@ const SearchPage = () => {
             <>
               {/* 검색결과가 있을때 */}
               <p className="mb-2 text-2xl font-bold">검색 결과</p>
-              <div className="flex flex-wrap justify-between">
+              <div className="mb-20 flex flex-wrap justify-between">
                 {searchData.map((movie, index) => (
+                  <MoviePoster
+                    key={index}
+                    title={movie.title}
+                    releaseDate={movie.repRlsDate}
+                    score={movie.score}
+                    bookmarked={false}
+                    posterUrl={movie.posterUrl}
+                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
+                  />
+                ))}
+              </div>
+              <p className="mb-2 text-3xl font-bold">이런영화는 어떠세요?</p>
+              <div className="flex justify-between">
+                {highScoreData.map((movie, index) => (
                   <MoviePoster
                     key={index}
                     title={movie.title}

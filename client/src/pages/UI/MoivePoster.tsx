@@ -79,7 +79,7 @@ const MoviePoster: React.FC<MoviePosterProps> = ({
   };
 
   return (
-    <div className="h-100 flex w-1/5 ">
+    <div className="flex w-1/5 overflow-hidden">
       <div className=" relative m-5 h-3/4 w-10/12 ">
         <img src={posterUrl} alt={title} className="h-full w-full" />
         <button className="absolute right-2 top-2 cursor-pointer" onClick={handleBookmarkToggle}>
@@ -91,7 +91,7 @@ const MoviePoster: React.FC<MoviePosterProps> = ({
         </button>
 
         <div className="flex flex-row  ">
-          <h2 className="mt-2  text-left text-lg font-bold">{title}</h2>
+          <h2 className="mt-2 truncate text-left text-lg font-bold">{title}</h2>
           <p className="ml-1 mt-4 text-sm  text-gray-700">{year}</p>
         </div>
         <div className="mb-10 flex">
