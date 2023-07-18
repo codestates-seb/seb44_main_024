@@ -54,7 +54,7 @@ const Review = ({ review }: ReviewProps) => {
             <p className="font-medium">{review.content}</p>
             <div>
               {/* 수정 및 삭제버튼 쿠키의 유저정보(아마 id)와 해당 리뷰의 유저id가 일치하는 경우에만 렌더링 */}
-              <button onClick={openModal} className="mr-2">
+              <button onClick={openModal} className="mr-2 text-gray-400">
                 수정
               </button>
               <button onClick={handleReviewDelete} className=" p-1 text-red-500 hover:bg-red-50">
@@ -64,7 +64,7 @@ const Review = ({ review }: ReviewProps) => {
           </div>
           <ReviewBottom review={review} />
         </div>
-        <div className="flex items-center">
+        <div className="mb-3 flex items-center">
           {isExpandOpen ? (
             <IoMdArrowDropup onClick={expandOpenHandler} className="cursor-pointer text-2xl" />
           ) : (
@@ -75,6 +75,12 @@ const Review = ({ review }: ReviewProps) => {
         </div>
         {isExpandOpen ? (
           <>
+            <form className="mb-3 flex w-full">
+              <textarea className="mr-3 grow resize-none border border-solid p-1 text-sm"></textarea>
+              <div className="flex items-center">
+                <button className="rounded-lg bg-theme1 px-5 py-1 text-white">등록</button>
+              </div>
+            </form>
             <Comment />
             <Comment />
           </>
