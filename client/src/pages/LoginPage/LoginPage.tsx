@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { setCookie } from '../../utils/cookie';
-import { useDispatch } from 'react-redux';
-import { loginVerified } from '../../redux-toolkit/slices/loginState';
 import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
@@ -12,7 +10,6 @@ const LoginPage: React.FC = () => {
   const [showInputError, setShowInputError] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserEmail(e.target.value);
@@ -38,16 +35,17 @@ const LoginPage: React.FC = () => {
 
       const { user, accessToken } = response.data;
       setCookie('accessToken', accessToken, { path: '/' });
-      // setCookie('refreshToken', refreshToken, { path: '/' });
 
       window.alert(`${user.name} 님, 환영합니다!`);
-      dispatch(loginVerified());
       navigate('/');
     } catch (err) {
       console.log(err);
       window.alert('아이디 또는 비밀번호를 다시 확인해 주세요.');
     }
   };
+
+  // 로그인 상태 확인
+  // const isLoggedIn = Boolean(getCookie('accessToken'));
 
   return (
     <div className="flex flex-col items-center justify-center">

@@ -6,7 +6,7 @@ import Spinner from '../../components/Spinner';
 const RedirectPage = () => {
   const getAccessToken = async (kakaoAuthCode: string): Promise<void> => {
     try {
-      const response = await axios.post('http://localhost:3000/login', { kakaoAuthCode }); //서버 아직 없음
+      const response = await axios.post('http://localhost:3000/login', { kakaoAuthCode }); //추후 주소 변경
       const accessToken = response.data.accessToken;
       // const user = response.data.user;
       // console.log(user);
@@ -18,7 +18,7 @@ const RedirectPage = () => {
 
   useEffect(() => {
     const kakaoAuthCode = new URL(window.location.href).searchParams.get('code');
-    // console.log('코드잘오니?:', kakaoAuthCode);
+    // console.log('코드잘오니?:', kakaoAuthCode); 잘 오는 거 확인! 구현 완료 후 삭제
     if (kakaoAuthCode) {
       getAccessToken(kakaoAuthCode);
     }

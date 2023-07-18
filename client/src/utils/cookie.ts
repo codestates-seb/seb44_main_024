@@ -3,14 +3,8 @@ import type { CookieSetOptions } from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export const setCookie = (name: string, value: string, options?: CookieSetOptions): void => {
-  const defaultOptions: CookieSetOptions = {
-    path: '/', //모든 경로에서 쿠키 사용 가능
-    httpOnly: true,
-  };
-
-  const mergedOptions = Object.assign({}, defaultOptions, options);
-  cookies.set(name, value, mergedOptions);
+export const setCookie = (name: string, value: string, option?: CookieSetOptions) => {
+  return cookies.set(name, value, { ...option });
 };
 
 export const getCookie = (name: string): string => {
