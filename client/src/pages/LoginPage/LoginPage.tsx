@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
   // const isLoggedIn = Boolean(getCookie('accessToken'));
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="mt-20 flex flex-col items-center justify-center">
       <div className="text-center text-xl">LOGO</div>
       <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
 
@@ -78,14 +78,14 @@ const LoginPage: React.FC = () => {
         {showInputError && <p className="mb-2 text-red-500">이메일과 비밀번호를 입력해주세요.</p>}
 
         <button
-          className="w-full bg-maindarkgray px-1 py-2 text-white hover:bg-mainblack"
+          className="w-full rounded bg-maindarkgray px-1 py-2 text-white hover:bg-mainblack"
           type="submit"
         >
           로그인
         </button>
       </form>
 
-      <button className="mt-2 w-96 bg-mainblack px-1 py-2 text-white">
+      <button className="mt-2 w-96 rounded bg-mainblack px-1 py-2 text-white">
         <Link to="/signup"> 아직 계정이 없으신가요? </Link>
       </button>
       <SocialLogin />
