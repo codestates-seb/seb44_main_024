@@ -19,7 +19,7 @@ const SearchPage = () => {
   console.log(keyword);
 
   // 해당 검색데이터 get 요청 // 예상 endpoint: `/search/keyword={keyword}`
-  // 검색데이터 없을 시(빈 배열), 추천영화(별점높은 순) get 요청 // 예상 endpoint: `/main` // '/main'은 데이터 여러개 들어오므로, 별점 높은순 데이터만 잘라서 사용해야함. (별점 높은순으로 5개만 사용)
+  // 검색데이터 밑에, 추천영화(별점높은 순) get 요청 // 예상 endpoint: `/main` // '/main'은 데이터 여러개 들어오므로, 별점 높은순 데이터만 잘라서 사용해야함. (별점 높은순으로 5개만 사용)
   useEffect(() => {
     const fetchSearchData = async () => {
       try {

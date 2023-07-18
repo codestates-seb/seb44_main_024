@@ -6,16 +6,16 @@ import { ModalProps } from '../ReviewModal';
 import ModalTag from './ModalTag/ModalTag';
 
 const tags: string[] = [
-  '#감동',
-  '#음악',
-  '#힐링',
-  '#킬링타임',
-  '#모험',
-  '#창의적',
-  '#영상미',
-  '#영감',
-  '#긴장감',
-  '#반전',
+  '감동',
+  '음악',
+  '힐링',
+  '킬링타임',
+  '모험',
+  '창의적',
+  '영상미',
+  '영감',
+  '긴장감',
+  '반전',
 ];
 
 const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
