@@ -115,7 +115,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="mt-20 flex flex-col items-center justify-center ">
       <div className="text-center text-xl">LOGO</div>
       <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
 
@@ -197,15 +197,15 @@ const SignupPage: React.FC = () => {
 
         <button
           className={`${
-            isValid ? 'bg-mainblack' : 'cursor-not-allowed bg-maindarkgray'
-          } w-full px-1 py-2 text-white`}
+            isValid ? 'rounded bg-mainblack' : 'cursor-not-allowed bg-maindarkgray'
+          } w-full rounded px-1 py-2 text-white`}
           type="submit"
         >
           회원가입
         </button>
       </form>
 
-      <button className="mt-2 w-96 bg-mainblack px-1 py-2 text-white">
+      <button className="mt-2 w-96 rounded bg-mainblack px-1 py-2 text-white">
         <Link to="/login">이미 가입하셨나요?</Link>
       </button>
       <SocialLogin />
