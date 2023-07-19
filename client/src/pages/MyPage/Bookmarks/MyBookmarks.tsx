@@ -1,10 +1,21 @@
+import ShortMovieList from '../UI/ShortMovieList';
+import { movies } from '../../UI/datalist';
+
 const MyBookmarks = () => {
+  // api 연결 후 수정할 부분
+  const moviesToRender = movies.slice(0, 5);
+  const bookmarksCounter = movies.length;
+
   return (
     <div>
       <div> 나의 북마크 </div>
-      {/* api로 북마크 목록 불러오기 -> 조건부 렌더링 */}
-      {/* 영화 아이템 pull 받아서 재활용 */}
-      <div> 영화 아이템 들어갈 자리</div>
+      <div>
+        {bookmarksCounter > 0 ? (
+          <ShortMovieList movies={moviesToRender} />
+        ) : (
+          <div> 새로 리뷰를 작성해 보세요. </div>
+        )}
+      </div>
     </div>
   );
 };

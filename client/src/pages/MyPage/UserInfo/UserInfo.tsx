@@ -21,7 +21,6 @@ const UserInfo = () => {
           <div>정보 수정</div>
         </div>
         <div>{`작성한 리뷰: ${dummyUser.reviews}개`}</div>
-        <div>{`선호 장르: ${dummyUser.genre}`}</div>
       </div>
     </div>
   );
