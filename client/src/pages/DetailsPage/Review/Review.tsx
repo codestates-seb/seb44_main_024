@@ -1,5 +1,5 @@
-import axios from 'axios';
-// import api from '../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+// import axios from 'axios';
+import api from '../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
 import { useState } from 'react';
 import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';
@@ -27,17 +27,15 @@ const Review = ({ review }: ReviewProps) => {
   };
 
   //리뷰 삭제(DELETE 요청) // reviewId 이용
+  //포스트맨목서버 'https://7824fe4c-db17-4a35-8a83-3480e0f32f69.mock.pstmn.io'
   const handleReviewDelete = async () => {
     try {
-      const response = await axios.delete(
-        'https://7824fe4c-db17-4a35-8a83-3480e0f32f69.mock.pstmn.io',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
-          },
-        }
-      );
+      const response = await api.delete(`/reviews/${review.reviewId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${token}`
+        },
+      });
       console.log(response);
       alert('삭제되었습니다.');
     } catch (err) {

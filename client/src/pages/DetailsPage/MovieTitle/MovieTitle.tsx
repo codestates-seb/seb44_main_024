@@ -16,7 +16,7 @@ const MovieTitle = ({ windowWidth }: windowWidthProps) => {
       <img
         className="w-full object-cover"
         style={{ height: `calc(100% - ${scrollbarHeight}px)` }}
-        src={movieDetail?.movie.stills[0]}
+        src={movieDetail?.movie.posterUrl}
         alt="Main Img"
       />
       <div className="absolute left-0 top-[55%] h-full w-full">

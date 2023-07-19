@@ -47,7 +47,7 @@ const MovieInfoBottom = () => {
           <div
             role="presentation"
             onClick={preventModalClick}
-            className="max-h-[450px] max-w-[800px] bg-white"
+            className="h-[300px] w-[500px] bg-white"
           >
             <img className="h-full w-full" src={stillUrl} alt="modal still" />
           </div>

@@ -1,5 +1,5 @@
-// import api from './assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
-import axios from 'axios';
+import api from './assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
+// import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ const DetailsPage = () => {
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
-  const { movieId } = useParams();
+  const { movieId } = useParams(); // 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page');
 
@@ -30,11 +30,12 @@ const DetailsPage = () => {
   const pageNumber = Number(page || 1); // 쿼리파라미터가 없는 경우에 default값 1
   const [totalReviews, setTotalReviews] = useState(0);
 
-  // 해당 영화데이터 get 요청 // 예상 endpoint: `/movies/{movieId}/page={pageNumber}`
+  // 해당 영화데이터 get 요청 // 예상 endpoint: `/movies/${movieId}?page=${pageNumber}`
+  // `/mockupdata/moviedetails${pageNumber}.json` => 목업데이터
   useEffect(() => {
     const fetchMovieDetail = async () => {
       try {
-        const response = await axios.get(`/mockupdata/moviedetails${pageNumber}.json`);
+        const response = await api.get(`/movies/${movieId}?page=${pageNumber}`);
         dispatch(fetchMovieSuccess(response.data));
         setTotalReviews(response.data.movie.review_count);
         setIsLoading(false);
@@ -44,7 +45,7 @@ const DetailsPage = () => {
       }
     };
     fetchMovieDetail();
-  }, [dispatch, pageNumber]);
+  }, [dispatch, pageNumber, movieId]);
 
   // 모달 열기, 닫기
   // 로그인 기능 완성시, 사용
@@ -121,17 +122,18 @@ const DetailsPage = () => {
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <p className="text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
-                {movieDetail?.recommend.map((movie, index) => (
-                  <MoviePoster
-                    key={index}
-                    title={movie.title}
-                    releaseDate={movie.repRlsDate}
-                    score={movie.score}
-                    bookmarked={false}
-                    posterUrl={movie.posterUrl}
-                  />
-                  // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
-                ))}
+                {movieDetail?.recommend &&
+                  movieDetail?.recommend.map((movie, index) => (
+                    <MoviePoster
+                      key={index}
+                      title={movie.title}
+                      releaseDate={movie.repRlsDate}
+                      score={movie.score}
+                      bookmarked={false}
+                      posterUrl={movie.posterUrl}
+                    />
+                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
+                  ))}
               </div>
             </div>
             {/* 리뷰작성모달 */}

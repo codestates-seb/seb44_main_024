@@ -1,5 +1,5 @@
-// import api from '../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
-import axios from 'axios';
+import api from '../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+// import axios from 'axios';
 import { useState } from 'react';
 import Tag from '../../UI/Tag';
 import { MdOutlineThumbUp } from 'react-icons/md';
@@ -11,6 +11,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
   const [likes, setLikes] = useState<number>(review.like); // 리다이렉트를 사용하면, 상태를 이렇게 수동으로 변경하지 않아도 될 수도..
 
   // 좋아요 클릭 post 요청 // 예상 endpoint: `/review/{review-id}/likes`
+  // 포스트맨 목서버 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io'
   // 로그인 기능 완성시 사용
   // const likeClickHandler = async () => {
   //   if (!isLoggedIn) {
@@ -38,13 +39,13 @@ const ReviewBottom = ({ review }: ReviewProps) => {
 
   const likeClickHandler = async () => {
     try {
-      const response = await axios.post(
-        'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io',
+      const response = await api.post(
+        `/review/${review.reviewId}/likes`,
         {},
         {
           headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
+            // Authorization: `Bearer ${token}`,
           },
         }
       );

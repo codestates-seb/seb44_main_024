@@ -1,5 +1,5 @@
-// import api from '../../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
-import axios from 'axios';
+import api from '../../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+// import axios from 'axios';
 import RatingStars from 'react-rating-stars-component';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux-toolkit/hooks';
@@ -50,36 +50,49 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
   };
 
   // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 reviewId이용
+  // 포스트맨 목서버 PATCH 'https://9eafe059-f15b-42b9-8571-1c6297da44fa.mock.pstmn.io'
+  // 포스트맨 목서버 POST 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io'
   const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // patch나 put시에도 밑의 리뷰데이터를 전체다 보내도 되는지 여부 확인(바뀐데이터만 보내는게 아니라)
     const reviewData = {
       score: score,
       content: reviewContent,
       tags: selectedTags,
       genre: movieDetail?.movie.genre,
     };
-    const url = review
-      ? 'https://9eafe059-f15b-42b9-8571-1c6297da44fa.mock.pstmn.io'
-      : 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io';
-    const method = review ? 'PATCH' : 'POST';
 
-    try {
-      const response = await axios({
-        method: method,
-        url: url,
-        data: reviewData,
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`
-        },
-      });
-      closeModal();
-      console.log(response);
-      alert('등록되었습니다.');
-    } catch (err) {
-      console.error(err);
-      alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+    if (review) {
+      try {
+        const response = await api.patch(`/reviews/${review.reviewId}`, reviewData, {
+          headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${token}`
+          },
+        });
+        closeModal();
+        console.log(response);
+        alert('수정되었습니다.');
+      } catch (err) {
+        console.error(err);
+        alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+      }
+    } else {
+      try {
+        const response = await api.post(`/movies/${movieId}/reviews`, reviewData, {
+          headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${token}`
+          },
+        });
+        closeModal();
+        console.log(response);
+        alert('등록되었습니다.');
+      } catch (err) {
+        console.error(err);
+        alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+      }
     }
   };
 
