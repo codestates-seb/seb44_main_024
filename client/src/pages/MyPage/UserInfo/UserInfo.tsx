@@ -1,4 +1,5 @@
 import { User } from '../assets/types/User';
+import ProfileImg from '../UI/ProfileImg';
 
 //테스트용 가짜 유저 정보 -> 추후 삭제
 const dummyUser: User = {
@@ -6,7 +7,6 @@ const dummyUser: User = {
   password: '1234',
   image: 'https://media.tenor.com/DtO_BhH5NUAAAAAC/chunsik-%EC%B6%98%EC%8B%9D.gif',
   reviews: 4,
-  genre: '액션',
 };
 
 //TODO: API로 정보 불러오기 -> GET , `/members/{member-id}` -> username:string, profile_Img: string
@@ -14,7 +14,7 @@ const dummyUser: User = {
 const UserInfo = () => {
   return (
     <div className="flex flex-row">
-      <img src="/" alt="profile img" />
+      <ProfileImg url={dummyUser.image} />
       <div>
         <div>
           <div>name</div>

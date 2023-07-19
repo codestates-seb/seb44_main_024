@@ -3,7 +3,6 @@ export interface User {
   password: string;
   image: string;
   reviews: number;
-  genre: string;
 }
 
 export interface BookmarkDataResponse {
