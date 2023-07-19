@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isAxiosError, AxiosError } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { emailValidationRegex, pwValidationRegex } from '../../constants/constants';
 import SocialLogin from '../../components/SocialLogin';
@@ -108,6 +109,14 @@ const SignupPage: React.FC = () => {
         window.alert('회원가입에 성공하였습니다.');
         navigate('/login');
       } catch (err) {
+        if (isAxiosError(err)) {
+          const axiosError = err as AxiosError;
+          const errRes = axiosError.response;
+          if (errRes?.status === 409) {
+            window.alert('이미 사용 중인 이름 또는 이메일입니다.');
+            return;
+          }
+        }
         console.log(err);
         window.alert('회원가입에 실패하였습니다.');
       }
