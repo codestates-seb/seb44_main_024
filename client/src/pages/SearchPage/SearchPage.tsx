@@ -26,8 +26,8 @@ const SearchPage = () => {
       try {
         const searchResponse = await api.get(`/search?keyword=${keyword}`);
 
-        setSearchData(searchResponse.data.movie);
-        setHighScoreData(searchResponse.data.recommend);
+        searchResponse.data.movie && setSearchData(searchResponse.data.movie);
+        searchResponse.data.recommend && setHighScoreData(searchResponse.data.recommend);
         setIsLoading(false);
       } catch (err) {
         console.error(err);

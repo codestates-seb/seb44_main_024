@@ -65,23 +65,23 @@ const DetailsPage = () => {
 
   // css 스크롤 효과
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
 
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+    // const handleResize = () => {
+    //   setWindowWidth(window.innerWidth);
+    // };
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
+    // window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      // window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -94,7 +94,7 @@ const DetailsPage = () => {
       ) : (
         <>
           {/* 영화정보 */}
-          <MovieTitle windowWidth={windowWidth} />
+          <MovieTitle />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
             style={{ height: `${scrollPosition}px` }}

@@ -1,24 +1,19 @@
 import { useAppSelector } from '../../../redux-toolkit/hooks';
 import { selectMovieDetails } from '../../../redux-toolkit/slices/movieDetailSlice';
-interface windowWidthProps {
-  windowWidth: number;
-}
-const MovieTitle = ({ windowWidth }: windowWidthProps) => {
+// interface windowWidthProps {
+//   windowWidth: number;
+// }
+const MovieTitle = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
 
   // css 스크롤 효과(아래 스크롤바가 생길때, 뷰포트를 조정)
-  let scrollbarHeight = 0;
-  if (windowWidth <= 697) {
-    scrollbarHeight = window.innerHeight - document.documentElement.clientHeight + 14;
-  }
+  // let scrollbarHeight = 0;
+  // if (windowWidth <= 697) {
+  //   scrollbarHeight = window.innerHeight - document.documentElement.clientHeight + 14;
+  // }
   return (
-    <div className="relative w-full" style={{ height: `calc(100vh - ${90}px)` }}>
-      <img
-        className="w-full object-cover"
-        style={{ height: `calc(100% - ${scrollbarHeight}px)` }}
-        src={movieDetail?.movie.posterUrl}
-        alt="Main Img"
-      />
+    <div className="relative h-movieTitle w-full">
+      <img className="h-full w-full" src={movieDetail?.movie.posterUrl} alt="Main Img" />
       <div className="absolute left-0 top-[55%] h-full w-full">
         <div className="mx-auto my-0 max-w-[1320px] px-10">
           <p className="mb-1 text-6xl font-bold text-white">{movieDetail?.movie.title}</p>
