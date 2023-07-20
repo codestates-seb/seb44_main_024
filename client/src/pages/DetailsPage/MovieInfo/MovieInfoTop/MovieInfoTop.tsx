@@ -1,14 +1,8 @@
 import { useAppSelector } from '../../../../redux-toolkit/hooks';
 import { selectMovieDetails } from '../../../../redux-toolkit/slices/movieDetailSlice';
 import Person from '../../UI/Person';
-import directorImg from '../../assets/director-img.jpg';
-import actress1Img from '../../assets/actress-1.jpg';
-import actor1Img from '../../assets/actor-1.jpg';
 import { AiFillStar } from 'react-icons/ai';
 import { FaPlay } from 'react-icons/fa';
-
-// 감독, 배우 이미지 api에 없어서 수동으로 넣음.
-const people = [directorImg, actress1Img, actor1Img];
 
 const MovieInfoTop = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
@@ -35,11 +29,11 @@ const MovieInfoTop = () => {
         </div>
         <p className="mb-5 font-semibold text-theme3">{movieDetail?.movie.description}</p>
         <p className="mb-4 text-2xl font-bold">감독</p>
-        <Person name={movieDetail?.movie.directorNm} img={people[0]} />
+        <Person name={movieDetail?.movie.directorNm} />
         <p className="mb-4 mt-5 text-2xl font-bold">출연</p>
         <div className="flex flex-wrap">
           {movieDetail?.movie.actors.map((actor, index) => {
-            return <Person key={index} name={actor.actor} role={actor.role} img={people[1]} />;
+            return <Person key={index} name={actor.actor} role={actor.role} />;
           })}
         </div>
       </div>

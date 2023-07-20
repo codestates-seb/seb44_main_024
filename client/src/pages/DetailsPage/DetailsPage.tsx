@@ -94,10 +94,12 @@ const DetailsPage = () => {
       ) : (
         <>
           {/* 영화정보 */}
+
           <MovieTitle />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
-            style={{ height: `${scrollPosition}px` }}
+            // style={{ height: `${scrollPosition}px` }}
+            style={{ top: `calc(60vh - ${scrollPosition}px)` }}
           >
             <MovieInfo />
             {/* 리뷰 */}
@@ -132,7 +134,8 @@ const DetailsPage = () => {
                       bookmarked={false}
                       posterUrl={movie.posterUrl}
                     />
-                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
+                    // MoviePoster props에 docId={movie.docId}도 들어가야함. link걸어줄라면
+                    // releaseDate는 repRlsDate로 바뀜
                   ))}
               </div>
             </div>
