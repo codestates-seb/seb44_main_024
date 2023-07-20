@@ -1,5 +1,4 @@
-// import axios from 'axios';
-import api from '../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+import api from '../assets/api/axiosInstance';
 import { useState } from 'react';
 import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';

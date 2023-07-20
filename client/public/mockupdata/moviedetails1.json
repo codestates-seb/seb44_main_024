@@ -29,7 +29,7 @@
         "reviewId": 1,
         "score": 5,
         "content": "아름다운 영화입니다..",
-        "like": 20,
+        "likes": 20,
         "tags": [
           "감동",
           "모험"

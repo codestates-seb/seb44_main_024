@@ -5,6 +5,7 @@ interface PersonProps {
   name: string | undefined;
   role?: string;
 }
+// 디폴트 프로필사진
 const defaultProfile =
   'https://thebulletin.org/wp-content/themes/atomic-bulletin/resources/assets/images/person-dummy.jpg';
 

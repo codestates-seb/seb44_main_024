@@ -12,8 +12,9 @@ const MovieTitle = () => {
   //   scrollbarHeight = window.innerHeight - document.documentElement.clientHeight + 14;
   // }
   return (
-    // h-movieTitle
+    // h-movieTitle -> 스크롤 높이만큼 제거된 height
     <div className="relative h-[60vh] w-full">
+      {/* 메인이미지 있을시, 사용 */}
       {/* <img className="h-full w-full" src={movieDetail?.movie.posterUrl} alt="Main Img" /> */}
       <div className="h-full w-full bg-theme1" />
       <div className="absolute left-0 top-[36%] h-full w-full">

@@ -1,5 +1,4 @@
-import api from '../../../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
-// import axios from 'axios';
+import api from '../../../assets/api/axiosInstance';
 import RatingStars from 'react-rating-stars-component';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux-toolkit/hooks';
@@ -49,11 +48,11 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
     setScore(newRating);
   };
 
-  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 `/review/${review.reviewId}`
+  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 `/reviews/${review.reviewId}`
   const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // patch나 put시에도 밑의 리뷰데이터를 전체다 보내도 되는지 여부 확인(바뀐데이터만 보내는게 아니라)
+    // patch, post 둘다 리뷰 전체데이터 전송 (새 리뷰, 수정된 리뷰)
     const reviewData = {
       score: score,
       content: reviewContent,

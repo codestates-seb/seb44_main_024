@@ -1,10 +1,9 @@
-import api from '../DetailsPage/assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
-// import axios from 'axios';
+import api from '../DetailsPage/assets/api/axiosInstance';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import MoviePoster from '../UI/MoivePoster';
-import { Recommend } from '../DetailsPage/assets/types/movieTypes'; // 실제 데이터 들어오는거보고 수정 필요
+import { Recommend } from '../DetailsPage/assets/types/movieTypes';
 import searchErrImg from './assets/searchErr.png';
 
 const SearchPage = () => {
@@ -13,14 +12,11 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  // Header.tsx 컴포넌트에서 검색시, 유저가 입력한 검색키워드와 함께 Link를 걸어줘야함. => `/search?keyword=${keyword input}`
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
-  console.log(typeof keyword);
 
   // 해당 검색데이터 get 요청 // 예상 endpoint: `/search?keyword=${keyword}`
   // 목업 데이터 `/mockupdata/searchdata.json`
-  // 위의 get요청 보내면 추천영화가 함께 들어옴.
   useEffect(() => {
     const fetchSearchData = async () => {
       try {

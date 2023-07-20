@@ -1,5 +1,4 @@
-import api from './assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
-// import axios from 'axios';
+import api from './assets/api/axiosInstance';
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
@@ -63,7 +62,7 @@ const DetailsPage = () => {
     setIsModalOpen(false);
   };
 
-  // css 스크롤 효과
+  // css 스크롤 효과 (주석부분은 메인 이미지가 있을때 사용-> 100vh)
   const [scrollPosition, setScrollPosition] = useState(0);
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -94,7 +93,6 @@ const DetailsPage = () => {
       ) : (
         <>
           {/* 영화정보 */}
-
           <MovieTitle />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
