@@ -9,7 +9,7 @@ const MovieInfoTop = () => {
   return (
     <div className="mb-14 flex">
       <div className="mr-7 shrink-0">
-        <img className=" mb-4 h-[400px]" src={movieDetail?.movie.posterUrl} alt="Poster Img" />
+        <img className=" mb-4 h-[28rem]" src={movieDetail?.movie.posterUrl} alt="Poster Img" />
         <a
           href={`https://www.youtube.com/results?search_query=${
             movieDetail?.movie.title + ' ' + 'trailer'
