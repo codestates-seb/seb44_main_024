@@ -99,9 +99,9 @@ const SignupPage: React.FC = () => {
 
     if (isValid) {
       try {
-        const response = await api.post('/register', {
-          name: userName,
+        const response = await api.post('/members', {
           email: userEmail,
+          username: userName,
           password: userPassword,
         });
         console.log(response.headers);
