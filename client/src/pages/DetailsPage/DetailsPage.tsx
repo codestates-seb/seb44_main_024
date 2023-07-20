@@ -62,27 +62,27 @@ const DetailsPage = () => {
     setIsModalOpen(false);
   };
 
-  // css 스크롤 효과 (주석부분은 메인 이미지가 있을때 사용-> 100vh)
-  const [scrollPosition, setScrollPosition] = useState(0);
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // css 스크롤 효과 (주석 두번부분은 메인 이미지가 있을때 사용-> 100vh)
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollPosition(window.scrollY);
+  //   };
 
-    // const handleResize = () => {
-    //   setWindowWidth(window.innerWidth);
-    // };
+  //   // const handleResize = () => {
+  //   //   setWindowWidth(window.innerWidth);
+  //   // };
 
-    window.addEventListener('scroll', handleScroll);
-    // window.addEventListener('resize', handleResize);
+  //   window.addEventListener('scroll', handleScroll);
+  //   // window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      // window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     // window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -92,54 +92,56 @@ const DetailsPage = () => {
         <></>
       ) : (
         <>
-          {/* 영화정보 */}
           <MovieTitle />
-          <div
+          {/* 영화정보 */}
+          <MovieInfo />
+
+          {/* css 스크롤 효과 */}
+          {/* <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
             // style={{ height: `${scrollPosition}px` }}
             style={{ top: `calc(60vh - ${scrollPosition}px)` }}
-          >
-            <MovieInfo />
-            {/* 리뷰 */}
-            <div className="mx-auto my-0 max-w-[1320px] p-8">
-              <div className="mb-6 flex justify-between">
-                <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
-                <button
-                  onClick={openModal}
-                  className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
-                >
-                  리뷰등록
-                </button>
-              </div>
-              {movieDetail?.movie.reviews.map((review, index) => {
-                return <Review key={index} review={review} />;
-              })}
-              <div className="flex justify-center text-3xl">
-                <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
-              </div>
+          ></div> */}
+
+          {/* 리뷰 */}
+          <div className="mx-auto my-0 max-w-[1320px] p-8">
+            <div className="mb-6 flex justify-between">
+              <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
+              <button
+                onClick={openModal}
+                className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
+              >
+                리뷰등록
+              </button>
             </div>
-            {/* 추천영화 */}
-            <div className="mx-auto my-0 max-w-[1320px] p-8">
-              <p className="text-xl font-bold">비슷한 장르의 영화</p>
-              <div className="flex justify-between">
-                {movieDetail?.recommended_movies &&
-                  movieDetail?.recommended_movies.map((movie, index) => (
-                    <MoviePoster
-                      key={index}
-                      title={movie.title}
-                      releaseDate={movie.repRlsDate}
-                      score={movie.score}
-                      bookmarked={false}
-                      posterUrl={movie.posterUrl}
-                    />
-                    // MoviePoster props에 docId={movie.docId}도 들어가야함. link걸어줄라면
-                    // releaseDate는 repRlsDate로 바뀜
-                  ))}
-              </div>
+            {movieDetail?.movie.reviews.map((review, index) => {
+              return <Review key={index} review={review} />;
+            })}
+            <div className="flex justify-center text-3xl">
+              <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
             </div>
-            {/* 리뷰작성모달 */}
-            {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
           </div>
+          {/* 추천영화 */}
+          <div className="mx-auto my-0 max-w-[1320px] p-8">
+            <p className="text-xl font-bold">비슷한 장르의 영화</p>
+            <div className="flex justify-between">
+              {movieDetail?.recommended_movies &&
+                movieDetail?.recommended_movies.map((movie, index) => (
+                  <MoviePoster
+                    key={index}
+                    title={movie.title}
+                    releaseDate={movie.repRlsDate}
+                    score={movie.score}
+                    bookmarked={false}
+                    posterUrl={movie.posterUrl}
+                  />
+                  // MoviePoster props에 docId={movie.docId}도 들어가야함. link걸어줄라면
+                  // releaseDate는 repRlsDate로 바뀜
+                ))}
+            </div>
+          </div>
+          {/* 리뷰작성모달 */}
+          {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
         </>
       )}
     </>
