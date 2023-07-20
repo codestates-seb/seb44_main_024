@@ -20,12 +20,11 @@ public class MovieActors {
     public static List<MovieActors> movieActors(Movie movie) {
         List<MovieActors> movieActors = new ArrayList<>();
 
-        Movie.Data.Result result = movie.getData().get(0).getResult().get(0);
-        Iterator<Movie.Data.Result.Actors.Actor> iterator = result.getActors().getActor().iterator();
+        Iterator<Movie.Actors.Actor> iterator = movie.getActors().getActor().iterator();
 
         First : while (iterator.hasNext()) {
             String actor = iterator.next().getActorNm();
-            for (Movie.Data.Result.Staffs.Staff staff : result.getStaffs().getStaff()) {
+            for (Movie.Staffs.Staff staff : movie.getStaffs().getStaff()) {
                 if (staff.getStaffNm().equals(actor) && staff.getStaffRole() != "") {
                     movieActors.add(new MovieActors(actor, staff.getStaffRole()));
                     continue First;

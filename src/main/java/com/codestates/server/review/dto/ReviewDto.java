@@ -22,8 +22,25 @@ public class ReviewDto {
         private String docId;
         @NotBlank
         private String content;
+        @NotBlank
+        private String genre;
         private Set<String> tags;
     }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Patch {
+        @Min(0)
+        @Max(5)
+        @NotNull
+        private int score;
+        @NotBlank
+        private String content;
+        private Set<String> tags;
+    }
+
 
     @Getter
     @Setter

@@ -12,11 +12,15 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ReviewMapper {
-    Review postToReview(ReviewDto.Post post);
+    @Mapping(target = "docId", source = "docId")
+    Review postToReview(ReviewDto.Post post, String docId);
+    Review patchToReview(ReviewDto.Patch patch);
     @Mapping(target = "tags",
             expression = "java(review.getReviewTags().stream().map(i -> i.getTagId()).collect(java.util.stream.Collectors.toSet()))")
     @Mapping(target = "likes",
                     expression = "java(review.getLikes().stream().count())")
+    @Mapping(target = "reviewId",
+            expression = "java(review.getId())")
     ReviewDto.Response reviewToResponse(Review review);
 
     default List<ReviewDto.Response> reviewsToResponses(List<Review> reviews) {

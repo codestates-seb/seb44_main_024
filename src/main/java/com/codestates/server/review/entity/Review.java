@@ -43,6 +43,8 @@ public class Review {
     private int score;
     @Column(nullable = false)
     private String content;
+    @Column(nullable = false)
+    private String genre;
     @CreatedDate
     @Column(updatable = false, nullable = false, columnDefinition = "DATETIME(0)")
     private LocalDateTime create_at;

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MultiResponseDto<T> {
-    private T topScore;
-    private T mostReview;
+public class SearchResponseDto<T> {
+    T movie;
+    T recommended_movies;
 }

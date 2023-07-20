@@ -5,7 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MultiResponseDto<T> {
-    private T topScore;
+public class MainResponseDto<T> {
+    private T boxOffice;
     private T mostReview;
+    private T topScore;
 }

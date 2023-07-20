@@ -15,3 +15,7 @@ spring:
 
 api:
   key : 78VM16BGS9427RH1MGSE
+
+kobis:
+  boxoffice :
+  key : 5431a979f391d9ef29ec3b0c5a397219

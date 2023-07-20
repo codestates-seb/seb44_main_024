@@ -15,19 +15,12 @@ public class MovieResponseDto {
     @Getter
     @Builder
     public static class Response {
+        // 영화 제목, 개봉일, 별점, 포스터, docId
         private String docId;
         private String title;
-        private String titleEng;
-        private String description;
-        private String genre;
-        private String runtime;
         private String repRlsDate;
-        private String nation;
-        private String rating;
-        private String directorNm;
-        private List<String> actors;
         private String posterUrl;
-        private List<String> stills;
+        private Double score;
     }
     @Getter
     @Builder

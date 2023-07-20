@@ -18,7 +18,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<String> tags = Arrays.asList("재미있어요", "감동적이에요", "스릴 넘쳐요", "웃겨요", "눈물나는", "설레는", "몰입도 높은", "예술적인", "생각할 거리가 있는", "인상 깊은");
+        List<String> tags = Arrays.asList("감동", "음악", "힐링", "킬링타임", "모험", "창의적", "영상미", "영감", "긴장감", "반전");
         List<Tag> tagEntities = tags.stream()
                 .map(Tag::new)
                 .collect(Collectors.toList());

@@ -18,4 +18,24 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("SELECT ROUND(AVG(r.score), 1) FROM Review r WHERE r.docId = :docId")
     Optional<Double> getAverageScoreByDocId(@Param("docId") String docId);
+
+//    @Query("SELECT r.docId FROM Review r GROUP BY r.docId ORDER BY COUNT(r.docId) DESC LIMIT 5")
+    @Query("SELECT r.docId FROM Review r GROUP BY r.docId ORDER BY COUNT(r.docId) DESC")
+    List<String> findMostReviewsWithDocId(Pageable pageable);
+
+    @Query("SELECT r.docId as avgScore FROM Review r GROUP BY r.docId ORDER BY AVG(r.score) DESC")
+    List<String> findHighestScoreWithDocId(Pageable pageable);
+
+    @Query("SELECT r.docId FROM Review r WHERE r.genre LIKE CONCAT('%', :genre, '%') GROUP BY r.docId ORDER BY COUNT(r.docId) DESC")
+    List<String> findMostReviewsWithGenre(@Param("genre") String genre,Pageable pageable);
+    // SELECT * FROM Question q WHERE LOWER(q.title) LIKE LOWER(CONCAT('%', :title, '%'))
+
+    @Query("SELECT r.docId FROM Review r WHERE r.genre LIKE CONCAT('%', :genre, '%') GROUP BY r.docId ORDER BY AVG(r.score) DESC")
+    List<String> findHighestScoreWithGenre(@Param("genre") String genre, Pageable pageable);
+
+    @Query("SELECT r.docId FROM Review r JOIN r.reviewTags rt JOIN rt.tag t WHERE t.id = :tag GROUP BY r.docId ORDER BY COUNT(r.docId) DESC")
+    List<String> findDocIdsByTagWithMostReviews(@Param("tag") String tag, Pageable pageable);
+
+    @Query("SELECT r.docId FROM Review r JOIN r.reviewTags rt JOIN rt.tag t WHERE t.id = :tag GROUP BY r.docId ORDER BY AVG(r.score) DESC")
+    List<String> findDocIdsByTagWithHighestScore(@Param("tag") String tag, Pageable pageable);
 }
