@@ -4,7 +4,7 @@ import UserInfo from './UserInfo/UserInfo';
 
 const MyPage = () => {
   return (
-    <div>
+    <div className="flex flex-col justify-center px-20">
       <UserInfo />
       <MyReviews />
       <MyBookmarks />

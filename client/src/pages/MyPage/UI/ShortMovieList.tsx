@@ -14,7 +14,7 @@ interface MoviePosterProps {
 
 const shortMovieList: React.FC<movieListProps> = ({ movies }) => {
   return (
-    <div>
+    <div className="flex flex-row pb-5">
       {movies.map((movie: MoviePosterProps, index: number) => (
         <MoviePoster
           key={index}

@@ -8,7 +8,7 @@ const MyBookmarks = () => {
 
   return (
     <div>
-      <div> 나의 북마크 </div>
+      <div className="text-2xl font-semibold"> 나의 북마크 </div>
       <div>
         {bookmarksCounter > 0 ? (
           <ShortMovieList movies={moviesToRender} />

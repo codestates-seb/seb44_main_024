@@ -8,8 +8,8 @@ const MyReviews = () => {
 
   return (
     <div>
-      <div> 내가 작성한 리뷰 </div>
-      <div>
+      <div className="text-2xl font-semibold"> 내가 작성한 리뷰 </div>
+      <div className="pb-12">
         {reviewCounter > 0 ? (
           <ShortMovieList movies={moviesToRender} />
         ) : (
