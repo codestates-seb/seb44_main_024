@@ -11,7 +11,9 @@ const MovieInfoTop = () => {
       <div className="mr-7 shrink-0">
         <img className=" mb-4 h-[400px]" src={movieDetail?.movie.posterUrl} alt="Poster Img" />
         <a
-          href="https://www.youtube.com/watch?v=ByXuk9QqQkk"
+          href={`https://www.youtube.com/results?search_query=${
+            movieDetail?.movie.title + ' ' + 'trailer'
+          }`}
           target="_blank"
           className="flex h-14 w-full items-center justify-center rounded-xl bg-theme1 hover:bg-yellow-200"
           rel="noreferrer"

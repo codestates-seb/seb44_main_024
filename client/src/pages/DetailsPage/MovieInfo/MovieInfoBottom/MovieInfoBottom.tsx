@@ -42,7 +42,7 @@ const MovieInfoBottom = () => {
         <div
           role="presentation"
           onClick={closeModal}
-          className="fixed inset-0 flex items-center justify-center bg-black/70"
+          className="fixed inset-0 z-10 flex items-center justify-center bg-black/70"
         >
           <div
             role="presentation"
