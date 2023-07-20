@@ -21,17 +21,17 @@ logging:
           jpa: DEBUG
 
 api:
-  key : 78VM16BGS9427RH1MGSE
+  key : {KMDB.KEY}
 
 kobis:
   boxoffice :
-  key : 5431a979f391d9ef29ec3b0c5a397219
+  key : {KOBIS.KEY}
 
 mail:
   address:
     admin: admin@gmail.com
 
 jwt:
-  key : ajdfakwje@qw4iekjr293k4kjd9x9d902kjldf0p2934
+  key : {JWT.KEY}
   access-token-expiration-minutes: 30
   refresh-token-expiration-minutes: 420
