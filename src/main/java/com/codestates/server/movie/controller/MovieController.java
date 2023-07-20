@@ -66,7 +66,7 @@ public class MovieController {
     @GetMapping("/movies/tag")
     public ResponseEntity getMovieByTag(@RequestParam String tag) {
         return new ResponseEntity<>(
-                new MultiResponseDto<>(
+                new ScoreAndReviewDto<>(
                         movieMapper.movieToResponse(movieService.getMovies(tag + "score")),
                         movieMapper.movieToResponse(movieService.getMovies(tag + "review"))
                 ),
@@ -76,7 +76,7 @@ public class MovieController {
     @GetMapping("/movies/genre")
     public ResponseEntity getMovieByGenre(@RequestParam String genre) {
         return new ResponseEntity<>(
-                new MultiResponseDto<>(
+                new ScoreAndReviewDto<>(
                         movieMapper.movieToResponse(movieService.getMovies(genre + "score")),
                         movieMapper.movieToResponse(movieService.getMovies(genre + "review"))
                 ),

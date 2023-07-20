@@ -40,7 +40,7 @@ public class Review {
 //    private Movie movie;
 
     @Column(nullable = false)
-    private int score;
+    private Double score;
     @Column(nullable = false)
     private String content;
     @Column(nullable = false)

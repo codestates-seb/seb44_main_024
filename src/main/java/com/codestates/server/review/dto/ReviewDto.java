@@ -18,7 +18,7 @@ public class ReviewDto {
         @Min(0)
         @Max(5)
         @NotNull
-        private int score;
+        private double score;
         private String docId;
         @NotBlank
         private String content;
@@ -35,7 +35,7 @@ public class ReviewDto {
         @Min(0)
         @Max(5)
         @NotNull
-        private int score;
+        private double score;
         @NotBlank
         private String content;
         private Set<String> tags;
@@ -50,7 +50,7 @@ public class ReviewDto {
     public static class Response {
         private Long reviewId;
         private String docId;
-        private int score;
+        private double score;
         private String content;
         private Set<String> tags;
         private long likes;
