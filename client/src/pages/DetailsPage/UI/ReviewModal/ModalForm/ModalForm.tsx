@@ -60,39 +60,42 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
       tags: selectedTags,
       genre: movieDetail?.movie.genre,
     };
-
-    if (review) {
-      try {
-        const response = await api.patch(`/reviews/${review.reviewId}`, reviewData, {
-          headers: {
-            'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
-          },
-        });
-        closeModal();
-        console.log(response);
-        alert('수정되었습니다.');
-        window.location.reload();
-      } catch (err) {
-        console.error(err);
-        alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+    if (reviewData.content && reviewData.score !== 0) {
+      if (review) {
+        try {
+          const response = await api.patch(`/reviews/${review.reviewId}`, reviewData, {
+            headers: {
+              'Content-Type': 'application/json',
+              // Authorization: `Bearer ${token}`
+            },
+          });
+          closeModal();
+          console.log(response);
+          alert('수정되었습니다.');
+          window.location.reload();
+        } catch (err) {
+          console.error(err);
+          alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+        }
+      } else {
+        try {
+          const response = await api.post(`/movies/${movieId}/reviews`, reviewData, {
+            headers: {
+              'Content-Type': 'application/json',
+              // Authorization: `Bearer ${token}`
+            },
+          });
+          closeModal();
+          console.log(response);
+          alert('등록되었습니다.');
+          window.location.reload();
+        } catch (err) {
+          console.error(err);
+          alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+        }
       }
     } else {
-      try {
-        const response = await api.post(`/movies/${movieId}/reviews`, reviewData, {
-          headers: {
-            'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
-          },
-        });
-        closeModal();
-        console.log(response);
-        alert('등록되었습니다.');
-        window.location.reload();
-      } catch (err) {
-        console.error(err);
-        alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
-      }
+      alert('리뷰내용 또는 별점을 추가해주세요!');
     }
   };
 
