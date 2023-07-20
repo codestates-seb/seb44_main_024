@@ -1,5 +1,4 @@
-import axios from 'axios';
-// import api from '../assets/api/axiosInstance'; // 백엔드 서버로 보낼때 바꾸기
+import api from '../assets/api/axiosInstance';
 import { useState } from 'react';
 import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';
@@ -16,6 +15,7 @@ export interface ReviewProps {
 const Review = ({ review }: ReviewProps) => {
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const expandOpenHandler: () => void = () => {
     setIsExandOpen(!isExpandOpen);
   };
@@ -26,20 +26,18 @@ const Review = ({ review }: ReviewProps) => {
     setIsModalOpen(false);
   };
 
-  //리뷰 삭제(DELETE 요청) // reviewId 이용
+  //리뷰 삭제(DELETE 요청) // 예상 endpoint: `/reviews/${review.reviewId}`
   const handleReviewDelete = async () => {
     try {
-      const response = await axios.delete(
-        'https://7824fe4c-db17-4a35-8a83-3480e0f32f69.mock.pstmn.io',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // Authorization: `Bearer ${token}`
-          },
-        }
-      );
+      const response = await api.delete(`/reviews/${review.reviewId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${token}`
+        },
+      });
       console.log(response);
       alert('삭제되었습니다.');
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);

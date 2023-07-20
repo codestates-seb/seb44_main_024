@@ -42,12 +42,12 @@ const MovieInfoBottom = () => {
         <div
           role="presentation"
           onClick={closeModal}
-          className="fixed inset-0 flex items-center justify-center bg-black/70"
+          className="fixed inset-0 z-10 flex items-center justify-center bg-black/70"
         >
           <div
             role="presentation"
             onClick={preventModalClick}
-            className="max-h-[450px] max-w-[800px] bg-white"
+            className="h-[300px] w-[500px] bg-white"
           >
             <img className="h-full w-full" src={stillUrl} alt="modal still" />
           </div>

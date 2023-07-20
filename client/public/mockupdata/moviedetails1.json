@@ -6,7 +6,7 @@
     "description": "평범한 열 살 짜리 소녀 치히로 식구는 이사 가던 중 길을 잘못 들어 낡은 터널을 지나가게 된다. 터널 저편엔 폐허가 된 놀이공원이 있었고 그곳엔 이상한 기운이 흘렀다. 인기척 하나 없는 이 마을의 낯선 분위기에 불길한 기운을 느낀 치히로는 부모님에게 돌아가자고 조르지만 부모님은 호기심에 들떠 마을 곳곳을 돌아다니기 시작한다. 어느 음식점에 도착한 치히로의 부모님은 그 곳에 차려진 음식들을 보고 즐거워하며 허겁지겁 먹어대다가 돼지로 변해버린다. 겁에 질려 당황하는 치히로에게 낯선 소년 하쿠가 나타나 빨리 이곳을 나가라고 소리치는데...",
     "genre": "애니메이션/판타지/가족",
     "runtime": "126",
-    "repRlsDate": "20010720",
+    "repRlsDate": "2001",
     "nation": "일본",
     "rating": "전체",
     "posterUrl": "https://upload.wikimedia.org/wikipedia/ko/b/bc/%EC%84%BC%EA%B3%BC_%EC%B9%98%ED%9E%88%EB%A1%9C%EC%9D%98_%ED%96%89%EB%B0%A9%EB%B6%88%EB%AA%85_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg",
@@ -29,7 +29,7 @@
         "reviewId": 1,
         "score": 5,
         "content": "아름다운 영화입니다..",
-        "like": 20,
+        "likes": 20,
         "tags": [
           "감동",
           "모험"
@@ -116,7 +116,7 @@
     "totalElements": 2,
     "totalPages": 1
   },
-  "recommend": [
+  "recommended_movies": [
     {
       "docId": "K28661",
       "title": "스파이더맨: 어크로스 더 유니버스",

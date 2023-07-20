@@ -1,10 +1,9 @@
-// import api from '../DetailsPage/assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
-import axios from 'axios';
+import api from '../DetailsPage/assets/api/axiosInstance';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import MoviePoster from '../UI/MoivePoster';
-import { Recommend } from '../DetailsPage/assets/types/movieTypes'; // 실제 데이터 들어오는거보고 수정 필요
+import { Recommend } from '../DetailsPage/assets/types/movieTypes';
 import searchErrImg from './assets/searchErr.png';
 
 const SearchPage = () => {
@@ -13,21 +12,18 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  // Header.tsx 컴포넌트에서 검색시, 유저가 입력한 검색키워드와 함께 Link를 걸어줘야함. => `/search?keyword=${keyword input}`
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
-  console.log(keyword);
 
-  // 해당 검색데이터 get 요청 // 예상 endpoint: `/search/keyword={keyword}`
-  // 검색데이터 밑에, 추천영화(별점높은 순) get 요청 // 예상 endpoint: `/main` // '/main'은 데이터 여러개 들어오므로, 별점 높은순 데이터만 잘라서 사용해야함. (별점 높은순으로 5개만 사용)
+  // 해당 검색데이터 get 요청 // 예상 endpoint: `/search?keyword=${keyword}`
+  // 목업 데이터 `/mockupdata/searchdata.json`
   useEffect(() => {
     const fetchSearchData = async () => {
       try {
-        const searchResponse = await axios.get(`/mockupdata/searchdata.json`);
-        const highScoreResponse = await axios.get(`/mockupdata/highscoredata.json`);
+        const searchResponse = await api.get(`/search?keyword=${keyword}`);
 
-        setSearchData(searchResponse.data.data);
-        setHighScoreData(highScoreResponse.data.data);
+        setSearchData(searchResponse.data.movie);
+        setHighScoreData(searchResponse.data.recommended_movies);
         setIsLoading(false);
       } catch (err) {
         console.error(err);
@@ -36,7 +32,7 @@ const SearchPage = () => {
       }
     };
     fetchSearchData();
-  }, []);
+  }, [keyword]);
 
   return (
     <>

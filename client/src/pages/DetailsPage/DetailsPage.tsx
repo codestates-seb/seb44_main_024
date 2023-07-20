@@ -1,5 +1,4 @@
-// import api from './assets/api/axiosInstance'; // 백엔드서버로 보낼때 axios를 api로 바꾸기
-import axios from 'axios';
+import api from './assets/api/axiosInstance';
 import { useAppSelector, useAppDispatch } from '../../redux-toolkit/hooks';
 import { fetchMovieSuccess, selectMovieDetails } from '../../redux-toolkit/slices/movieDetailSlice';
 import { useEffect, useState } from 'react';
@@ -22,7 +21,7 @@ const DetailsPage = () => {
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
-  const { movieId } = useParams();
+  const { movieId } = useParams(); // 테스트용 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page');
 
@@ -30,11 +29,12 @@ const DetailsPage = () => {
   const pageNumber = Number(page || 1); // 쿼리파라미터가 없는 경우에 default값 1
   const [totalReviews, setTotalReviews] = useState(0);
 
-  // 해당 영화데이터 get 요청 // 예상 endpoint: `/movies/{movieId}/page={pageNumber}`
+  // 해당 영화데이터 get 요청 // 예상 endpoint: `/movies/${movieId}?page=${pageNumber}`
+  // `/mockupdata/moviedetails${pageNumber}.json` => 목업데이터
   useEffect(() => {
     const fetchMovieDetail = async () => {
       try {
-        const response = await axios.get(`/mockupdata/moviedetails${pageNumber}.json`);
+        const response = await api.get(`/movies/${movieId}?page=${pageNumber}`);
         dispatch(fetchMovieSuccess(response.data));
         setTotalReviews(response.data.movie.review_count);
         setIsLoading(false);
@@ -44,7 +44,7 @@ const DetailsPage = () => {
       }
     };
     fetchMovieDetail();
-  }, [dispatch, pageNumber]);
+  }, [dispatch, pageNumber, movieId]);
 
   // 모달 열기, 닫기
   // 로그인 기능 완성시, 사용
@@ -62,25 +62,25 @@ const DetailsPage = () => {
     setIsModalOpen(false);
   };
 
-  // css 스크롤 효과
+  // css 스크롤 효과 (주석부분은 메인 이미지가 있을때 사용-> 100vh)
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
 
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+    // const handleResize = () => {
+    //   setWindowWidth(window.innerWidth);
+    // };
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
+    // window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      // window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -93,10 +93,11 @@ const DetailsPage = () => {
       ) : (
         <>
           {/* 영화정보 */}
-          <MovieTitle windowWidth={windowWidth} />
+          <MovieTitle />
           <div
             className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
-            style={{ height: `${scrollPosition}px` }}
+            // style={{ height: `${scrollPosition}px` }}
+            style={{ top: `calc(60vh - ${scrollPosition}px)` }}
           >
             <MovieInfo />
             {/* 리뷰 */}
@@ -121,17 +122,19 @@ const DetailsPage = () => {
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <p className="text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
-                {movieDetail?.recommend.map((movie, index) => (
-                  <MoviePoster
-                    key={index}
-                    title={movie.title}
-                    releaseDate={movie.repRlsDate}
-                    score={movie.score}
-                    bookmarked={false}
-                    posterUrl={movie.posterUrl}
-                  />
-                  // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
-                ))}
+                {movieDetail?.recommended_movies &&
+                  movieDetail?.recommended_movies.map((movie, index) => (
+                    <MoviePoster
+                      key={index}
+                      title={movie.title}
+                      releaseDate={movie.repRlsDate}
+                      score={movie.score}
+                      bookmarked={false}
+                      posterUrl={movie.posterUrl}
+                    />
+                    // MoviePoster props에 docId={movie.docId}도 들어가야함. link걸어줄라면
+                    // releaseDate는 repRlsDate로 바뀜
+                  ))}
               </div>
             </div>
             {/* 리뷰작성모달 */}

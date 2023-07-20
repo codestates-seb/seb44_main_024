@@ -19,6 +19,9 @@ export default {
         maindarkgray: '#5A5A5A',
         maingray: '#F2F2F2',
       },
+      height: {
+        movieTitle: 'calc(100vh - 121px)',
+      },
     },
   },
   plugins: [],
