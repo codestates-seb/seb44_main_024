@@ -16,6 +16,7 @@ export interface ReviewProps {
 const Review = ({ review }: ReviewProps) => {
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const expandOpenHandler: () => void = () => {
     setIsExandOpen(!isExpandOpen);
   };
@@ -26,8 +27,7 @@ const Review = ({ review }: ReviewProps) => {
     setIsModalOpen(false);
   };
 
-  //리뷰 삭제(DELETE 요청) // reviewId 이용
-  //포스트맨목서버 'https://7824fe4c-db17-4a35-8a83-3480e0f32f69.mock.pstmn.io'
+  //리뷰 삭제(DELETE 요청) // 예상 endpoint: `/reviews/${review.reviewId}`
   const handleReviewDelete = async () => {
     try {
       const response = await api.delete(`/reviews/${review.reviewId}`, {
@@ -38,6 +38,7 @@ const Review = ({ review }: ReviewProps) => {
       });
       console.log(response);
       alert('삭제되었습니다.');
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);

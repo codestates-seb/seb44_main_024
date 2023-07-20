@@ -8,10 +8,9 @@ import { ReviewProps } from '../Review';
 
 const ReviewBottom = ({ review }: ReviewProps) => {
   // const isLoggedIn = Boolean(getCookie('accessToken')); // 로그인 기능 완성시 사용
-  const [likes, setLikes] = useState<number>(review.like); // 리다이렉트를 사용하면, 상태를 이렇게 수동으로 변경하지 않아도 될 수도..
+  const [likes, setLikes] = useState<number>(review.likes); // 좋아요 요청만 요청 성공시 상태 변경(페이지 리프레쉬 -> 사용자경험에 좋지않음)
 
   // 좋아요 클릭 post 요청 // 예상 endpoint: `/review/{review-id}/likes`
-  // 포스트맨 목서버 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io'
   // 로그인 기능 완성시 사용
   // const likeClickHandler = async () => {
   //   if (!isLoggedIn) {
@@ -29,11 +28,12 @@ const ReviewBottom = ({ review }: ReviewProps) => {
   //         }
   //       );
   //       console.log(response);
+  //       setLikes((prev) => prev + 1);
   //     } catch (err) {
   //       console.error(err);
   //       alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
   //     }
-  //     setLikes((prev) => prev + 1);
+  //
   //   }
   // };
 

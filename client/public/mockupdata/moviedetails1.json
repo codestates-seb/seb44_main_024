@@ -116,7 +116,7 @@
     "totalElements": 2,
     "totalPages": 1
   },
-  "recommend": [
+  "recommended_movies": [
     {
       "docId": "K28661",
       "title": "스파이더맨: 어크로스 더 유니버스",

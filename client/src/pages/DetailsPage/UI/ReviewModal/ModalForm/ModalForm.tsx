@@ -49,9 +49,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
     setScore(newRating);
   };
 
-  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 reviewId이용
-  // 포스트맨 목서버 PATCH 'https://9eafe059-f15b-42b9-8571-1c6297da44fa.mock.pstmn.io'
-  // 포스트맨 목서버 POST 'https://032b9d6f-98f0-429c-ae1e-76363c379d20.mock.pstmn.io'
+  // 리뷰 등록 및 수정(조건부 POST, PATCH 요청) // 예상 endpoint: `/movies/{movie-id}/reviews`(POST) // PATCH는 `/review/${review.reviewId}`
   const handleReviewFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -74,6 +72,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
         closeModal();
         console.log(response);
         alert('수정되었습니다.');
+        window.location.reload();
       } catch (err) {
         console.error(err);
         alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
@@ -89,6 +88,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
         closeModal();
         console.log(response);
         alert('등록되었습니다.');
+        window.location.reload();
       } catch (err) {
         console.error(err);
         alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);

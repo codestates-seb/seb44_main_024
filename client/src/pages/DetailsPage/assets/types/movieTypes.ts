@@ -27,7 +27,7 @@ export interface ReviewContent {
   reviewId: number;
   score: number;
   content: string;
-  like: number;
+  likes: number;
   tags: string[];
   user: User; // 백엔드쪽에서 아직구현x
 }
@@ -57,5 +57,5 @@ export interface PageInfo {
 export interface MovieDetailData {
   movie: Movie;
   pageInfo: PageInfo;
-  recommend: Recommend[];
+  recommended_movies: Recommend[];
 }

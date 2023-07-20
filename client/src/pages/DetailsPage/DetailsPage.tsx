@@ -22,7 +22,7 @@ const DetailsPage = () => {
   const dispatch = useAppDispatch();
 
   // 리액트 라우터 돔
-  const { movieId } = useParams(); // 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
+  const { movieId } = useParams(); // 테스트용 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page');
 
@@ -124,8 +124,8 @@ const DetailsPage = () => {
             <div className="mx-auto my-0 max-w-[1320px] p-8">
               <p className="text-xl font-bold">비슷한 장르의 영화</p>
               <div className="flex justify-between">
-                {movieDetail?.recommend &&
-                  movieDetail?.recommend.map((movie, index) => (
+                {movieDetail?.recommended_movies &&
+                  movieDetail?.recommended_movies.map((movie, index) => (
                     <MoviePoster
                       key={index}
                       title={movie.title}

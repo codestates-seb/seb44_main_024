@@ -16,7 +16,7 @@ const MovieTitle = () => {
     <div className="relative h-[60vh] w-full">
       {/* <img className="h-full w-full" src={movieDetail?.movie.posterUrl} alt="Main Img" /> */}
       <div className="h-full w-full bg-theme1" />
-      <div className="absolute left-0 top-[40%] h-full w-full">
+      <div className="absolute left-0 top-[36%] h-full w-full">
         <div className="mx-auto my-0 max-w-[1320px] px-10">
           <p className="mb-1 text-6xl font-bold text-white">{movieDetail?.movie.title}</p>
           <p className="mb-4 ml-1 text-lg text-white">{movieDetail?.movie.titleEng}</p>
