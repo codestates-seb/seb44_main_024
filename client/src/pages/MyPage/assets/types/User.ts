@@ -5,6 +5,11 @@ export interface User {
   reviews: number;
 }
 
+export interface MyPageInfoRes {
+  username: string;
+  profile_Img: string;
+}
+
 export interface BookmarkDataResponse {
   movie: {
     docId: number;
