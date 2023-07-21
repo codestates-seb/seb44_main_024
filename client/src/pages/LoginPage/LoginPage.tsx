@@ -33,11 +33,11 @@ const LoginPage: React.FC = () => {
         password: userPassword,
       });
 
-      const { user, accessToken, refreshToken } = response.data;
+      const { accessToken, refreshToken } = response.data;
       setCookie('accessToken', accessToken, { path: '/' });
       setCookie('refreshToken', refreshToken, { path: '/' });
 
-      window.alert(`${user.name} 님, 환영합니다!`);
+      window.alert('환영합니다!');
       navigate('/');
     } catch (err) {
       console.log(err);
@@ -50,7 +50,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="mt-20 flex flex-col items-center justify-center">
-      <div className="text-center text-xl">LOGO</div>
+      <div className="mb-3 text-center text-3xl">MovieLog</div>
       <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">로그인</div>
 
       <form onSubmit={handleLogin}>
