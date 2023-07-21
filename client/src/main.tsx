@@ -13,6 +13,7 @@ import DetailsPage from './pages/DetailsPage/DetailsPage';
 import MainPage from './pages/MainPage/MainPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import SearchPage from './pages/SearchPage/SearchPage';
+import MyPage from './pages/MyPage/MyPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: '/search', element: <SearchPage /> },
       { path: '/movies/:movieId', element: <DetailsPage /> },
       { path: '*', element: <ErrorPage /> },
+      { path: '/mypage', element: <MyPage /> },
     ],
   },
 ]);
