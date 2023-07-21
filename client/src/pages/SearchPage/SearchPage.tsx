@@ -1,9 +1,10 @@
 import api from '../DetailsPage/assets/api/axiosInstance';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Recommend } from '../DetailsPage/assets/types/movieTypes';
+import Spinner from '../../components/Spinner';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import MoviePoster from '../UI/MoivePoster';
-import { Recommend } from '../DetailsPage/assets/types/movieTypes';
 import searchErrImg from './assets/searchErr.png';
 
 const SearchPage = () => {
@@ -39,7 +40,9 @@ const SearchPage = () => {
       {isError ? (
         <ErrorPage />
       ) : isLoading ? (
-        <></>
+        <div className="flex h-[80vh] items-center justify-center">
+          <Spinner />
+        </div>
       ) : (
         <div className="p-10">
           <p className="mb-6 mt-2 text-center text-5xl font-semibold">&quot;{keyword}&quot;</p>

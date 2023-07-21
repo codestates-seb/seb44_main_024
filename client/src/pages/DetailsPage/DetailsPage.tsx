@@ -10,6 +10,7 @@ import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
 import MoviePoster from '../UI/MoivePoster';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import Spinner from '../../components/Spinner';
 // import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
 
 const DetailsPage = () => {
@@ -62,47 +63,19 @@ const DetailsPage = () => {
     setIsModalOpen(false);
   };
 
-  // css 스크롤 효과 (주석 두번부분은 메인 이미지가 있을때 사용-> 100vh)
-  // const [scrollPosition, setScrollPosition] = useState(0);
-  // // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScrollPosition(window.scrollY);
-  //   };
-
-  //   // const handleResize = () => {
-  //   //   setWindowWidth(window.innerWidth);
-  //   // };
-
-  //   window.addEventListener('scroll', handleScroll);
-  //   // window.addEventListener('resize', handleResize);
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //     // window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-
   return (
     <>
       {isError ? (
         <ErrorPage /> // (error메세지 상태 props로 넘기기? or not)
       ) : isLoading ? (
-        <></>
+        <div className="flex h-[80vh] items-center justify-center">
+          <Spinner />
+        </div>
       ) : (
         <>
           <MovieTitle />
           {/* 영화정보 */}
           <MovieInfo />
-
-          {/* css 스크롤 효과 */}
-          {/* <div
-            className="absolute bottom-0 left-0 z-10 w-full bg-white" //  duration-500 ease-out 고민
-            // style={{ height: `${scrollPosition}px` }}
-            style={{ top: `calc(60vh - ${scrollPosition}px)` }}
-          ></div> */}
-
           {/* 리뷰 */}
           <div className="mx-auto my-0 max-w-[1320px] p-8">
             <div className="mb-6 flex justify-between">

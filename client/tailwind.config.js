@@ -6,6 +6,7 @@ export default {
       bp1: { max: '640px' },
       bp2: { max: '817px' },
       bp3: { max: '980px' },
+      bp4: { min: '640px' },
     },
     extend: {
       colors: {
@@ -18,9 +19,6 @@ export default {
         mainblack: '#1A1A1A',
         maindarkgray: '#5A5A5A',
         maingray: '#F2F2F2',
-      },
-      height: {
-        movieTitle: 'calc(100vh - 121px)',
       },
     },
   },

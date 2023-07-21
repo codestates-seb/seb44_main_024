@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .custom-height {
+    height: calc(100vh - 90px);
+  }
+
+  @media (max-width: 697px) {
+    .custom-height {
+      height: calc(100vh - 104px);
+    }
+  }
+}
