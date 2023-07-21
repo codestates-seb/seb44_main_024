@@ -33,8 +33,9 @@ const LoginPage: React.FC = () => {
         password: userPassword,
       });
 
-      const { user, accessToken } = response.data;
+      const { user, accessToken, refreshToken } = response.data;
       setCookie('accessToken', accessToken, { path: '/' });
+      setCookie('refreshToken', refreshToken, { path: '/' });
 
       window.alert(`${user.name} 님, 환영합니다!`);
       navigate('/');
