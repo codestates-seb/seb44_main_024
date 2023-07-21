@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux-toolkit/hooks';
 import { selectMovieDetails } from '../../../../../redux-toolkit/slices/movieDetailSlice';
 import { ModalProps } from '../ReviewModal';
+import { getCookie } from '../../../../../utils/cookie'; // 로그인 기능 완성시 사용
 import ModalTag from './ModalTag/ModalTag';
 
 const tags: string[] = [
@@ -20,7 +21,7 @@ const tags: string[] = [
 ];
 
 const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
-  console.log(movieId);
+  const token = getCookie('accessToken');
   const movieDetail = useAppSelector(selectMovieDetails);
   const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
@@ -65,7 +66,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
           const response = await api.patch(`/reviews/${review.reviewId}`, reviewData, {
             headers: {
               'Content-Type': 'application/json',
-              // Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           });
           closeModal();
@@ -81,7 +82,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
           const response = await api.post(`/movies/${movieId}/reviews`, reviewData, {
             headers: {
               'Content-Type': 'application/json',
-              // Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           });
           closeModal();

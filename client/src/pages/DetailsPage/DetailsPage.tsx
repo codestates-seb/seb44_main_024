@@ -11,15 +11,16 @@ import Pagination from './UI/Pagination';
 import MoviePoster from '../UI/MoivePoster';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Spinner from '../../components/Spinner';
-// import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
+import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
 
 const DetailsPage = () => {
-  // const isLoggedIn = Boolean(getCookie('accessToken')); // 로그인 기능 완성시 사용
+  const isLoggedIn = Boolean(getCookie('accessToken')); // 로그인 기능 완성시 사용
   const movieDetail = useAppSelector(selectMovieDetails);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const dispatch = useAppDispatch();
+  console.log(isLoggedIn);
 
   // 리액트 라우터 돔
   const { movieId } = useParams(); // 테스트용 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
@@ -48,17 +49,17 @@ const DetailsPage = () => {
   }, [dispatch, pageNumber, movieId]);
 
   // 모달 열기, 닫기
-  // 로그인 기능 완성시, 사용
-  // const openModal = () => {
-  //   if (!isLoggedIn) {
-  //     alert('로그인을 해주세요.');
-  //   } else {
-  //     setIsModalOpen(true);
-  //   }
-  // };
+  // 로그인 기능 완성시, 아래주석 삭제
   const openModal = () => {
-    setIsModalOpen(true);
+    if (!isLoggedIn) {
+      alert('로그인을 해주세요.');
+    } else {
+      setIsModalOpen(true);
+    }
   };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
   const closeModal = () => {
     setIsModalOpen(false);
   };
