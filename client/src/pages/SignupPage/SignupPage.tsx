@@ -99,9 +99,9 @@ const SignupPage: React.FC = () => {
 
     if (isValid) {
       try {
-        const response = await api.post('/register', {
-          name: userName,
+        const response = await api.post('/members', {
           email: userEmail,
+          username: userName,
           password: userPassword,
         });
         console.log(response.headers);
@@ -120,7 +120,7 @@ const SignupPage: React.FC = () => {
 
   return (
     <div className="mt-20 flex flex-col items-center justify-center ">
-      <div className="text-center text-xl">LOGO</div>
+      <div className="mb-3 text-center text-3xl">MovieLog</div>
       <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
 
       <form onSubmit={handleSignup}>
