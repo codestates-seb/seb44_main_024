@@ -7,15 +7,23 @@ import { FaPlay } from 'react-icons/fa';
 const MovieInfoTop = () => {
   const movieDetail = useAppSelector(selectMovieDetails);
   return (
-    <div className="mb-14 flex">
-      <div className="mr-7 shrink-0">
-        <img className=" mb-4 h-[28rem]" src={movieDetail?.movie.posterUrl} alt="Poster Img" />
+    <div className="mb-14 bp4:flex">
+      <div className="shrink-0 bp4:mr-7">
+        <img
+          className="mb-4 h-[28rem] bp1:w-full"
+          src={movieDetail?.movie.posterUrl}
+          alt="Poster Img"
+        />
         <a
-          href={`https://www.youtube.com/results?search_query=${
-            movieDetail?.movie.title + ' ' + 'trailer'
-          }`}
+          href={
+            movieDetail?.movie.trailer
+              ? movieDetail?.movie.trailer
+              : `https://www.youtube.com/results?search_query=${
+                  movieDetail?.movie.title + ' ' + 'trailer'
+                }`
+          }
           target="_blank"
-          className="flex h-14 w-full items-center justify-center rounded-xl bg-theme1 hover:bg-yellow-200"
+          className="flex h-14 items-center justify-center rounded-xl bg-theme1 hover:bg-yellow-200 bp1:mb-7 bp1:w-full"
           rel="noreferrer"
         >
           <FaPlay className=" text-2xl text-white" />

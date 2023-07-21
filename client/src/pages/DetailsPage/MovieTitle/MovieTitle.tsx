@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../../redux-toolkit/hooks';
 import { selectMovieDetails } from '../../../redux-toolkit/slices/movieDetailSlice';
+
 // interface windowWidthProps {
 //   windowWidth: number;
 // }
@@ -39,8 +40,20 @@ const MovieTitle = () => {
     // </div>
     // 이전 css
 
-    <div className="flex h-[60vh] w-full items-center bg-theme1">
-      <div className="mx-auto my-0 mt-44 w-[1320px] px-10 text-white">
+    <div
+      className={`flex w-full items-center ${movieDetail?.movie.backdrop ? '' : 'bg-theme1'} ${
+        movieDetail?.movie.backdrop ? 'custom-height' : 'h-[60vh]'
+        // h-[60vh] -> 이미지 없을때
+      }`}
+      style={{
+        backgroundImage: movieDetail?.movie.backdrop
+          ? `url(${movieDetail?.movie.backdrop})`
+          : undefined,
+        backgroundSize: movieDetail?.movie.backdrop ? 'cover' : undefined,
+        backgroundPosition: movieDetail?.movie.backdrop ? 'center' : undefined,
+      }}
+    >
+      <div className="mx-auto mt-60 w-[1320px] px-8 text-white">
         <p className="mb-1 text-7xl font-bold">{movieDetail?.movie.title}</p>
         <p className="mb-4 ml-1 text-xl">{movieDetail?.movie.titleEng}</p>
         <p className="text-2xl font-medium">

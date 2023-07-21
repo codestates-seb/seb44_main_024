@@ -10,6 +10,7 @@ import ReviewModal from './UI/ReviewModal/ReviewModal';
 import Pagination from './UI/Pagination';
 import MoviePoster from '../UI/MoivePoster';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import Spinner from '../../components/Spinner';
 // import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
 
 const DetailsPage = () => {
@@ -89,7 +90,9 @@ const DetailsPage = () => {
       {isError ? (
         <ErrorPage /> // (error메세지 상태 props로 넘기기? or not)
       ) : isLoading ? (
-        <></>
+        <div className="flex h-[80vh] items-center justify-center">
+          <Spinner />
+        </div>
       ) : (
         <>
           <MovieTitle />

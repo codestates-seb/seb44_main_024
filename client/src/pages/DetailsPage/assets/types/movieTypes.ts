@@ -12,6 +12,8 @@ export interface Movie {
   score: number;
   review_count: number;
   directorNm: string;
+  trailer: null | string;
+  backdrop: null | string;
   actors: Actor[];
   stills: string[];
   reviews: ReviewContent[];
