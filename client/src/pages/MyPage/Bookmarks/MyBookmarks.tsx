@@ -2,7 +2,8 @@ import ShortMovieList from '../UI/ShortMovieList';
 import { movies } from '../../UI/datalist';
 
 const MyBookmarks = () => {
-  // 새로운 페이지로 분리하기?
+  // TODO: 새로운 페이지로 분리하기 (브랜치 분리)
+
   // api 연결 후 수정
   const bookmarkList = [...movies];
   const moviesToRender = bookmarkList.slice(0, 5);

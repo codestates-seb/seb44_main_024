@@ -4,8 +4,8 @@ import ProfileImg from '../UI/ProfileImg';
 import InfoEditModal from './InfoEditModal';
 // import { getUserinfo } from '../assets/api/UserInfoApi';
 
-//TODO: API로 정보 불러오기 getUserinfo(id) <- id 토큰에서 찾아오기
-//테스트용 가짜 유저 정보 -> 추후 삭제
+//TODO: API로 정보 불러오기 getUserinfo(id) <- member id 알아오기
+//테스트용 유저 정보 -> 추후 삭제
 const user: User = {
   username: 'Chunsik',
   password: '1234',
@@ -13,7 +13,6 @@ const user: User = {
   reviews: 4,
 };
 
-//TODO: 회원정보 수정 modal 연결
 const UserInfo = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const openInfoEditModal = useCallback(() => {
