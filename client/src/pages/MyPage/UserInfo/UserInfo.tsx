@@ -5,7 +5,7 @@ import InfoEditModal from './InfoEditModal';
 // import { getUserinfo } from '../assets/api/UserInfoApi';
 
 //TODO: API로 정보 불러오기 getUserinfo(id) <- member id 알아오기
-//테스트용 유저 정보 -> 추후 삭제
+//테스트용 유저 정보
 const user: User = {
   username: 'Chunsik',
   password: '1234',
