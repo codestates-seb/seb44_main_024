@@ -6,8 +6,8 @@ const MyPage = () => {
   return (
     <div className="flex flex-col justify-center px-20">
       <UserInfo />
-      <MyReviews />
       <MyBookmarks />
+      <MyReviews />
     </div>
   );
 };
