@@ -1,5 +1,6 @@
 package com.codestates.server.member.controller;
 
+import com.codestates.server.dto.MultiResponseDto;
 import com.codestates.server.dto.ScoreAndReviewDto;
 import com.codestates.server.dto.SingleResponseDto;
 import com.codestates.server.member.dto.MemberDto;
@@ -68,7 +69,7 @@ public class MemberController {
         Page<Member> pageMembers = memberService.findMembers(page - 1, size);
         List<Member> members = pageMembers.getContent();
         return new ResponseEntity<>(
-                new ScoreAndReviewDto<>(mapper.membersToMemberResponses(members),
+                new MultiResponseDto<>(mapper.membersToMemberResponses(members),
                         pageMembers),
                 HttpStatus.OK);
     }

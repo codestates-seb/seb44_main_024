@@ -2,6 +2,7 @@ package com.codestates.server.member.entity;
 
 //import com.codestates.server.review.entity.Review;
 
+import com.codestates.server.review.entity.Review;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,8 +34,11 @@ public class Member implements UserDetails {
     @Column(length = 100, nullable = false)
     private String password;
 
-//    @OneToMany(mappedBy = "member")
-//    private List<Review> reviews = new ArrayList<>();
+    private String profile_img;
+
+    @OneToMany(mappedBy = "member")
+    @Builder.Default
+    private List<Review> reviews = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

@@ -21,10 +21,12 @@ public interface  MovieMapper {
                 .titleEng(movie.getTitleEng())
                 .description(movie.getPlots().getPlot().get(0).getPlotText())
                 .genre(movie.getGenre())
-                .runtime(movie.getRuntime())
+                .runtime(getruntime(movie))
                 .repRlsDate(getrepRlsDate(movie).substring(0, 4))
                 .nation(movie.getNation())
-                .rating(movie.getRating())
+                .rating(getrating(movie))
+                .trailer(movie.getTrailer())
+                .backdrop(movie.getBackdrop())
                 .directorNm(movie.getDirectors().getDirector().get(0).getDirectorNm())
                 .actors(MovieActors.movieActors(movie).stream().limit(10L).collect(Collectors.toList()))
                 .posterUrl(setNoData(movie).getPosters().split("\\|")[0])
@@ -56,15 +58,30 @@ public interface  MovieMapper {
         return i.getRepRlsDate();
     }
 
+    default String getrating(Movie i) {
+        if (i.getRating().equals("")) {
+            return "미정";
+        }
+        return i.getRating();
+    }
+
+    default String getruntime(Movie i) {
+        if (i.getRuntime().isEmpty()) {
+            return "00";
+        }
+        return i.getRuntime();
+    }
+
+
     default Movie setNoData(Movie i) {
-        if (i.getPosters().equals("")) {
+        if (i.getPosters().isEmpty()) {
             i.setPosters("https://s3-eu-west-1.amazonaws.com/entertainmentie/uploads/2021/08/27144852/generic-movie-poster.jpg");
         }
-        if (i.getRepRlsDate().equals("")) {
-            i.setRepRlsDate("00000000");
-        }
-        if (i.getStlls().equals("")) {
+
+        if (i.getStlls().isBlank()) {
             i.setStlls("https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6.png|".repeat(4).replaceAll("\\|$", ""));
+        } else if ( 1 <= i.getStlls().split("\\|").length && i.getStlls().split("\\|").length < 4 ) {
+            i.setStlls(i.getStlls().repeat(4).replaceAll("\\|$", ""));
         }
         return i;
     }

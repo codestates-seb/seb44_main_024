@@ -1,5 +1,9 @@
 package com.codestates.server.review.service;
 
+import com.codestates.server.exception.BusinessLogicException;
+import com.codestates.server.exception.ExceptionCode;
+import com.codestates.server.member.entity.Member;
+import com.codestates.server.member.service.MemberService;
 import com.codestates.server.review.entity.Review;
 import com.codestates.server.review.repository.ReviewRepository;
 import com.codestates.server.tag.service.ReviewTagService;
@@ -22,30 +26,35 @@ public class ReviewService {
     ReviewRepository reviewRepository;
     @Autowired
     ReviewTagService reviewTagService;
+    @Autowired
+    MemberService memberService;
 
     @Transactional(readOnly = true)
     public Review getReview(Long reviewId) {
 //        Review review = reviewRepository.findById(reviewId).get();
-        return reviewRepository.findById(reviewId).get();
+        return findverifyReview(reviewId);
     }
 
 
     public Review createReview(Review post, Set<String> tags) {
+        Member member = memberService.authenticationMember();
+        post.setMember(member);
+        
         Review review = reviewRepository.save(post);
         // ReviewTag 테이블에 Review와 tags 추가
         reviewTagService.addReviewTag(review, tags);
-        // 로그인한 회원 정보
-        // review.setMember(authenticationMember());
-        // 영화 정보
-        // review.setMovie(movieRepository.findById(movieId));
+
         return review;
     }
 
 
-    @Transactional
     public Review updateReview(Review postToReview, Long reviewId, Set<String> tags) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("Review not found with id: " + reviewId));
+        Review review = findverifyReview(reviewId);
+
+        if (memberService.authenticationMember().getMemberId() != review.getMember().getMemberId()) {
+            System.out.println("if BusinessLogicException");
+            throw new BusinessLogicException(ExceptionCode.REVIEW_FORBIDDEN);
+        }
 
         if (review.getScore() != postToReview.getScore())
             review.setScore(postToReview.getScore());
@@ -64,6 +73,11 @@ public class ReviewService {
 
     public void deleteReview(Long reviewId) {
         Review review = findverifyReview(reviewId);
+
+        if (memberService.authenticationMember().getMemberId() != review.getMember().getMemberId()) {
+            throw new BusinessLogicException(ExceptionCode.REVIEW_FORBIDDEN);
+        }
+
         reviewRepository.delete(review);
     }
 
@@ -80,18 +94,19 @@ public class ReviewService {
 
 
     // 등록된 리뷰 중 해당 Id를 가진 리뷰 리턴
+    @Transactional(readOnly = true)
     public Review findverifyReview(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("Review not found with id: " + reviewId));
-//                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.REVIEW_NOT_FOUNT));
         return review;
     }
-
+    @Transactional(readOnly = true)
     public Page<Review> getReviewsByDocId(int page,String docId) {
         return reviewRepository.findByDocId(PageRequest.of(page, 5, Sort.Direction.DESC, "likeCount"), docId);
     }
 
     // 등록된 리뷰 중 docId를 가지고 평균 평점 구하기
+    @Transactional(readOnly = true)
     public Double getAverageScore(String docId) {
         return reviewRepository.getAverageScoreByDocId(docId).orElse(0.0);
     }

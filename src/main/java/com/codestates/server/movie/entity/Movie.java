@@ -33,6 +33,8 @@ public class Movie {
     private Directors directors;
     private Actors actors;
     private Staffs staffs;
+    private String trailer;
+    private String backdrop;
 
 
     @Getter

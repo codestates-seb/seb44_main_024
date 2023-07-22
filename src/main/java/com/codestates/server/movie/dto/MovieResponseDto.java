@@ -38,6 +38,8 @@ public class MovieResponseDto {
         private String directorNm;
         private List<MovieActors> actors;
         private String posterUrl;
+        private String trailer;
+        private String backdrop;
         private List<String> stills;
         private Double score;
         private int review_count;

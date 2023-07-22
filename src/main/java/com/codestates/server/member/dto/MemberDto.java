@@ -1,9 +1,6 @@
 package com.codestates.server.member.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -40,9 +37,13 @@ public class MemberDto {
         private String password;
     }
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
+    @Builder
+    @Setter
     public static class Response {
         private long memberId;
         private String username;
+        private String profile_img;
     }
 }

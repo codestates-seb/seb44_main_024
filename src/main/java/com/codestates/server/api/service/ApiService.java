@@ -22,8 +22,49 @@ public class ApiService {
     private String kmdb_key;
     @Value("${kobis.key}")
     private String kobis_key;
+    @Value("${tmdb.key}")
+    private String tmdb_key;
+
     private final String KMDB_URL = "https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
     private final String KOBIS_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+    private final String TMDB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie";
+    private final String TMDB_VIDEO_URL = "https://api.themoviedb.org/3/movie/{movieID}/videos";
+    private final String TMDB_IMAGE_URL = "https://api.themoviedb.org/3/movie/{movieID}/images";
+
+
+    public String getTMDbId(String title,String repRlsDate) throws IOException {
+        URI uri = UriComponentsBuilder.fromUriString(TMDB_SEARCH_URL)
+                .queryParam("api_key", tmdb_key)
+                .queryParam("query", title)
+                .queryParam("include_adult", true)
+                .queryParam("language", "ko")
+                .queryParam("page", 1)
+                .queryParam("primary_release_year", repRlsDate)
+                .build()
+                .toUri();
+
+        return executeGetRequest(uri);
+    }
+
+    public String getTMDbImage(String movieId) throws IOException {
+        URI uri = UriComponentsBuilder.fromUriString(TMDB_IMAGE_URL)
+                .queryParam("api_key", tmdb_key)
+                .buildAndExpand(movieId)
+                .toUri();
+
+        return executeGetRequest(uri);
+    }
+
+    public String getTMDbVideo(String movieId) throws IOException {
+        URI uri = UriComponentsBuilder.fromUriString(TMDB_VIDEO_URL)
+                .queryParam("api_key", tmdb_key)
+                .queryParam("language", "ko")
+                .buildAndExpand(movieId)
+                .toUri();
+
+        return executeGetRequest(uri);
+    }
+
 
     public String getKMDbBydocId(String docid) throws IOException {
         String movieId = docid.substring(0, 1);

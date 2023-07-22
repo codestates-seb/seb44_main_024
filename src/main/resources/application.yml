@@ -27,6 +27,10 @@ kobis:
   boxoffice :
   key : 5431a979f391d9ef29ec3b0c5a397219
 
+tmdb:
+  key: 08637c4f198bed78701a8e1770d54f19
+
+
 mail:
   address:
     admin: admin@gmail.com

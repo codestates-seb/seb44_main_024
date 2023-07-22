@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -80,9 +82,28 @@ public class MemberService {
         return findMember;
     }
 
+    @Transactional(readOnly = true)
+    public Member findVerifiedMember(String email) {
+        Optional<Member> optionalMember =
+                memberRepository.findByEmail(email);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
+    }
+
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+    }
+
+    public Member authenticationMember() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //현재 로그인한 사용자 이메일
+        String useremail = (String) authentication.getPrincipal();
+
+        // 로그인한 ID(이매일)로 Member를 찾아서 반환
+        return findVerifiedMember(useremail);
     }
 }

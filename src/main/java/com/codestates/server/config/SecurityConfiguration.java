@@ -54,10 +54,13 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                                 .antMatchers(HttpMethod.POST, "/members").permitAll()
+                                .antMatchers(HttpMethod.POST, "/movies/**").hasRole("USER")
                                 .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
+                                .antMatchers(HttpMethod.PATCH, "/review/**").hasRole("USER")
                                 .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
+                                .antMatchers(HttpMethod.DELETE, "/review/**").hasRole("USER")
                                 .anyRequest().permitAll()
                 );
         return http.build();
@@ -72,8 +75,17 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        configuration.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:5173",
+                        "http://code-main-24.s3-website.ap-northeast-2.amazonaws.com"
+                )
+        );
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
+        configuration.setAllowCredentials(true); // 인증 정보를 함께 전송할 수 있도록 허용
+        configuration.addAllowedHeader("*"); // 모든 헤더 허용
+        configuration.addExposedHeader("Authorization"); // 클라이언트에게 노출할 응답 헤더 추가
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

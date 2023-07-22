@@ -1,6 +1,7 @@
 package com.codestates.server.review.entity;
 
 import com.codestates.server.like.entity.ReviewLike;
+import com.codestates.server.member.entity.Member;
 import com.codestates.server.tag.entity.ReviewTag;
 import lombok.*;
 import org.hibernate.annotations.Formula;
@@ -28,9 +29,9 @@ public class Review {
 
     // Member 와 1:N 연관관계 설정
     // 어떤 회원이 해당 리뷰를 작성했는지
-//    @ManyToOne
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     // Movie 와 1:N 연관관계 설정
     // 어떤 영화에 리뷰가 작성된건지

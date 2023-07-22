@@ -23,12 +23,17 @@ public class MovieActors {
         Iterator<Movie.Actors.Actor> iterator = movie.getActors().getActor().iterator();
 
         First : while (iterator.hasNext()) {
+            boolean isActorFound = false;
             String actor = iterator.next().getActorNm();
             for (Movie.Staffs.Staff staff : movie.getStaffs().getStaff()) {
                 if (staff.getStaffNm().equals(actor) && staff.getStaffRole() != "") {
                     movieActors.add(new MovieActors(actor, staff.getStaffRole()));
+                    isActorFound = true;
                     continue First;
                 }
+            }
+            if (!isActorFound) {
+                movieActors.add(new MovieActors(actor, "출연"));
             }
         }
         return movieActors;
