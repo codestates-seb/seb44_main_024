@@ -6,6 +6,7 @@ import com.codestates.server.dto.SingleResponseDto;
 import com.codestates.server.member.dto.MemberDto;
 import com.codestates.server.member.entity.Member;
 import com.codestates.server.member.mapper.MemberMapper;
+import com.codestates.server.member.repository.MemberRepository;
 import com.codestates.server.member.service.MemberService;
 import com.codestates.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,6 +34,7 @@ public class MemberController {
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
+    private final MemberRepository memberRepository;
 
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
@@ -54,13 +59,19 @@ public class MemberController {
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
                 HttpStatus.OK);    }
 
-    @GetMapping("/{member-id}")
-    public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponse(member))
-                , HttpStatus.OK);
+//    @GetMapping("/{member-id}")
+//    public ResponseEntity getMember(
+//            @PathVariable("member-id") @Positive long memberId) {
+//        Member member = memberService.findMember(memberId);
+//
+//        return new ResponseEntity<>(member, HttpStatus.OK);
+//    }
+
+    @GetMapping
+    public ResponseEntity getMember() {
+        Member member = memberService.authenticationMember();
+
+        return new ResponseEntity<>(mapper.memberToMemberResponse(member), HttpStatus.OK);
     }
 
     @GetMapping
