@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MoviePoster from './MoivePoster';
-import { movies } from './datalist';
+
+interface Movie {
+  title: string;
+  docId: string;
+  repRlsDate: string;
+  score: number;
+  bookmarked: boolean;
+  posterUrl: string;
+}
 
 const MovieRecommend: React.FC = () => {
   const [showAllMovies, setShowAllMovies] = useState(false);
 
-  //영화 모음 데이터
+  const [movies, setMovies] = useState<Movie[]>([]);
 
-  // const top5movies = movies.slice(0, 5);
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/main'
+        ); //엔드포인트
 
-  // 엔드포인트 제공시 쓸 코드
-  // const [movies, setMovies] = useState<Movie[]>([]);
+        if (response.status === 200) {
+          const data = response.data;
+          const MovieRecommendTop5 = data.topScore;
+          setMovies(MovieRecommendTop5);
+          console.log(MovieRecommendTop5);
+        } else {
+          console.log('Failed to fetch movies:', response.data);
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
 
-  // useEffect(() => {
-  //   const fetchMovies = async () => {
-  //     try {
-  //       const response = await axios.get(''); //엔드포인트
-
-  //       if (response.status === 200) {
-  //         const data = response.data;
-  //         const top5Movies = data.slice(0, 5);
-  //         setMovies(top5Movies);
-  //         console.log(data);
-  //       } else {
-  //         console.log('Failed to fetch movies:', response.data);
-  //       }
-  //     } catch (error) {
-  //       console.log('Error:', error);
-  //     }
-  //   };
-
-  //   fetchMovies();
-  // }, []);
+    fetchMovies();
+  }, []);
 
   const handleShowMoreMovies = () => {
     setShowAllMovies(!showAllMovies);
@@ -57,8 +62,9 @@ const MovieRecommend: React.FC = () => {
           {moviesToRender.map((movie, index) => (
             <MoviePoster
               key={index}
+              movieId={movie.docId}
               title={movie.title}
-              releaseDate={movie.releaseDate}
+              releaseDate={movie.repRlsDate}
               score={movie.score}
               bookmarked={movie.bookmarked}
               posterUrl={movie.posterUrl}

@@ -58,6 +58,7 @@ const SearchPage = () => {
                 {highScoreData.map((movie, index) => (
                   <MoviePoster
                     key={index}
+                    movieId={movie.movieId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
@@ -76,6 +77,7 @@ const SearchPage = () => {
                 {searchData.map((movie, index) => (
                   <MoviePoster
                     key={index}
+                    movieId={movie.movieId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
@@ -90,6 +92,7 @@ const SearchPage = () => {
                 {highScoreData.map((movie, index) => (
                   <MoviePoster
                     key={index}
+                    movieId={movie.movieId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
