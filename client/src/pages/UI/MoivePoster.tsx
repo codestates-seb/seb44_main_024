@@ -84,23 +84,24 @@ const MoviePoster: React.FC<MoviePosterProps> = ({
       <div className=" relative m-5 h-3/4 w-10/12 ">
         <Link to={`/movies/${movieId}`}>
           <img src={posterUrl} alt={title} className="h-full w-full" />
-          <button className="absolute right-2 top-2 cursor-pointer" onClick={handleBookmarkToggle}>
-            {isBookmarked ? (
-              <BsStarFill className="mr-0.5 mt-0.5 h-6 w-6 text-yellow-400" />
-            ) : (
-              <BsStar className="mr-0.5 mt-0.5 h-6 w-6 text-gray-400" />
-            )}
-          </button>
-
-          <div className="flex flex-row  ">
-            <h2 className="mt-2 truncate text-left text-lg font-bold">{title}</h2>
-            <p className="ml-1 mt-4 text-sm  text-gray-700">{releaseDate}</p>
-          </div>
-          <div className="mb-10 flex">
-            {renderscoreStars()}
-            {hoverscore && <span className="ml-2 text-sm text-gray-600">{score}</span>}
-          </div>
         </Link>
+
+        <button className="absolute right-2 top-2 cursor-pointer" onClick={handleBookmarkToggle}>
+          {isBookmarked ? (
+            <BsStarFill className="mr-0.5 mt-0.5 h-6 w-6 text-yellow-400" />
+          ) : (
+            <BsStar className="mr-0.5 mt-0.5 h-6 w-6 text-gray-400" />
+          )}
+        </button>
+
+        <div className="flex flex-row  ">
+          <h2 className="mt-2 truncate text-left text-lg font-bold">{title}</h2>
+          <p className="ml-1 mt-4 text-sm  text-gray-700">{releaseDate}</p>
+        </div>
+        <div className="mb-10 flex">
+          {renderscoreStars()}
+          {hoverscore && <span className="ml-2 text-sm text-gray-600">{score}</span>}
+        </div>
       </div>
     </div>
   );
