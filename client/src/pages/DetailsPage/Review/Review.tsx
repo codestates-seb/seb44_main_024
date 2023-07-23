@@ -7,12 +7,14 @@ import ReviewModal from '../UI/ReviewModal/ReviewModal';
 import CommentForm from './Comment/CommentForm/CommentForm';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { ReviewContent } from '../assets/types/movieTypes';
+import { getCookie } from '../../../utils/cookie'; // 로그인 기능 완성시 사용
 
 export interface ReviewProps {
   review: ReviewContent;
 }
 
 const Review = ({ review }: ReviewProps) => {
+  const token = getCookie('accessToken'); // 로그인 기능 완성시 사용
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -32,7 +34,7 @@ const Review = ({ review }: ReviewProps) => {
       const response = await api.delete(`/reviews/${review.reviewId}`, {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       console.log(response);

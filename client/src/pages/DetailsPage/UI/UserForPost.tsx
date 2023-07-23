@@ -11,15 +11,14 @@ const UserForPost = ({ review }: ReviewProps) => {
       <div className="mr-3">
         <img
           className="h-12 w-12 rounded-full"
-          src={defaultProfile}
+          // src={defaultProfile}
           // 유저관련 정보 아직 서버로부터 안들어옴
-          // src={review.user.profile_Img && review.user.profile_Img}
+          src={review.user.profile_img ? review.user.profile_img : defaultProfile}
           alt="user"
         />
       </div>
-      <div>user</div>
       {/* 유저관련 정보 아직 서버로부터 안들어옴 */}
-      {/* <div>{review.user.username && review.user.username}</div> */}
+      <div>{review.user.username ? review.user.username : 'user'}</div>
     </div>
   );
 };

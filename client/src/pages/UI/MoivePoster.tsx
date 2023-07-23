@@ -79,10 +79,14 @@ const MoviePoster: React.FC<MoviePosterProps> = ({
     return stars;
   };
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex w-1/5 overflow-hidden " key={movieId}>
       <div className=" relative m-5 h-3/4 w-10/12 ">
-        <Link to={`/movies/${movieId}`}>
+        <Link to={`/movies/${movieId}`} onClick={handleClick}>
           <img src={posterUrl} alt={title} className="h-full w-full" />
         </Link>
 

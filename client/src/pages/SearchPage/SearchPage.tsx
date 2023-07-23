@@ -57,13 +57,12 @@ const SearchPage = () => {
                 {highScoreData.map((movie, index) => (
                   <MoviePoster
                     key={index}
-                    movieId={movie.movieId}
+                    movieId={movie.docId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
                     bookmarked={false}
                     posterUrl={movie.posterUrl}
-                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
                   />
                 ))}
               </div>
@@ -76,13 +75,12 @@ const SearchPage = () => {
                 {searchData.map((movie, index) => (
                   <MoviePoster
                     key={index}
-                    movieId={movie.movieId}
+                    movieId={movie.docId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
                     bookmarked={false}
                     posterUrl={movie.posterUrl}
-                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
                   />
                 ))}
               </div>
@@ -91,13 +89,12 @@ const SearchPage = () => {
                 {highScoreData.map((movie, index) => (
                   <MoviePoster
                     key={index}
-                    movieId={movie.movieId}
+                    movieId={movie.docId}
                     title={movie.title}
                     releaseDate={movie.repRlsDate}
                     score={movie.score}
                     bookmarked={false}
                     posterUrl={movie.posterUrl}
-                    // MoviePoster props에 movieId={movie.docId}도 들어가야함. link걸어줄라면
                   />
                 ))}
               </div>
