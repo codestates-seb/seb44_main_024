@@ -14,6 +14,7 @@ import MainPage from './pages/MainPage/MainPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import MyPage from './pages/MyPage/MyPage';
+import CategoryPage from './pages/CategoryPage/CategoryPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ const router = createBrowserRouter([
       { path: '/login', element: <LoginPage /> },
       { path: '/search', element: <SearchPage /> },
       { path: '/movies/:movieId', element: <DetailsPage /> },
+      { path: '/category/:genre', element: <CategoryPage /> },
+      { path: '/category/:tag', element: <CategoryPage /> },
       { path: '*', element: <ErrorPage /> },
       { path: '/mypage', element: <MyPage /> },
     ],
