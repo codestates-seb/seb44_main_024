@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
+import { setCookie } from '../../utils/cookie';
 
 const LoginPage: React.FC = () => {
   const [userEmail, setUserEmail] = useState('');
@@ -31,7 +32,12 @@ const LoginPage: React.FC = () => {
         email: userEmail,
         password: userPassword,
       });
-      console.log('서버 응답:', response.headers);
+      const authHeader = response.headers.authorization;
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7);
+        console.log('추출된 JWT 토큰:', token);
+      }
+      setCookie('jwtToken', 'token');
       if (response.status === 200) {
         window.alert('환영합니다!');
         navigate('/');
