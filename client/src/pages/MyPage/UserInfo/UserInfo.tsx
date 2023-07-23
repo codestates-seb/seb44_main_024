@@ -17,7 +17,7 @@ const UserInfo = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const openInfoEditModal = useCallback(() => {
     setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
+  }, []);
 
   return (
     <div className="flex flex-col">
