@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { setCookie } from '../../utils/cookie';
 import api from '../../utils/api';
 import SocialLogin from '../../components/SocialLogin';
 
@@ -32,21 +31,18 @@ const LoginPage: React.FC = () => {
         email: userEmail,
         password: userPassword,
       });
-
-      const { accessToken, refreshToken } = response.data;
-      setCookie('accessToken', accessToken, { path: '/' });
-      setCookie('refreshToken', refreshToken, { path: '/' });
-
-      window.alert('환영합니다!');
-      navigate('/');
+      console.log('서버 응답:', response.headers);
+      if (response.status === 200) {
+        window.alert('환영합니다!');
+        navigate('/');
+      } else {
+        window.alert('아이디 또는 비밀번호를 다시 확인해 주세요.');
+      }
     } catch (err) {
       console.log(err);
       window.alert('아이디 또는 비밀번호를 다시 확인해 주세요.');
     }
   };
-
-  // 로그인 상태 확인
-  // const isLoggedIn = Boolean(getCookie('accessToken'));
 
   return (
     <div className="mt-20 flex flex-col items-center justify-center">
