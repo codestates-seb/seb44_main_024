@@ -108,9 +108,8 @@ const DetailsPage = () => {
                     score={movie.score}
                     bookmarked={false}
                     posterUrl={movie.posterUrl}
+                    movieId={movie.docId}
                   />
-                  // MoviePoster props에 docId={movie.docId}도 들어가야함. link걸어줄라면
-                  // releaseDate는 repRlsDate로 바뀜
                 ))}
             </div>
           </div>
