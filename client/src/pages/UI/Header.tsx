@@ -2,11 +2,8 @@ import { BsSearch } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import CategoryModal from './CategoryModal';
-
-// interface HeaderProps {
-//   search: string;
-// }
-// const Header: React.FC<HeaderProps> = ({ search }) => {
+import { getCookie } from '../../utils/cookie';
+import LogoutButton from '../../components/LogoutButton';
 
 const Header = () => {
   // 검색인풋 제출
@@ -25,14 +22,12 @@ const Header = () => {
       alert('검색어는 최소 두 글자 이상 입력해주세요.');
     }
   };
-  // const [IsLogin, setIsLogin] = useState(false);
-
-  // const IsLogined = () => {
-  //   //if got token setIsLogin(true)
-  // };
 
   const OpenCategoryModal = () => {
     setisCategoryOpen(!isCategoryOpen);
+    Boolean(getCookie('jwtToken'));
+    console.log(getCookie('jwtToken'));
+    console.log(document.cookie);
   };
 
   const CloseCategoryModal = () => {
@@ -54,7 +49,6 @@ const Header = () => {
           </button>
           {isCategoryOpen && (
             <CategoryModal
-              // onClick={handleBackdropClick}
               onClose={CloseCategoryModal}
               genre={'string'}
               tag={'string'}
@@ -78,32 +72,27 @@ const Header = () => {
             <BsSearch />
           </button>
         </form>
-        <div className="mr-4 mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/login">Login</Link>
-        </div>
-        <div className="mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        {!getCookie('jwtToken') ? (
+          <div className="flex flex-row">
+            <div className="mr-4 mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
+              <Link to="/login">Login</Link>
+            </div>
+            <div className="mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
+              <Link to="/signup">Sign Up</Link>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-row">
+            <div className="mr-4 mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
+              <Link to="/mypage">MyPage</Link>
+            </div>
+            <div className="w-36">
+              <LogoutButton />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 export default Header;
-
-/*토큰 구현이 끝난다면
-상태에 따라 바뀌게끔 삼항자 설정
-{setIsLogin(false) ? 
-        <div className="mr-4 mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/login">Login</Link>
-        </div>
-        <div className="mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/signup">Sign Up</Link> :
-<div className="mr-4 mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/mypage">MyPage</Link>
-        </div>
-        <div className="mt-2 cursor-pointer font-bold text-mainblack hover:bg-maingray">
-          <Link to="/signup">Log Out</Link>
-        </div>
-        }
-
-*/

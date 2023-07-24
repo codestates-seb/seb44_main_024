@@ -44,7 +44,7 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
 
   const handleGenreClick = (genre: string) => {
     console.log(genre);
-    const queryString = `?genre=${genre}`; // ?genre=장르
+    const queryString = `?genre=${genre}`;
     console.log(queryString);
 
     window.location.href = `/category/genre${queryString}`;
@@ -72,7 +72,6 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
             className="text-2xl hover:bg-mainyellow"
           >
             {genre}
-            {/* <Link to={`/category/${genre}`}>{genre}</Link> */}
           </button>
         ))}
       </div>
@@ -88,7 +87,6 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
             className="text-2xl hover:bg-mainyellow"
           >
             {tag}
-            {/* <Link to={`/category/${tag}`}>{tag}</Link> */}
           </button>
         ))}
       </div>
