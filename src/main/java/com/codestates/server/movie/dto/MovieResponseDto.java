@@ -3,9 +3,7 @@ package com.codestates.server.movie.dto;
 import com.codestates.server.movie.entity.MovieActors;
 import com.codestates.server.review.dto.ReviewDto;
 import com.codestates.server.review.entity.Review;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,5 +42,15 @@ public class MovieResponseDto {
         private Double score;
         private int review_count;
         private List<ReviewDto.Response> reviews;
+    }
+    @Setter
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MovieReviewDto {
+        private String docId;
+        private String title;
+        private String posters;
     }
 }

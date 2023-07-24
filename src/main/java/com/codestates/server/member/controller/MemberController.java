@@ -1,12 +1,17 @@
 package com.codestates.server.member.controller;
 
 import com.codestates.server.dto.MultiResponseDto;
-import com.codestates.server.dto.ScoreAndReviewDto;
 import com.codestates.server.dto.SingleResponseDto;
 import com.codestates.server.member.dto.MemberDto;
 import com.codestates.server.member.entity.Member;
 import com.codestates.server.member.mapper.MemberMapper;
 import com.codestates.server.member.service.MemberService;
+import com.codestates.server.movie.entity.Movie;
+import com.codestates.server.movie.mapper.MovieMapper;
+import com.codestates.server.movie.service.MovieService;
+import com.codestates.server.review.entity.Review;
+import com.codestates.server.review.mapper.ReviewMapper;
+import com.codestates.server.review.service.ReviewService;
 import com.codestates.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +35,10 @@ public class MemberController {
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
+    private final MovieMapper movieMapper;
+    private final ReviewMapper reviewMapper;
+    private final MovieService movieService;
+    private final ReviewService reviewService;
 
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
@@ -80,6 +89,21 @@ public class MemberController {
         memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/reviews")
+    public ResponseEntity getReviews(@RequestParam int page) {
+        Member member = memberService.authenticationMember();
+        Page<Review> reviewPage = reviewService.findverifyReviews(member, page -1);
+        List<Review> reviews = reviewPage.getContent();
+        List<Movie> movies = movieService.getMovie(reviews);
+
+        List<MemberDto.MovieReview> result = mapper.movieAndreview(reviewMapper.reviewsToResponses(reviews), movieMapper.movieToMovieReview(movies));
+
+        return new ResponseEntity(
+                new MultiResponseDto<>(result, reviewPage)
+                ,HttpStatus.OK
+        );
     }
 
 }

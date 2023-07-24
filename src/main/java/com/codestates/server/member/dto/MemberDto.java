@@ -1,5 +1,8 @@
 package com.codestates.server.member.dto;
 
+import com.codestates.server.movie.dto.MovieResponseDto;
+import com.codestates.server.review.dto.ReviewDto;
+import com.codestates.server.review.entity.Review;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -45,5 +48,14 @@ public class MemberDto {
         private long memberId;
         private String username;
         private String profile_img;
+    }
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Builder
+    @Setter
+    public static class MovieReview {
+        private MovieResponseDto.MovieReviewDto movie;
+        private ReviewDto.Response review;
     }
 }

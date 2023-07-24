@@ -1,7 +1,5 @@
 package com.codestates.server.member.entity;
 
-//import com.codestates.server.review.entity.Review;
-
 import com.codestates.server.review.entity.Review;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -36,7 +35,7 @@ public class Member implements UserDetails {
 
     private String profile_img;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 

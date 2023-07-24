@@ -36,6 +36,8 @@ public interface  MovieMapper {
                 .build();
     }
 
+    List<MovieResponseDto.MovieReviewDto> movieToMovieReview(List<Movie> movies);
+
 
     default List<MovieResponseDto.Response> movieToResponse(List<Movie> movies) {
 

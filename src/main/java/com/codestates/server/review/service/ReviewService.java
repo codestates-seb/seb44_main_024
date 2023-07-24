@@ -100,6 +100,13 @@ public class ReviewService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.REVIEW_NOT_FOUNT));
         return review;
     }
+
+    // 특정 회원이 등록한 리뷰를 찾아서 반환한다.
+    @Transactional(readOnly = true)
+    public Page<Review> findverifyReviews(Member member, int page) {
+        Page<Review> reviewPage = reviewRepository.findByMember(member, PageRequest.of(page, 5, Sort.Direction.DESC, "updateAt"));
+        return reviewPage;
+    }
     @Transactional(readOnly = true)
     public Page<Review> getReviewsByDocId(int page,String docId) {
         return reviewRepository.findByDocId(PageRequest.of(page, 5, Sort.Direction.DESC, "likeCount"), docId);

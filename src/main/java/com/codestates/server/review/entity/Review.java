@@ -48,10 +48,10 @@ public class Review {
     private String genre;
     @CreatedDate
     @Column(updatable = false, nullable = false, columnDefinition = "DATETIME(0)")
-    private LocalDateTime create_at;
+    private LocalDateTime createAt;
     @LastModifiedDate
     @Column(nullable = false, columnDefinition = "DATETIME(0)")
-    private LocalDateTime update_at;
+    private LocalDateTime updateAt;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<ReviewLike> likes = new ArrayList<>();
@@ -63,15 +63,27 @@ public class Review {
     private Set<ReviewTag> reviewTags = new LinkedHashSet<>();
 
     public void addTag(Set<String> tags) {
-        this.reviewTags  = tags.stream()
+        this.reviewTags = tags.stream()
                 .map(i -> new ReviewTag(this, i))
                 .collect(Collectors.toSet());
     }
 
-//    @ElementCollection
+    //    @ElementCollection
 //    @CollectionTable(name = "review_tags",
 //            joinColumns = @JoinColumn(name = "review_id"))
 //    @Column(name = "tag")
 ////    @Enumerated(EnumType.STRING) // 태그 값이 Enum 형태일 경우에만 사용
 //    private Set<String> tags;
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Review)) return false;
+//        Review other = (Review) o;
+//        return Objects.equals(id, other.id); // id 필드를 기준으로 동등성 비교
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
 }

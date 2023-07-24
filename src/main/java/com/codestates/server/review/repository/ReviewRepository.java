@@ -1,5 +1,6 @@
 package com.codestates.server.review.repository;
 
+import com.codestates.server.member.entity.Member;
 import com.codestates.server.review.entity.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,8 @@ import java.util.OptionalDouble;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findByDocId(Pageable pageable, String docId);
+
+    Page<Review> findByMember(Member member, Pageable pageable);
 
     @Query("SELECT ROUND(AVG(r.score), 1) FROM Review r WHERE r.docId = :docId")
     Optional<Double> getAverageScoreByDocId(@Param("docId") String docId);

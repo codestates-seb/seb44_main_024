@@ -8,7 +8,6 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,11 +19,19 @@ public class MovieUtils {
     @Autowired
     JSONParser jsonParser;
 
-    public List<String> getBoxOffice() throws IOException, ParseException {
+    public List<String> getBoxOffice() {
         Object json = apiService.getBoxOffice();
 
         // JSON parse
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(json.toString());
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(json.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
         JSONObject boxOfficeResult = (JSONObject) jsonObject.get("boxOfficeResult");
         JSONArray dailyBoxOfficeList = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
 
@@ -40,8 +47,16 @@ public class MovieUtils {
         return boxOfficeList;
     }
 
-    public List<String> getResult(String api) throws ParseException {
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(api);
+    public List<String> getResult(String api) {
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(api);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
         JSONArray data = (JSONArray) jsonObject.get("Data");
 
         JSONObject firstElement = (JSONObject) data.get(0);
@@ -55,11 +70,19 @@ public class MovieUtils {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getResult(List<String> api) throws ParseException {
+    public List<String> getResult(List<String> api) {
         List<String> list = new ArrayList<>();
 
         for (String json : api) {
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
+            JSONObject jsonObject = null;
+
+            try {
+                jsonObject = (JSONObject) jsonParser.parse(json);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+
             JSONArray data = (JSONArray) jsonObject.get("Data");
 
             JSONObject firstElement = (JSONObject) data.get(0);
