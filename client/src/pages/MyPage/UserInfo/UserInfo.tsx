@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { User } from '../assets/types/User';
 import ProfileImg from '../UI/ProfileImg';
-// import InfoEditModal from './InfoEditModal';
+import InfoEditModal from './InfoEditModal';
 // import axios from 'axios';
 
 //테스트용 유저 정보
@@ -14,10 +14,9 @@ import ProfileImg from '../UI/ProfileImg';
 
 interface userInfoProps {
   info: User;
-  setName: any;
 }
 
-const UserInfo = ({ info, setName }: userInfoProps) => {
+const UserInfo = ({ info }: userInfoProps) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const openInfoEditModal = useCallback(() => {
     setModalOpen(!isModalOpen);
