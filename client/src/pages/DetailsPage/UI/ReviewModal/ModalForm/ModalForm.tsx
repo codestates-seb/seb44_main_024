@@ -78,7 +78,7 @@ const ModalForm = ({ closeModal, movieId, review, pageNumber }: ModalProps) => {
           window.location.reload();
         } catch (err) {
           console.error(err);
-          alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+          alert('에러가 발생했습니다. 다시 시도하거나 새로고침 해주세요: ' + err);
         }
       } else {
         try {
@@ -100,7 +100,7 @@ const ModalForm = ({ closeModal, movieId, review, pageNumber }: ModalProps) => {
           // 해당 페이지 리뷰5개일땐, 다음페이지로 넘겨줌. 5개 미만일땐 해당페이지 새로고침 (나중에 적용)
         } catch (err) {
           console.error(err);
-          alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+          alert('에러가 발생했습니다. 다시 시도하거나 새로고침 해주세요: ' + err);
         }
       }
     } else {

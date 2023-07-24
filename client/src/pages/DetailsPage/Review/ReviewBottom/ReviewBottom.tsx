@@ -35,7 +35,7 @@ const ReviewBottom = ({ review }: ReviewProps) => {
         // setLikes((prev) => prev + 1);
       } catch (err) {
         console.error(err);
-        alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+        alert('에러가 발생했습니다. 다시 시도하거나 새로고침 해주세요: ' + err);
       }
     }
   };

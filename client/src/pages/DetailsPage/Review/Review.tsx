@@ -7,12 +7,18 @@ import ReviewModal from '../UI/ReviewModal/ReviewModal';
 import CommentForm from './Comment/CommentForm/CommentForm';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { ReviewContent } from '../assets/types/movieTypes';
-import { getCookie } from '../../../utils/cookie'; // 로그인 기능 완성시 사용
+import { getCookie, removeCookie } from '../../../utils/cookie'; // 로그인 기능 완성시 사용
 import { useNavigate } from 'react-router-dom';
 
 export interface ReviewProps {
   review: ReviewContent;
   pageNumber?: string | number;
+}
+
+interface ErrorResponse {
+  response?: {
+    status?: number;
+  };
 }
 
 const Review = ({ review, pageNumber }: ReviewProps) => {
@@ -52,7 +58,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
       }
     } catch (err) {
       console.error(err);
-      alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
+      alert('에러가 발생했습니다. 다시 시도하거나 새로고침 해주세요: ' + err);
     }
   };
 
@@ -68,15 +74,20 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data);
         setUserId(response.data.memberId);
       } catch (err) {
-        console.error(err);
+        const errorResponse = err as ErrorResponse;
+        if (errorResponse.response && errorResponse.response.status === 401) {
+          removeCookie('jwtToken');
+          alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+          window.location.reload();
+        } else {
+          console.error(err);
+        }
       }
     };
     fetchUserData();
   }, [token, isLoggedIn]);
-  console.log(userId);
 
   return (
     <>
