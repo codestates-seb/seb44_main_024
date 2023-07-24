@@ -56,20 +56,18 @@ public class MemberController {
             @Valid @RequestBody MemberDto.Patch requestBody) {
         requestBody.setMemberId(memberId);
 
-        Member member =
-                memberService.updateMember(mapper.memberPatchToMember(requestBody));
+        Member member = memberService.updateMember(mapper.memberPatchToMember(requestBody));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-                HttpStatus.OK);    }
+                HttpStatus.OK);    
+    }
 
-    @GetMapping("/{member-id}")
-    public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponse(member))
-                , HttpStatus.OK);
+    @GetMapping("/mypage")
+    public ResponseEntity getMember() {
+        Member member = memberService.authenticationMember();
+
+        return new ResponseEntity<>(mapper.memberToMemberResponse(member), HttpStatus.OK);
     }
 
     @GetMapping
