@@ -34,10 +34,8 @@ const LoginPage: React.FC = () => {
       });
       const authHeader = response.headers.authorization;
       if (authHeader && authHeader.startsWith('Bearer ')) {
-        const token = authHeader.substring(7);
-        console.log('추출된 JWT 토큰:', token);
+        setCookie('jwtToken', authHeader.substring(7));
       }
-      setCookie('jwtToken', 'token');
       if (response.status === 200) {
         window.alert('환영합니다!');
         navigate('/');
