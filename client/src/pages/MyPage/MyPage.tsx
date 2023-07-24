@@ -3,6 +3,7 @@ import axios from 'axios';
 import MyBookmarks from './Bookmarks/MyBookmarks';
 import MyReviews from './Reviews/MyReviews';
 import UserInfo from './UserInfo/UserInfo';
+import DeleteUserBtn from './UI/deleteUserBtn';
 import { User } from './assets/types/User';
 
 const MyPage = () => {
@@ -47,6 +48,7 @@ const MyPage = () => {
       <UserInfo info={user} />
       <MyBookmarks id={user.memberId} />
       <MyReviews reviewCounter={user.reviews} setReviewCount={setReviewCounter} />
+      <DeleteUserBtn id={user.memberId} />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const MyReviews = ({ reviewCounter, setReviewCount }: MyReviewProps) => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/reviews?page=0'
+          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/reviews?page=1'
         );
         if (res.status === 200) {
           const data = res.data;
