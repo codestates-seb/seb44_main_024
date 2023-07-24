@@ -23,7 +23,7 @@ interface ErrorResponse {
 
 const Review = ({ review, pageNumber }: ReviewProps) => {
   const token = getCookie('jwtToken'); // 로그인 기능 완성시 사용
-  const isLoggedIn = Boolean(getCookie('jwtToken'));
+  const [isLoggedIn, setIsLoggedIn] = useState(Boolean(getCookie('jwtToken')));
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
@@ -81,7 +81,8 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
         const errorResponse = err as ErrorResponse;
         if (errorResponse.response && errorResponse.response.status === 401) {
           removeCookie('jwtToken');
-          alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+          setIsLoggedIn(false);
+          // alert('세션이 만료되었습니다. 다시 로그인해주세요.');
         } else {
           console.error(err);
         }
