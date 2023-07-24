@@ -18,7 +18,7 @@ import java.util.List;
 public class ApiService {
     @Autowired
     RestTemplate restTemplate;
-    @Value("${api.key}")
+    @Value("${kmdb.key}")
     private String kmdb_key;
     @Value("${kobis.key}")
     private String kobis_key;

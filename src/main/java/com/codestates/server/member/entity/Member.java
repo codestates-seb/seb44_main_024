@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Setter
 @Builder
 @Entity
-public class Member implements UserDetails {
+public class Member implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -34,7 +34,17 @@ public class Member implements UserDetails {
     @Column(length = 100, nullable = false)
     private String password;
 
-    private String profile_img;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    private String socialId;
+
+    private String refreshToken;
+
+    private String imageUrl;
 
     @OneToMany(mappedBy = "member")
     @Builder.Default

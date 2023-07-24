@@ -12,6 +12,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  profiles:
+    include: oauth
 
 logging:
   level:
@@ -20,15 +22,14 @@ logging:
         orm:
           jpa: DEBUG
 
-api:
-  key : {KMDB.KEY}
+kmdb:
+  key : {KMDB_KEY}
 
 kobis:
-  boxoffice :
-  key : {KOBIS.KEY}
+  key : {KOBIS_KEY}
 
 tmdb:
-  key: 08637c4f198bed78701a8e1770d54f19
+  key: {TMDB_KEY}
 
 
 mail:
@@ -36,6 +37,7 @@ mail:
     admin: admin@gmail.com
 
 jwt:
-  key : {JWT.KEY}
+  key : {JWT_KEY}
   access-token-expiration-minutes: 30
   refresh-token-expiration-minutes: 420
+

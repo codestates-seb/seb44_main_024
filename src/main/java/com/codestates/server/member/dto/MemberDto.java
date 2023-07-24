@@ -44,6 +44,6 @@ public class MemberDto {
     public static class Response {
         private long memberId;
         private String username;
-        private String profile_img;
+        private String imageUrl;
     }
 }

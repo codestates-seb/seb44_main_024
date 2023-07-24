@@ -67,7 +67,7 @@ public class MemberController {
 //        return new ResponseEntity<>(member, HttpStatus.OK);
 //    }
 
-    @GetMapping
+    @GetMapping("/mypage")
     public ResponseEntity getMember() {
         Member member = memberService.authenticationMember();
 

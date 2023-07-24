@@ -43,7 +43,7 @@ public interface ReviewMapper {
                                     .user(MemberDto.Response.builder()
                                             .memberId(member.getMemberId())
                                             .username(member.getUsername())
-                                            .profile_img(member.getProfile_img())
+                                            .imageUrl(member.getImageUrl())
                                             .build())
                                     .tags(i.getReviewTags()
                                             .stream()

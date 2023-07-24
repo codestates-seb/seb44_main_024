@@ -8,6 +8,10 @@ import com.codestates.server.auth.handler.MemberAuthenticationFailureHandler;
 import com.codestates.server.auth.handler.MemberAuthenticationSuccessHandler;
 import com.codestates.server.auth.jwt.JwtTokenizer;
 import com.codestates.server.auth.utils.CustomAuthorityUtils;
+import com.codestates.server.member.repository.MemberRepository;
+import com.codestates.server.oauth.handler.OAuth2LoginFailureHandler;
+import com.codestates.server.oauth.handler.OAuth2LoginSuccessHandler;
+import com.codestates.server.oauth.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,15 +37,19 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils; // 추가
+    private final CustomAuthorityUtils authorityUtils;
+    private final MemberRepository memberRepository;
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .headers().frameOptions().sameOrigin()
+                .headers().frameOptions().sameOrigin() // 개발환경에서 H2 콘솔 사용을 위한 설정
                 .and()
                 .csrf().disable()
-                .cors(withDefaults())
+//                .cors(withDefaults())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .formLogin().disable()
@@ -61,8 +69,12 @@ public class SecurityConfiguration {
                                 .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
                                 .antMatchers(HttpMethod.DELETE, "/review/**").hasRole("USER")
-                                .anyRequest().permitAll()
-                );
+                                .anyRequest().permitAll())
+                .oauth2Login()
+                .successHandler(oAuth2LoginSuccessHandler)
+                .failureHandler(oAuth2LoginFailureHandler)
+                .userInfoEndpoint().userService(customOAuth2UserService);
+
         return http.build();
     }
 
@@ -111,4 +123,5 @@ public class SecurityConfiguration {
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
+
 }
