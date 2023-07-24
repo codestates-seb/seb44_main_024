@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface  MovieMapper {
+public interface MovieMapper {
 
     default MovieResponseDto.ResponseDetail movieToResponseDetail(Movie movie) {
 
@@ -41,16 +41,16 @@ public interface  MovieMapper {
 
     default List<MovieResponseDto.Response> movieToResponse(List<Movie> movies) {
 
-            return movies.stream()
-                    .map(i ->
-                            MovieResponseDto.Response.builder()
-                            .docId(i.getDocId())
-                            .title(i.getTitle().replaceAll("!HS|!HE", "").trim().replaceAll("\\s+", " "))
-                            .repRlsDate(getrepRlsDate(i).substring(0, 4))
-                            .posterUrl(setNoData(i).getPosters().split("\\|")[0])//i.getPosters().split("\\|")[0])
-                            .score(i.getScore())
-                            .build())
-                    .collect(Collectors.toList());
+        return movies.stream()
+                .map(i ->
+                        MovieResponseDto.Response.builder()
+                                .docId(i.getDocId())
+                                .title(i.getTitle().replaceAll("!HS|!HE", "").trim().replaceAll("\\s+", " "))
+                                .repRlsDate(getrepRlsDate(i).substring(0, 4))
+                                .posterUrl(setNoData(i).getPosters().split("\\|")[0])//i.getPosters().split("\\|")[0])
+                                .score(i.getScore())
+                                .build())
+                .collect(Collectors.toList());
     }
 
     default String getrepRlsDate(Movie i) {
@@ -82,7 +82,7 @@ public interface  MovieMapper {
 
         if (i.getStlls().isBlank()) {
             i.setStlls("https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6.png|".repeat(4).replaceAll("\\|$", ""));
-        } else if ( 1 <= i.getStlls().split("\\|").length && i.getStlls().split("\\|").length < 4 ) {
+        } else if (1 <= i.getStlls().split("\\|").length && i.getStlls().split("\\|").length < 4) {
             i.setStlls(i.getStlls().repeat(4).replaceAll("\\|$", ""));
         }
         return i;

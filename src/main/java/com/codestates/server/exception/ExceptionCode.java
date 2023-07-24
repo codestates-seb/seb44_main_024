@@ -9,10 +9,6 @@ public enum ExceptionCode {
     REVIEW_FORBIDDEN(403, "Permission denied"),
     MEMBER_FORBIDDEN(403, "Permission denied"),
     PAGE_CANNOT_LOAD(404, "The page cannot be loaded."),
-    COFFEE_NOT_FOUND(404, "Coffee not found"),
-    COFFEE_CODE_EXISTS(409, "Coffee Code exists"),
-    ORDER_NOT_FOUND(404, "Order not found"),
-    CANNOT_CHANGE_ORDER(403, "Order can not change"),
     NOT_IMPLEMENTATION(501, "Not Implementation"),
     INVALID_MEMBER_STATUS(400, "Invalid member status");
 

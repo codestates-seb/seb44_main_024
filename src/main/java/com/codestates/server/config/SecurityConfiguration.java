@@ -53,17 +53,17 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                                .antMatchers(HttpMethod.POST, "/members").permitAll()
-                                .antMatchers(HttpMethod.POST, "/movies/**").hasRole("USER")
-                                .antMatchers(HttpMethod.POST, "/review/*/likes").hasRole("USER")
-                                .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
-                                .antMatchers(HttpMethod.PATCH, "/review/**").hasRole("USER")
-                                .antMatchers(HttpMethod.GET, "/members/reviews").hasRole("USER")
-                                .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
-                                .antMatchers(HttpMethod.DELETE, "/review/**").hasRole("USER")
-                                .anyRequest().permitAll()
+                        .antMatchers(HttpMethod.POST, "/members").permitAll()
+                        .antMatchers(HttpMethod.POST, "/movies/**").hasRole("USER")
+                        .antMatchers(HttpMethod.POST, "/review/*/likes").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH, "/review/**").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/members/reviews").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
+                        .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
+                        .antMatchers(HttpMethod.DELETE, "/review/**").hasRole("USER")
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }
@@ -76,8 +76,7 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        
         configuration.setAllowedOrigins(
                 Arrays.asList(
                         "http://localhost:5173",
@@ -97,7 +96,7 @@ public class SecurityConfiguration {
 
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
-        public void configure(HttpSecurity builder) throws Exception {
+        public void configure(HttpSecurity builder) {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);

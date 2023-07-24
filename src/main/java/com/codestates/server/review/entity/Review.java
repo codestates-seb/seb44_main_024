@@ -26,20 +26,9 @@ public class Review {
     private Long id;
     @Column(nullable = false)
     private String docId;
-
-    // Member 와 1:N 연관관계 설정
-    // 어떤 회원이 해당 리뷰를 작성했는지
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-
-    // Movie 와 1:N 연관관계 설정
-    // 어떤 영화에 리뷰가 작성된건지
-    // Movie 엔티티를 작성하지 않으면 Long 타입으로 영화 ID 값을 저장한다.
-//    @ManyToOne
-//    @JoinColumn(name = "MOVIE_ID")
-//    private Movie movie;
-
     @Column(nullable = false)
     private Double score;
     @Column(nullable = false)
@@ -67,23 +56,4 @@ public class Review {
                 .map(i -> new ReviewTag(this, i))
                 .collect(Collectors.toSet());
     }
-
-    //    @ElementCollection
-//    @CollectionTable(name = "review_tags",
-//            joinColumns = @JoinColumn(name = "review_id"))
-//    @Column(name = "tag")
-////    @Enumerated(EnumType.STRING) // 태그 값이 Enum 형태일 경우에만 사용
-//    private Set<String> tags;
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Review)) return false;
-//        Review other = (Review) o;
-//        return Objects.equals(id, other.id); // id 필드를 기준으로 동등성 비교
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
 }

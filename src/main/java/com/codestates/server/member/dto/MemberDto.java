@@ -2,7 +2,6 @@ package com.codestates.server.member.dto;
 
 import com.codestates.server.movie.dto.MovieResponseDto;
 import com.codestates.server.review.dto.ReviewDto;
-import com.codestates.server.review.entity.Review;
 import lombok.*;
 
 import javax.validation.constraints.Email;

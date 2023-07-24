@@ -12,8 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface LikeRepository extends JpaRepository<ReviewLike, Long> {
-//    @Query("SELECT rl FROM ReviewLike rl WHERE rl.review = :review AND rl.member = :member")
-    Optional<ReviewLike> findReviewLikeByReviewEqualsAndMember(Review review, Member member);
     Boolean existsByReviewAndMember(Review review, Member member);
 
     ReviewLike findByReviewAndMember(Review review, Member member);

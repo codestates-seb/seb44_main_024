@@ -3,13 +3,10 @@ package com.codestates.server.member.mapper;
 import com.codestates.server.member.dto.MemberDto;
 import com.codestates.server.member.entity.Member;
 import com.codestates.server.movie.dto.MovieResponseDto;
-import com.codestates.server.movie.entity.Movie;
 import com.codestates.server.review.dto.ReviewDto;
-import com.codestates.server.review.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

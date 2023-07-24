@@ -8,8 +8,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LikeMapper {
-//    @Mapping(target = "reviewId", source = "review_id")
-//    ReviewLike reviewIdToLike(Long review_id);
     @Mapping(target = "review", source = "review")
     ReviewLike reviewToReviewLike(Review review);
 }

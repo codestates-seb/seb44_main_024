@@ -5,13 +5,7 @@ import com.codestates.server.exception.BusinessLogicException;
 import com.codestates.server.exception.ExceptionCode;
 import com.codestates.server.member.entity.Member;
 import com.codestates.server.member.repository.MemberRepository;
-import com.codestates.server.movie.entity.Movie;
-import com.codestates.server.movie.service.MovieService;
-import com.codestates.server.review.entity.Review;
-import com.codestates.server.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.parser.ParseException;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

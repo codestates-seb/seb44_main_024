@@ -10,12 +10,10 @@ import com.codestates.server.tag.service.ReviewTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +29,6 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Review getReview(Long reviewId) {
-//        Review review = reviewRepository.findById(reviewId).get();
         return findverifyReview(reviewId);
     }
 
@@ -39,7 +36,7 @@ public class ReviewService {
     public Review createReview(Review post, Set<String> tags) {
         Member member = memberService.authenticationMember();
         post.setMember(member);
-        
+
         Review review = reviewRepository.save(post);
         // ReviewTag 테이블에 Review와 tags 추가
         reviewTagService.addReviewTag(review, tags);
@@ -52,7 +49,6 @@ public class ReviewService {
         Review review = findverifyReview(reviewId);
 
         if (memberService.authenticationMember().getMemberId() != review.getMember().getMemberId()) {
-            System.out.println("if BusinessLogicException");
             throw new BusinessLogicException(ExceptionCode.REVIEW_FORBIDDEN);
         }
 
@@ -82,17 +78,6 @@ public class ReviewService {
     }
 
 
-    // 로그인한 회원 정보 확인
-//    private Member authenticationMember() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        //현재 로그인한 사용자 이메일
-//        String username = (String) authentication.getPrincipal();
-//
-//        // 로그인한 ID(이매일)로 Member를 찾아서 반환
-//        return memberService.findVerifiedMember(username);
-//    }
-
-
     // 등록된 리뷰 중 해당 Id를 가진 리뷰 리턴
     @Transactional(readOnly = true)
     public Review findverifyReview(Long reviewId) {
@@ -107,8 +92,9 @@ public class ReviewService {
         Page<Review> reviewPage = reviewRepository.findByMember(member, PageRequest.of(page, 5, Sort.Direction.DESC, "updateAt"));
         return reviewPage;
     }
+
     @Transactional(readOnly = true)
-    public Page<Review> getReviewsByDocId(int page,String docId) {
+    public Page<Review> getReviewsByDocId(int page, String docId) {
         return reviewRepository.findByDocId(PageRequest.of(page, 5, Sort.Direction.DESC, "likeCount"), docId);
     }
 

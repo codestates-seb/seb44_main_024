@@ -19,7 +19,7 @@ public class ReviewTag {
     @JoinColumn(name = "review_id")
     private Review review;
 
-    @ManyToOne //(targetEntity = Tag.class, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "tag_id", insertable = false, updatable = false)
     private Tag tag;
 

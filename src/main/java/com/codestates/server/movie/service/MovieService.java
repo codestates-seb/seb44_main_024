@@ -1,8 +1,6 @@
 package com.codestates.server.movie.service;
 
 import com.codestates.server.api.service.ApiService;
-import com.codestates.server.exception.BusinessLogicException;
-import com.codestates.server.exception.ExceptionCode;
 import com.codestates.server.movie.entity.Movie;
 import com.codestates.server.movie.scheduler.MovieScheduler;
 import com.codestates.server.review.entity.Review;
@@ -12,7 +10,6 @@ import com.codestates.server.utils.MovieUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -79,14 +76,12 @@ public class MovieService {
     }
 
 
-
-
     public List<Movie> getMovies(String mapKey) {
         return getMoviesByResult(movieScheduler.getMainPage().get(mapKey).stream());
     }
 
 
-    public List<Movie> searchKeyword(String keyword) throws IOException, ParseException {
+    public List<Movie> searchKeyword(String keyword) {
         String json = apiService.getKMDbByQuery(keyword);
 
         return getMoviesByResult(movieUtils.getResult(json).stream());
@@ -117,12 +112,12 @@ public class MovieService {
             }
             movie.setScore(reviewService.getAverageScore(movie.getDocId()));
             return movie;
-        }  catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    
-    
+
+
     private String searchTMDbId(Movie movie) {
         // TMDB에서 영화제목 검색하여 영화 ID와 Poster 가져오기
         String repRlsDate = movie.getRepRlsDate().length() > 4 ? movie.getRepRlsDate().substring(0, 4) : movie.getRepRlsDate();
@@ -137,7 +132,7 @@ public class MovieService {
                 tmdbId = objectMapper.readTree(apiService.getTMDbId(title, repRlsDate));
 
                 if ((tmdbId.get("results").get(0) == null || tmdbId.get("results").get(0).get("id").asText().isEmpty()) && !repRlsDate.isBlank()) {
-                    tmdbId = objectMapper.readTree(apiService.getTMDbId(title, String.valueOf(Integer.parseInt(repRlsDate) -1)));
+                    tmdbId = objectMapper.readTree(apiService.getTMDbId(title, String.valueOf(Integer.parseInt(repRlsDate) - 1)));
                 }
             }
         } catch (JsonProcessingException e) {
@@ -145,7 +140,6 @@ public class MovieService {
         }
 
 
-//        if (tmdbId.get("results").get(0) != null) {
         if (tmdbId.has("results")) {
             for (JsonNode result : tmdbId.get("results")) {
 
@@ -163,37 +157,34 @@ public class MovieService {
                         movie.setPosters("https://image.tmdb.org/t/p/original" + poster);
                     }
                 }
-//                else if (result.get("title").asText().equals(movie.getTitle())) {
-//
-//                }
             }
 
         }
         return id;
     }
 
-        private void searchTMDbImage (Movie movie, String id) {
-            // TMDB 에서 영화 ID를 통해 영화 이미지 가져오기
-            JsonNode tmdbImage = null;
-            try {
-                tmdbImage = objectMapper.readTree(apiService.getTMDbImage(id));
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+    private void searchTMDbImage(Movie movie, String id) {
+        // TMDB 에서 영화 ID를 통해 영화 이미지 가져오기
+        JsonNode tmdbImage = null;
+        try {
+            tmdbImage = objectMapper.readTree(apiService.getTMDbImage(id));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
-            if (tmdbImage.get("backdrops") != null) {
-                JsonNode backdrops = tmdbImage.get("backdrops");
+        if (tmdbImage.get("backdrops") != null) {
+            JsonNode backdrops = tmdbImage.get("backdrops");
 
-                int count = 0;
-                for (JsonNode backdrop : backdrops) {
-                    if (count >= 4) {
-                        break;
-                    }
-                    movie.setStlls("https://image.tmdb.org/t/p/original" + backdrop.get("file_path").asText() + "|" + movie.getStlls());
-                    count++;
+            int count = 0;
+            for (JsonNode backdrop : backdrops) {
+                if (count >= 4) {
+                    break;
                 }
+                movie.setStlls("https://image.tmdb.org/t/p/original" + backdrop.get("file_path").asText() + "|" + movie.getStlls());
+                count++;
             }
         }
+    }
 
 
     private void searchTMDbVideo(Movie movie, String id) {
@@ -209,10 +200,6 @@ public class MovieService {
             String movieTrailer = "https://www.youtube.com/watch?v=" + tmdbVideo.get("results").get(0).get("key").asText();
             movie.setTrailer(movieTrailer);
         }
-//        else if (tmdbVideo.get("results") == null) {
-//            movie.setTrailer(null);
-//         null 이면 에러페이지 URL
-//        }
     }
 
     private String formatTitleWithSpace(String title) {
@@ -224,7 +211,6 @@ public class MovieService {
         }
         return title;
     }
-
 
 
 }

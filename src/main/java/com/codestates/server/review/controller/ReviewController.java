@@ -5,7 +5,6 @@ import com.codestates.server.review.dto.ReviewDto;
 import com.codestates.server.review.entity.Review;
 import com.codestates.server.review.mapper.ReviewMapper;
 import com.codestates.server.review.service.ReviewService;
-import com.codestates.server.tag.service.ReviewTagService;
 import com.codestates.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,7 @@ import java.util.Set;
 public class ReviewController {
     private final ReviewMapper reviewMapper;
     private final ReviewService reviewService;
+
     // 리뷰 작성
     @PostMapping("/movies/{movie-id}/reviews")
     public ResponseEntity postReview(@Valid @RequestBody ReviewDto.Post post,

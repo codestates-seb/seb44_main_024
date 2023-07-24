@@ -6,12 +6,10 @@ import com.codestates.server.tag.entity.Tag;
 import com.codestates.server.tag.repository.TagRepository;
 import com.codestates.server.utils.MovieUtils;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.parser.ParseException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +28,7 @@ public class MovieScheduler {
     private final int PAGE_SIZE = 10;
 
     @Scheduled(fixedRate = 86400000)
-    public void boxOfficeScheduled() throws IOException, ParseException {
+    public void boxOfficeScheduled() {
         List<String> boxOfficeList = new ArrayList<>();
         for (String str : movieUtils.getBoxOffice()) {
             movieUtils.getResult(apiService.getKMDbByTitle(str))
@@ -42,21 +40,21 @@ public class MovieScheduler {
 
 
     @Scheduled(fixedRate = 7200000)
-    public void reviewScheduled() throws IOException, ParseException {
+    public void reviewScheduled() {
         // 리뷰가 많은 영화Id 값을 가져온다.
         List<String> reviewList = getMoviesWithMostReviews();
         mainMap.put("review", reviewList);
     }
 
     @Scheduled(fixedRate = 7200000)
-    public void scoreScheduled() throws IOException, ParseException {
+    public void scoreScheduled() {
         // 평점이 높은 영화Id 값을 가져온다.
         List<String> scoreList = getMoviesWithHighestScore();
         mainMap.put("score", scoreList);
     }
 
     @Scheduled(fixedRate = 7200000)
-    public void tagScheduled() throws IOException, ParseException {
+    public void tagScheduled() {
         List<String> tags = tagRepository.findAll()
                 .stream()
                 .map(Tag::getId)
@@ -72,7 +70,7 @@ public class MovieScheduler {
     }
 
     @Scheduled(fixedRate = 7200000)
-    public void genreScheduled() throws IOException, ParseException {
+    public void genreScheduled() {
 
         List<String> genres = List.of("액션", "범죄", "느와르", "드라마", "멜로", "로맨스", "판타지", "SF", "재난", "코메디", "공포", "뮤직", "스포츠", "미스터리", "어드벤처", "가족", "뮤지컬", "스릴러", "전쟁");
 
@@ -86,10 +84,7 @@ public class MovieScheduler {
     }
 
 
-
-
-
-    private List<String> getMoviesWithMostReviews() throws IOException, ParseException {
+    private List<String> getMoviesWithMostReviews() {
         List<String> reviewList = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findMostReviewsWithDocId(PageRequest.of(0, PAGE_SIZE))
@@ -103,7 +98,7 @@ public class MovieScheduler {
         return reviewList;
     }
 
-    private List<String> getMoviesWithHighestScore() throws IOException, ParseException {
+    private List<String> getMoviesWithHighestScore() {
         List<String> scoreList = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findHighestScoreWithDocId(PageRequest.of(0, PAGE_SIZE))
@@ -117,7 +112,7 @@ public class MovieScheduler {
         return scoreList;
     }
 
-    private List<String> getMoviesWithHighestScoreByTag(String tag) throws IOException, ParseException {
+    private List<String> getMoviesWithHighestScoreByTag(String tag) {
         List<String> tagScore = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findDocIdsByTagWithHighestScore(tag, PageRequest.of(0, PAGE_SIZE))
@@ -127,7 +122,7 @@ public class MovieScheduler {
         return tagScore;
     }
 
-    private List<String> getMoviesWithMostReviewsByTag(String tag) throws IOException, ParseException {
+    private List<String> getMoviesWithMostReviewsByTag(String tag) {
         List<String> tagReview = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findDocIdsByTagWithMostReviews(tag, PageRequest.of(0, PAGE_SIZE))
@@ -137,7 +132,7 @@ public class MovieScheduler {
         return tagReview;
     }
 
-    private List<String> getMoviesWithHighestScoreByGenre(String genre) throws IOException, ParseException {
+    private List<String> getMoviesWithHighestScoreByGenre(String genre) {
         List<String> genreScore = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findHighestScoreWithGenre(genre, PageRequest.of(0, PAGE_SIZE))
@@ -151,7 +146,7 @@ public class MovieScheduler {
         return genreScore;
     }
 
-    private List<String> getMoviesWithMostReviewsByGenre(String genre) throws IOException, ParseException {
+    private List<String> getMoviesWithMostReviewsByGenre(String genre) {
         List<String> genreReview = movieUtils.getResult(
                 apiService.getKMDbBydocIds(
                         reviewRepository.findMostReviewsWithGenre(genre, PageRequest.of(0, PAGE_SIZE))
@@ -164,7 +159,6 @@ public class MovieScheduler {
         }
         return genreReview;
     }
-
 
 
     public Map<String, List<String>> getMainPage() {

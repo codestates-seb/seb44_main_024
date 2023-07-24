@@ -32,10 +32,6 @@ public class LikeService {
         likeRepository.delete(like);
     }
 
-//        private boolean verifyExistsLike(ReviewLike like) {
-//        return likeRepository.findReviewLikeByReviewEqualsAndMember(like.getReview(), like.getMember())
-//                .isPresent();
-//    }
     private boolean verifyExistsLike(ReviewLike like) {
         return likeRepository.existsByReviewAndMember(like.getReview(), like.getMember());
     }

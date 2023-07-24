@@ -1,7 +1,6 @@
 package com.codestates.server.review.dto;
 
 import com.codestates.server.member.dto.MemberDto;
-import com.codestates.server.member.entity.Member;
 import lombok.*;
 
 import javax.validation.constraints.Max;
