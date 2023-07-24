@@ -1,13 +1,13 @@
 export interface User {
   username: string;
-  password: string;
-  image: string;
   reviews: number;
+  memberId: number;
 }
 
-export interface MyPageInfoRes {
+export interface UserInfoRes {
   username: string;
   profile_Img: string;
+  memberId: number;
 }
 
 export interface BookmarkDataResponse {
