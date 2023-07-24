@@ -60,7 +60,7 @@ public class MemberController {
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-                HttpStatus.OK);    
+                HttpStatus.OK);
     }
 
     @GetMapping("/mypage")
