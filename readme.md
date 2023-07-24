@@ -82,7 +82,7 @@ https://docs.google.com/document/d/14iwRrKFCwTG8JSXJxOXTuhqbzYRPH--943AKqX9UDvo/
 
 ### 서비스 메뉴얼
 
-링크
+https://www.notion.so/codestates/24-1fc4d0cd773c46aa826335772cc4edd7?p=e2f355c388da480bbfdacdd2c112bbee&pm=s
 
 <br />
 
