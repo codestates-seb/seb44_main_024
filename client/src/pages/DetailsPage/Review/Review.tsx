@@ -68,6 +68,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(response.data);
         setUserId(response.data.memberId);
       } catch (err) {
         console.error(err);

@@ -20,7 +20,6 @@ const DetailsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const dispatch = useAppDispatch();
-  console.log(isLoggedIn);
 
   // 리액트 라우터 돔
   const { movieId } = useParams(); // 테스트용 임시 movieId: "F58480" (MoviePoster에서 링크 걸때까지)
