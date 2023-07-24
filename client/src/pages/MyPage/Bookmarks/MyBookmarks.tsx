@@ -1,5 +1,4 @@
 import ShortMovieList from '../UI/ShortMovieList';
-// import { movies } from '../../UI/datalist';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
