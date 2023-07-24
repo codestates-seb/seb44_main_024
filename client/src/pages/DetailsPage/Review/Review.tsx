@@ -73,7 +73,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
         const response = await api.get(`/members/mypage`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer `,
+            Authorization: `Bearer ${token}`,
           },
         });
         setUserId(response.data.memberId);
