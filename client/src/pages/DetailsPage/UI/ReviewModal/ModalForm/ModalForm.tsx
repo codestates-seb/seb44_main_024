@@ -5,6 +5,7 @@ import { useAppSelector } from '../../../../../redux-toolkit/hooks';
 import { selectMovieDetails } from '../../../../../redux-toolkit/slices/movieDetailSlice';
 import { ModalProps } from '../ReviewModal';
 import { getCookie } from '../../../../../utils/cookie'; // 로그인 기능 완성시 사용
+import { useNavigate } from 'react-router-dom';
 import ModalTag from './ModalTag/ModalTag';
 
 const tags: string[] = [
@@ -20,9 +21,10 @@ const tags: string[] = [
   '반전',
 ];
 
-const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
+const ModalForm = ({ closeModal, movieId, review, pageNumber }: ModalProps) => {
   const token = getCookie('jwtToken');
   console.log(token);
+  const navigate = useNavigate();
   const movieDetail = useAppSelector(selectMovieDetails);
   const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
@@ -89,6 +91,11 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
           closeModal();
           console.log(response);
           alert('등록되었습니다.');
+          if (pageNumber === '1' || pageNumber === 1) {
+            window.location.reload();
+          } else {
+            navigate(`/movies/${movieId}?page=1`);
+          }
           window.location.reload();
           // 해당 페이지 리뷰5개일땐, 다음페이지로 넘겨줌. 5개 미만일땐 해당페이지 새로고침 (나중에 적용)
         } catch (err) {

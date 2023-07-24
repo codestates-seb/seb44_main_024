@@ -89,7 +89,7 @@ const DetailsPage = () => {
               </button>
             </div>
             {movieDetail?.movie.reviews.map((review, index) => {
-              return <Review key={index} review={review} />;
+              return <Review key={index} review={review} pageNumber={pageNumber} />;
             })}
             <div className="flex justify-center text-3xl">
               <Pagination totalReviews={totalReviews} movieId={movieId} pageNumber={pageNumber} />
@@ -114,7 +114,9 @@ const DetailsPage = () => {
             </div>
           </div>
           {/* 리뷰작성모달 */}
-          {isModalOpen && <ReviewModal movieId={movieId} closeModal={closeModal} />}
+          {isModalOpen && (
+            <ReviewModal movieId={movieId} closeModal={closeModal} pageNumber={pageNumber} />
+          )}
         </>
       )}
     </>
