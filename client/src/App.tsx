@@ -1,13 +1,14 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
-import Main from './pages/MainPage/Main';
-import MovieGallery from './pages/UI/MovieGallery';
 import Header from './pages/UI/Header';
+import Footer from './pages/UI/Footer';
 
 function App() {
   return (
     <>
+      <Header />
       <Outlet />
+      <Footer />
     </>
   );
 }

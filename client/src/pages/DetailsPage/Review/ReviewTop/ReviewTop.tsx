@@ -11,12 +11,12 @@ const ReviewTop = ({ review }: ReviewProps) => {
         {Array(Math.floor(review.score))
           .fill('')
           .map((_, index) => (
-            <AiFillStar key={index} className="text-2xl text-theme1" />
+            <AiFillStar key={index} className="text-4xl text-theme1" />
           ))}
         {review.score - Math.floor(review.score) > 0 &&
           Array(review.score - Math.floor(review.score) + 0.5)
             .fill('')
-            .map((_, index) => <FaStarHalf key={index} className="text-2xl text-theme1" />)}
+            .map((_, index) => <FaStarHalf key={index} className="text-4xl text-theme1" />)}
       </div>
     </div>
   );

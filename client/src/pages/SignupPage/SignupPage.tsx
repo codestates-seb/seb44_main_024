@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { isAxiosError } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import { emailValidationRegex, pwValidationRegex } from '../../constants/constants';
 import SocialLogin from '../../components/SocialLogin';
+import api from '../../utils/api';
 
 const SignupPage: React.FC = () => {
-  const [displayName, setDisplayName] = useState('');
-  const [displayNameValid, setDisplayNameValid] = useState(false);
-  const [displayNameError, setDisplayNameError] = useState('');
+  const [userName, setuserName] = useState('');
+  const [userNameValid, setuserNameValid] = useState(false);
+  const [userNameError, setuserNameError] = useState('');
 
   const [userEmail, setUserEmail] = useState('');
   const [userEmailValid, setUserEmailValid] = useState(false);
@@ -22,29 +24,24 @@ const SignupPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const URL = '';
-
   useEffect(() => {
-    if (displayName.length === 0) {
-      setDisplayNameValid(false);
-      setDisplayNameError('');
-    } else if (displayName.length >= 2) {
-      setDisplayNameValid(true);
-      setDisplayNameError('');
+    if (userName.length === 0) {
+      setuserNameValid(false);
+      setuserNameError('');
+    } else if (userName.length >= 2) {
+      setuserNameValid(true);
+      setuserNameError('');
     } else {
-      setDisplayNameValid(false);
-      setDisplayNameError('이름은 2자 이상이어야 합니다.');
+      setuserNameValid(false);
+      setuserNameError('이름은 2자 이상이어야 합니다.');
     }
-  }, [displayName]);
+  }, [userName]);
 
   useEffect(() => {
-    const regex1 =
-      /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
     if (userEmail.length === 0) {
       setUserEmailValid(false);
       setUserEmailError('');
-    } else if (regex1.test(userEmail)) {
+    } else if (emailValidationRegex.test(userEmail)) {
       setUserEmailValid(true);
       setUserEmailError('');
     } else {
@@ -54,12 +51,10 @@ const SignupPage: React.FC = () => {
   }, [userEmail]);
 
   useEffect(() => {
-    const regex2 = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-
     if (userPassword.length === 0) {
       setUserPasswordValid(false);
       setUserPasswordError('');
-    } else if (regex2.test(userPassword)) {
+    } else if (pwValidationRegex.test(userPassword)) {
       setUserPasswordValid(true);
       setUserPasswordError('');
     } else {
@@ -81,55 +76,64 @@ const SignupPage: React.FC = () => {
     }
   }, [confirmPassword, userPassword]);
 
-  const isValid = userEmailValid && displayNameValid && userPasswordValid && confirmPasswordValid;
+  const isValid = userEmailValid && userNameValid && userPasswordValid && confirmPasswordValid;
 
-  const signupOnClickHandler = async (e: React.FormEvent) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setuserName(e.target.value);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isValid) {
       try {
-        const response = await axios.post(
-          `${URL}/signup`, //api 나오는 대로 변경
-          JSON.stringify({
-            name: displayName,
-            email: userEmail,
-            password: userPassword,
-          }),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-              withCredentials: true,
-            },
-          }
-        );
-
+        const response = await api.post('/members', {
+          email: userEmail,
+          username: userName,
+          password: userPassword,
+        });
         console.log(response.headers);
         window.alert('회원가입에 성공하였습니다.');
         navigate('/login');
       } catch (err) {
-        console.log(err);
-        window.alert('회원가입에 실패하였습니다.');
+        if (isAxiosError(err) && err.response?.status === 409) {
+          window.alert('이미 사용 중인 이름 또는 이메일입니다.');
+        } else {
+          console.log(err);
+          window.alert('회원가입에 실패하였습니다.');
+        }
       }
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <form>
-        <div className="text-center text-xl">LOGO</div>
-        <div className="mb-6 border-b-2 border-darkGray text-center text-2xl">회원가입</div>
+    <div className="mt-20 flex flex-col items-center justify-center ">
+      <div className="mb-3 text-center text-3xl">MovieLog</div>
+      <div className="mb-6 border-b-2 border-mainblack text-center text-2xl">회원가입</div>
 
+      <form onSubmit={handleSignup}>
         <div className="mb-4">
           <input
             type="text"
-            id="displayName"
+            id="userName"
             placeholder="닉네임 입력"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            value={userName}
+            onChange={handleNameChange}
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
-          {displayNameError && <p className="text-red-500">{displayNameError}</p>}
+          {userNameError && <p className="text-red-500">{userNameError}</p>}
         </div>
 
         <div className="mb-4">
@@ -138,8 +142,8 @@ const SignupPage: React.FC = () => {
             id="userEmail"
             placeholder="이메일 입력"
             value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            onChange={handleEmailChange}
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           {userEmailError && <p className="text-red-500">{userEmailError}</p>}
         </div>
@@ -150,8 +154,8 @@ const SignupPage: React.FC = () => {
             id="userPassword"
             placeholder="비밀번호 입력"
             value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            onChange={handlePasswordChange}
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2 flex gap-3">
             <p className={`${userPassword.length >= 8 ? 'text-darkBlue' : 'text-zinc-400'}`}>
@@ -178,8 +182,8 @@ const SignupPage: React.FC = () => {
             id="confirmPassword"
             placeholder="비밀번호 확인"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-darkGray focus:outline-none"
+            onChange={handleConfirmPasswordChange}
+            className="w-full border-2 border-zinc-300 px-1 py-2 focus:border-b-2 focus:border-mainblack focus:outline-none"
           />
           <div className="mt-2">
             <p
@@ -197,19 +201,18 @@ const SignupPage: React.FC = () => {
 
         <button
           className={`${
-            isValid ? 'bg-darkGray' : 'cursor-not-allowed bg-Gray'
-          } w-full px-1 py-2 text-white`}
+            isValid ? 'rounded bg-mainblack' : 'cursor-not-allowed bg-maindarkgray'
+          } w-full rounded px-1 py-2 text-white`}
           type="submit"
-          onClick={(e) => signupOnClickHandler(e)}
         >
           회원가입
         </button>
-
-        <button className="mt-2 w-full bg-darkGray px-1 py-2 text-white">
-          <Link to="/login">이미 가입하셨나요?</Link>
-        </button>
-        <SocialLogin />
       </form>
+
+      <button className="mt-2 w-96 rounded bg-mainblack px-1 py-2 text-white">
+        <Link to="/login">이미 가입하셨나요?</Link>
+      </button>
+      <SocialLogin />
     </div>
   );
 };
