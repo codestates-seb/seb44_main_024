@@ -82,14 +82,14 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
         if (errorResponse.response && errorResponse.response.status === 401) {
           removeCookie('jwtToken');
           alert('세션이 만료되었습니다. 다시 로그인해주세요.');
-          window.location.reload();
+          navigate('/');
         } else {
           console.error(err);
         }
       }
     };
     fetchUserData();
-  }, [token, isLoggedIn]);
+  }, [token, isLoggedIn, navigate]);
 
   return (
     <>
