@@ -30,7 +30,6 @@ const ReviewBottom = ({ review }: ReviewProps) => {
           }
         );
         console.log(response);
-        alert('추가되었습니다.');
         window.location.reload();
         // setLikes((prev) => prev + 1);
       } catch (err) {
