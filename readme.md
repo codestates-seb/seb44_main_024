@@ -16,7 +16,7 @@
 
   **( BE ):** 김어진, 박세빈, 황성재
 
-- **발표 링크 :** 
+- **발표 링크 :** https://www.youtube.com/watch?v=qIxDavzY3BU
 - **배포 링크 :** http://code-main-24.s3-website.ap-northeast-2.amazonaws.com/
 <div>
 
