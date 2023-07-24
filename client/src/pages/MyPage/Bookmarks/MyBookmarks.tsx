@@ -1,11 +1,36 @@
 import ShortMovieList from '../UI/ShortMovieList';
-import { movies } from '../../UI/datalist';
+// import { movies } from '../../UI/datalist';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const MyBookmarks = () => {
-  // TODO: 새로운 페이지로 분리하기 (브랜치 분리)
+interface MyBookmarkProps {
+  id: number;
+}
+
+const MyBookmarks = ({ id }: MyBookmarkProps) => {
+  const [bookmarks, setBookmark] = useState([]);
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const res = await axios.get(
+          `http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/${id}/bookmarks`
+        );
+        if (res.status === 200) {
+          const data = res.data;
+          setBookmark(data);
+        } else {
+          console.log('Failed to fetch bookmark data:', res.data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchBookmarks();
+  }, []);
 
   // api 연결 후 수정
-  const bookmarkList = [...movies];
+  const bookmarkList = [...bookmarks];
   const moviesToRender = bookmarkList.slice(0, 5);
   const bookmarksCounter = bookmarkList.length;
 
@@ -16,7 +41,7 @@ const MyBookmarks = () => {
         {bookmarksCounter > 0 ? (
           <ShortMovieList movies={moviesToRender} />
         ) : (
-          <div> 새로 리뷰를 작성해 보세요. </div>
+          <div className="pb-28 pt-24 text-xl opacity-80">마음에 드는 영화를 북마크해 보세요. </div>
         )}
       </div>
     </div>

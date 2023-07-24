@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
-import { User, UserInfoRes } from '../assets/types/User';
+import { useCallback, useState } from 'react';
+import { User } from '../assets/types/User';
 import ProfileImg from '../UI/ProfileImg';
 // import InfoEditModal from './InfoEditModal';
-import axios from 'axios';
+// import axios from 'axios';
 
 //테스트용 유저 정보
 // const user: User = {
@@ -12,34 +12,12 @@ import axios from 'axios';
 //   reviews: 4,
 // };
 
-const UserInfo = (user: User) => {
-  const [info, setInfo] = useState<UserInfoRes>({
-    username: user.username,
-    profile_Img: '',
-    memberId: user.memberId,
-  });
+interface userInfoProps {
+  info: User;
+  setName: any;
+}
 
-  useEffect(() => {
-    const fetchInfo = async () => {
-      try {
-        const res = await axios.get(
-          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/mypage'
-        );
-
-        if (res.status === 200) {
-          const data = res.data;
-          setInfo(data);
-        } else {
-          console.log('failed to fetch UserInfo:', res.data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchInfo();
-  }, []);
-
+const UserInfo = ({ info, setName }: userInfoProps) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const openInfoEditModal = useCallback(() => {
     setModalOpen(!isModalOpen);
@@ -48,7 +26,7 @@ const UserInfo = (user: User) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row px-5 py-24">
-        <ProfileImg url={info.profile_Img} />
+        <ProfileImg url={''} />
         <div className="flex flex-col justify-center pl-10">
           <div className="flex flex-row justify-center pb-3">
             <div className="text-4xl font-bold">{info.username}</div>
@@ -59,7 +37,7 @@ const UserInfo = (user: User) => {
               정보 수정
             </button>
           </div>
-          <div className="text-xl">{`작성한 리뷰: ${user.reviews}개`}</div>
+          <div className="text-xl">{`작성한 리뷰: ${info.reviews}개`}</div>
         </div>
       </div>
       {/* <div className="flex items-center justify-center">
