@@ -102,7 +102,7 @@ const MoviePoster: React.FC<MoviePosterProps> = ({
           <h2 className="mt-2 truncate text-left text-lg font-bold">{title}</h2>
           <p className="ml-1 mt-4 text-sm  text-gray-700">{releaseDate}</p>
         </div>
-        <div className="mb-10 flex">
+        <div className="mb-10 flex h-4">
           {renderscoreStars()}
           {hoverscore && <span className="ml-2 text-sm text-gray-600">{score}</span>}
         </div>

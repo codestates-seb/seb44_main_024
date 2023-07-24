@@ -11,7 +11,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <button className="mt-2 w-96 rounded bg-mainblack px-1 py-2 text-white" onClick={handleLogout}>
+    <button className="mt-2 w-36 rounded bg-mainblack px-1 py-2 text-white" onClick={handleLogout}>
       로그아웃
     </button>
   );
