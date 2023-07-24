@@ -37,7 +37,7 @@ export interface ReviewContent {
 export interface User {
   memberId: number;
   username: string;
-  profile_img: string;
+  profile_img: string | null;
 }
 
 // search 데이터에서도 사용(같은 형태)

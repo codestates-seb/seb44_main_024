@@ -8,15 +8,18 @@ import CommentForm from './Comment/CommentForm/CommentForm';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { ReviewContent } from '../assets/types/movieTypes';
 import { getCookie } from '../../../utils/cookie'; // 로그인 기능 완성시 사용
+import { useNavigate } from 'react-router-dom';
 
 export interface ReviewProps {
   review: ReviewContent;
 }
 
 const Review = ({ review }: ReviewProps) => {
-  const token = getCookie('accessToken'); // 로그인 기능 완성시 사용
+  const token = getCookie('jwtToken'); // 로그인 기능 완성시 사용
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const expandOpenHandler: () => void = () => {
     setIsExandOpen(!isExpandOpen);
@@ -39,7 +42,7 @@ const Review = ({ review }: ReviewProps) => {
       });
       console.log(response);
       alert('삭제되었습니다.');
-      window.location.reload();
+      navigate(`/movies/${review.docId}?page=1`);
     } catch (err) {
       console.error(err);
       alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);

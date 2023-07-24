@@ -21,7 +21,8 @@ const tags: string[] = [
 ];
 
 const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
-  const token = getCookie('accessToken');
+  const token = getCookie('jwtToken');
+  console.log(token);
   const movieDetail = useAppSelector(selectMovieDetails);
   const [selectedTags, setSelectedTags] = useState<string[]>(review ? review.tags : []);
   const [reviewContent, setReviewContent] = useState<string>(review ? review.content : '');
@@ -89,6 +90,7 @@ const ModalForm = ({ closeModal, movieId, review }: ModalProps) => {
           console.log(response);
           alert('등록되었습니다.');
           window.location.reload();
+          // 해당 페이지 리뷰5개일땐, 다음페이지로 넘겨줌. 5개 미만일땐 해당페이지 새로고침 (나중에 적용)
         } catch (err) {
           console.error(err);
           alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
