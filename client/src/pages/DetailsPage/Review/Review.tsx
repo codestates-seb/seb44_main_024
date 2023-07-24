@@ -89,7 +89,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
       }
     };
     fetchUserData();
-  }, [token, isLoggedIn, navigate]);
+  }, [token, isLoggedIn]);
 
   return (
     <>
