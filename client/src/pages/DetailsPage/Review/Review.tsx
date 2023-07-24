@@ -68,6 +68,8 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
     }
     const fetchUserData = async () => {
       try {
+        const currentToken = getCookie('jwtToken');
+        if (!currentToken) return;
         const response = await api.get(`/members/mypage`, {
           headers: {
             'Content-Type': 'application/json',
