@@ -5,12 +5,14 @@ interface movieListProps {
 }
 
 interface MoviePosterProps {
-  movieId: string;
-  title: string;
-  releaseDate: string;
-  score: number;
-  bookmarked: boolean;
-  posterUrl: string;
+  movie: {
+    docId: string;
+    title: string;
+    releaseDate: string;
+    score: number;
+    bookmarked: boolean;
+    posters: string;
+  };
 }
 
 const shortMovieList: React.FC<movieListProps> = ({ movies }) => {
@@ -19,12 +21,12 @@ const shortMovieList: React.FC<movieListProps> = ({ movies }) => {
       {movies.map((movie: MoviePosterProps, index: number) => (
         <MoviePoster
           key={index}
-          movieId={movie.movieId}
-          title={movie.title}
-          releaseDate={movie.releaseDate}
-          score={movie.score}
-          bookmarked={movie.bookmarked}
-          posterUrl={movie.posterUrl}
+          movieId={movie.movie.docId}
+          title={movie.movie.title}
+          releaseDate={movie.movie.releaseDate}
+          score={movie.movie.score}
+          bookmarked={movie.movie.bookmarked}
+          posterUrl={movie.movie.posters}
         />
       ))}
     </div>
