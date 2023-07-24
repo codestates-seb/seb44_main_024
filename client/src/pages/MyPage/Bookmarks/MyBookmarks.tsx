@@ -34,7 +34,7 @@ const MyBookmarks = ({ id }: MyBookmarkProps) => {
     };
 
     fetchBookmarks();
-  }, []);
+  }, [id, token]);
 
   // api 연결 후 수정
   const bookmarkList = [...bookmarks];

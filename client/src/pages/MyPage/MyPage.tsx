@@ -10,7 +10,9 @@ import { getCookie } from '../../utils/cookie';
 const MyPage = () => {
   //TODO: hook으로 분리
   const token = getCookie('jwtToken');
+  const [isLoading, setIsLoading] = useState(true);
   // const [username, setName] = useState<string>('name');
+  const [reviews, setReview] = useState([]);
   const [reviewCounter, setReviewCounter] = useState<number>(0);
 
   const [user, setUser] = useState<User>({
@@ -41,6 +43,8 @@ const MyPage = () => {
             reviews: 0,
             memberId: data.memberId,
           });
+          setIsLoading(false);
+          // console.log(user);
         } else {
           console.log('failed to fetch UserInfo:', res.data);
         }
@@ -51,12 +55,19 @@ const MyPage = () => {
 
     fetchInfo();
   }, []);
-
+  if (isLoading) {
+    return <div> Loading...</div>;
+  }
   return (
     <div className="flex flex-col justify-center px-20">
       <UserInfo info={user} />
       <MyBookmarks id={user.memberId} />
-      <MyReviews reviewCounter={user.reviews} setReviewCount={setReviewCounter} />
+      <MyReviews
+        reviews={reviews}
+        setReview={setReview}
+        reviewCounter={user.reviews}
+        setReviewCount={setReviewCounter}
+      />
       <DeleteUserBtn id={user.memberId} />
     </div>
   );
