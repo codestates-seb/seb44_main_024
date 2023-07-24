@@ -16,10 +16,10 @@ const Header = () => {
   };
   const handleSearchInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchInput.length > 1) {
+    if (searchInput.length > 0) {
       navigate(`/search?keyword=${searchInput}`);
     } else {
-      alert('검색어는 최소 두 글자 이상 입력해주세요.');
+      alert('검색어는 최소 한 글자 이상 입력해주세요.');
     }
   };
 
