@@ -40,6 +40,7 @@ const InfoEditModal = ({ setModalOpen, username, password, imgUrl }: InfoProps) 
       },
     })
       .then((res) => {
+        console.log(res);
         console.log('수정 완료');
       })
       .catch((err) => {
