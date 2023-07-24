@@ -1,5 +1,5 @@
 import api from '../assets/api/axiosInstance';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReviewTop from './ReviewTop/ReviewTop';
 import ReviewBottom from './ReviewBottom/ReviewBottom';
 import Comment from './Comment/Comment';
@@ -12,12 +12,15 @@ import { useNavigate } from 'react-router-dom';
 
 export interface ReviewProps {
   review: ReviewContent;
+  pageNumber?: string | number;
 }
 
-const Review = ({ review }: ReviewProps) => {
+const Review = ({ review, pageNumber }: ReviewProps) => {
   const token = getCookie('jwtToken'); // 로그인 기능 완성시 사용
+  const isLoggedIn = Boolean(getCookie('jwtToken'));
   const [isExpandOpen, setIsExandOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [userId, setUserId] = useState<number | null>(null);
 
   const navigate = useNavigate();
 
@@ -33,6 +36,9 @@ const Review = ({ review }: ReviewProps) => {
 
   //리뷰 삭제(DELETE 요청) // 예상 endpoint: `/reviews/${review.reviewId}`
   const handleReviewDelete = async () => {
+    if (!isLoggedIn) {
+      return;
+    }
     try {
       const response = await api.delete(`/reviews/${review.reviewId}`, {
         headers: {
@@ -42,12 +48,34 @@ const Review = ({ review }: ReviewProps) => {
       });
       console.log(response);
       alert('삭제되었습니다.');
-      navigate(`/movies/${review.docId}?page=1`);
+      if (pageNumber === '1' || pageNumber === 1) {
+        window.location.reload();
+      } else {
+        navigate(`/movies/${review.docId}?page=1`);
+      }
     } catch (err) {
       console.error(err);
       alert('에러가 발생했습니다. 다시 시도해주세요: ' + err);
     }
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await api.get(`/members/mypage`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUserId(response.data.memberId);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUserData();
+  }, [token]);
+  console.log(userId);
 
   return (
     <>
@@ -58,12 +86,25 @@ const Review = ({ review }: ReviewProps) => {
             <p className="font-medium">{review.content}</p>
             <div>
               {/* 수정 및 삭제버튼 쿠키의 유저정보(아마 id)와 해당 리뷰의 유저id가 일치하는 경우에만 렌더링 */}
-              <button onClick={openModal} className="mr-2 text-gray-400">
+              {userId === review.user.memberId ? (
+                <>
+                  <button onClick={openModal} className="mr-2 text-gray-400">
+                    수정
+                  </button>
+                  <button
+                    onClick={handleReviewDelete}
+                    className=" p-1 text-red-500 hover:bg-red-50"
+                  >
+                    삭제
+                  </button>
+                </>
+              ) : null}
+              {/* <button onClick={openModal} className="mr-2 text-gray-400">
                 수정
               </button>
               <button onClick={handleReviewDelete} className=" p-1 text-red-500 hover:bg-red-50">
                 삭제
-              </button>
+              </button> */}
             </div>
           </div>
           <ReviewBottom review={review} />

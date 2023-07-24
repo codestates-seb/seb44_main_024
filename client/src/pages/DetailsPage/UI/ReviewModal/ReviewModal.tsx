@@ -6,9 +6,10 @@ export interface ModalProps {
   closeModal: CloseModalFn;
   movieId?: string;
   review?: ReviewContent;
+  pageNumber?: string | number;
 }
 
-const ReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
+const ReviewModal = ({ closeModal, movieId, review, pageNumber }: ModalProps) => {
   const preventModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
@@ -24,7 +25,12 @@ const ReviewModal = ({ closeModal, movieId, review }: ModalProps) => {
         onClick={preventModalClick}
         className="h-[450px] w-[500px] bg-white p-5"
       >
-        <ModalForm closeModal={closeModal} movieId={movieId} review={review} />
+        <ModalForm
+          closeModal={closeModal}
+          movieId={movieId}
+          review={review}
+          pageNumber={pageNumber}
+        />
       </div>
     </div>
   );
