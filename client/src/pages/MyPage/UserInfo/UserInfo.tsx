@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { User } from '../assets/types/User';
 import ProfileImg from '../UI/ProfileImg';
-import InfoEditModal from './InfoEditModal';
+// import InfoEditModal from './InfoEditModal';
 // import axios from 'axios';
 
 //테스트용 유저 정보
