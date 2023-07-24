@@ -5,6 +5,7 @@ interface movieListProps {
 }
 
 interface MoviePosterProps {
+  movieId: string;
   title: string;
   releaseDate: string;
   score: number;
@@ -18,6 +19,7 @@ const shortMovieList: React.FC<movieListProps> = ({ movies }) => {
       {movies.map((movie: MoviePosterProps, index: number) => (
         <MoviePoster
           key={index}
+          movieId={movie.movieId}
           title={movie.title}
           releaseDate={movie.releaseDate}
           score={movie.score}
