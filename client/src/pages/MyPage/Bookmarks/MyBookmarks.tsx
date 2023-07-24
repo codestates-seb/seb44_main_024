@@ -1,18 +1,26 @@
 import ShortMovieList from '../UI/ShortMovieList';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { getCookie } from '../../../utils/cookie';
 
 interface MyBookmarkProps {
   id: number;
 }
 
 const MyBookmarks = ({ id }: MyBookmarkProps) => {
+  const token = getCookie('jwtToken');
   const [bookmarks, setBookmark] = useState([]);
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
         const res = await axios.get(
-          `http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/${id}/bookmarks`
+          `http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/${id}/bookmarks`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (res.status === 200) {
           const data = res.data;

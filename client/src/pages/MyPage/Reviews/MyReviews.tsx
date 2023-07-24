@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ShortMovieList from '../UI/ShortMovieList';
 import axios from 'axios';
+import { getCookie } from '../../../utils/cookie';
 // import { movies } from '../../UI/datalist';
 
 interface MyReviewProps {
@@ -10,12 +11,19 @@ interface MyReviewProps {
 
 const MyReviews = ({ reviewCounter, setReviewCount }: MyReviewProps) => {
   // TODO: 페이지네이션 컴포넌트 만들고 페이지네이션으로 변경
+  const token = getCookie('jwtToken');
   const [reviews, setReview] = useState([]);
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/reviews?page=1'
+          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/reviews?page=1',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (res.status === 200) {
           const data = res.data;

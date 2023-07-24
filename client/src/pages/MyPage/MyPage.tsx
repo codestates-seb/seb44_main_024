@@ -5,14 +5,16 @@ import MyReviews from './Reviews/MyReviews';
 import UserInfo from './UserInfo/UserInfo';
 import DeleteUserBtn from './UI/deleteUserBtn';
 import { User } from './assets/types/User';
+import { getCookie } from '../../utils/cookie';
 
 const MyPage = () => {
   //TODO: hook으로 분리
-  const [username, setName] = useState<string>('name');
+  const token = getCookie('jwtToken');
+  // const [username, setName] = useState<string>('name');
   const [reviewCounter, setReviewCounter] = useState<number>(0);
 
   const [user, setUser] = useState<User>({
-    username: username,
+    username: 'name',
     reviews: reviewCounter,
     memberId: 0,
   });
@@ -21,14 +23,21 @@ const MyPage = () => {
     const fetchInfo = async () => {
       try {
         const res = await axios.get(
-          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/mypage'
+          'http://ec2-54-180-85-209.ap-northeast-2.compute.amazonaws.com:8080/members/mypage',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         if (res.status === 200) {
           const data = res.data;
-          setName(data.username);
+          // console.log(data);
+          // setName(data.username);
           setUser({
-            username: username,
+            username: data.username,
             reviews: 0,
             memberId: data.memberId,
           });
