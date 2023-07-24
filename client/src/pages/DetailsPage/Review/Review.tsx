@@ -73,7 +73,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
         const response = await api.get(`/members/mypage`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer `,
           },
         });
         setUserId(response.data.memberId);
@@ -82,14 +82,15 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
         if (errorResponse.response && errorResponse.response.status === 401) {
           removeCookie('jwtToken');
           setIsLoggedIn(false);
-          // alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+          navigate('/');
+          // alert('세션이 만료되었습니다. 다시 로그인 해주세요.')
         } else {
           console.error(err);
         }
       }
     };
     fetchUserData();
-  }, [token, isLoggedIn]);
+  }, [token, isLoggedIn, navigate]);
 
   return (
     <>
