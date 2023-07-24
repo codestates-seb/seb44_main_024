@@ -44,7 +44,7 @@
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 |                                     <img alt="김어진" src="client\public\img\profile5.png" height="100" width="100">                                      |                   <img alt="박세빈" src="client\public\img\profile6.png" height="100" width="100">                   | <img alt="황성재" src="client\public\img\profile7.png" height="100" width="100"> |
 |                                                        [@kimaj2001](https://github.com/kimaj2001)                                                         |                                      [@ParkSebin](https://github.com/parks3bin)                                      |                        [@hsj159755](hsj159755@gmail.com)                         |
-| <p align="left">리뷰 CRUD <br/>리뷰 좋아요 기능 <br/> 영화 API 사용하여 관련 기능 구현(메인페이지,상세페이지,영화 검색,추천 영화,장르 검색,태그 검색)</p> | <p align="left">회원가입 <br/>자체 로그인 (Spring Security, JWT 토큰 발급, 인증 및 권한 부여) <br/> OAuth 로그인</p> |                            회원가입 <br/>로그인 <br/>                            |
+| <p align="left">리뷰 CRUD <br/>리뷰 좋아요 기능 <br/> 영화 API 사용하여 관련 기능 구현<br/>(메인페이지,상세페이지,<br/>영화 검색,추천 영화,<br/>장르 검색,태그 검색)</p> | <p align="left">회원가입 <br/>자체 로그인 (Spring Security, JWT 토큰 발급, 인증 및 권한 부여) <br/> OAuth 로그인</p> |                            회원가입 <br/>로그인 <br/>                            |
 
 <br />
 <br />
