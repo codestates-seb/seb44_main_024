@@ -14,7 +14,7 @@ import Spinner from '../../components/Spinner';
 import { getCookie } from '../../utils/cookie'; // 로그인 기능 완성시 사용
 
 const DetailsPage = () => {
-  const isLoggedIn = Boolean(getCookie('accessToken')); // 로그인 기능 완성시 사용
+  const isLoggedIn = Boolean(getCookie('jwtToken')); // 로그인 기능 완성시 사용
   const movieDetail = useAppSelector(selectMovieDetails);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +38,7 @@ const DetailsPage = () => {
       try {
         const response = await api.get(`/movies/${movieId}?page=${pageNumber}`);
         dispatch(fetchMovieSuccess(response.data));
-        setTotalReviews(response.data.movie.review_count);
+        setTotalReviews(response.data.pageInfo.totalElements);
         setIsLoading(false);
       } catch (err) {
         console.error(err);
@@ -80,7 +80,7 @@ const DetailsPage = () => {
           {/* 리뷰 */}
           <div className="mx-auto my-0 max-w-[1320px] p-8">
             <div className="mb-6 flex justify-between">
-              <p className="text-xl font-medium">리뷰 {movieDetail?.movie.review_count}개</p>
+              <p className="text-xl font-medium">리뷰 {movieDetail?.pageInfo.totalElements}개</p>
               <button
                 onClick={openModal}
                 className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
