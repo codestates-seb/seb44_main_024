@@ -36,9 +36,6 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
 
   //리뷰 삭제(DELETE 요청) // 예상 endpoint: `/reviews/${review.reviewId}`
   const handleReviewDelete = async () => {
-    if (!isLoggedIn) {
-      return;
-    }
     try {
       const response = await api.delete(`/reviews/${review.reviewId}`, {
         headers: {
@@ -60,6 +57,9 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
     const fetchUserData = async () => {
       try {
         const response = await api.get(`/members/mypage`, {
@@ -74,7 +74,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
       }
     };
     fetchUserData();
-  }, [token]);
+  }, [token, isLoggedIn]);
   console.log(userId);
 
   return (
