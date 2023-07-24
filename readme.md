@@ -5,7 +5,7 @@
 </div>
 </br>
 
-<div  align="center">
+<div  align="left">
 
 - **팀 명 :** 코딩24시⏰
 - **프로젝트 명 :** MovieLog
@@ -90,8 +90,6 @@ https://docs.google.com/document/d/14iwRrKFCwTG8JSXJxOXTuhqbzYRPH--943AKqX9UDvo/
 
 https://www.notion.so/codestates/24-1fc4d0cd773c46aa826335772cc4edd7?p=fee5256469d64225ad1bd896f3f50d7e&pm=s
 <br/>
-
-### 화면 정의서
 
 <br/>
 
