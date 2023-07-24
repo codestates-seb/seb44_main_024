@@ -25,8 +25,9 @@ const MyPage = () => {
 
         if (res.status === 200) {
           const data = res.data;
+          setName(data.username);
           setUser({
-            username: data.username,
+            username: username,
             reviews: 0,
             memberId: data.memberId,
           });
@@ -43,7 +44,7 @@ const MyPage = () => {
 
   return (
     <div className="flex flex-col justify-center px-20">
-      <UserInfo info={user} setName={setName} />
+      <UserInfo info={user} />
       <MyBookmarks id={user.memberId} />
       <MyReviews reviewCounter={user.reviews} setReviewCount={setReviewCounter} />
     </div>
