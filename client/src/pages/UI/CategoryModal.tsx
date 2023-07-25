@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 interface ModalProps {
   onClose: () => void;
@@ -59,9 +60,9 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
   console.log('selectedTag : ');
 
   return (
-    <div className="fixed left-48 top-20  z-50 flex w-80 flex-row items-center justify-center gap-2 border bg-white p-1">
-      <div className="mr-5 flex w-1/2 flex-col  text-center">
-        장르별
+    <div className="fixed left-48 top-20 z-50 flex w-80 gap-4 rounded border-4 border-mainblack bg-maingray shadow-2xl">
+      <div className="flex w-1/2 flex-col p-6">
+        <p className="mb-4">장르별</p>
         {genres.map((genre, index) => (
           <button
             key={index}
@@ -69,14 +70,14 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
               handleGenreClick(genre);
               closeModal();
             }}
-            className="text-2xl hover:bg-mainyellow"
+            className="mb-2 flex py-1 text-xl font-semibold hover:bg-mainyellow"
           >
             {genre}
           </button>
         ))}
       </div>
-      <div className="mr-5 flex w-1/2 flex-col  text-center">
-        #태그별
+      <div className="flex w-1/2 flex-col p-6">
+        <p className="mb-4">#태그별</p>
         {tags.map((tag, index) => (
           <button
             key={index}
@@ -84,13 +85,17 @@ const CategoryModal: React.FC<ModalProps> = ({ onClose }) => {
               handleTagClick(tag);
               closeModal();
             }}
-            className="text-2xl hover:bg-mainyellow"
+            className="mb-2 flex py-1 text-xl font-semibold hover:bg-mainyellow"
           >
             {tag}
           </button>
         ))}
       </div>
-      <button onClick={closeModal}>닫기</button>
+      <div className="mr-2 mt-6 h-full justify-start text-center text-3xl">
+        <button className="hover:animate-spin" onClick={closeModal}>
+          <AiFillCloseCircle />
+        </button>
+      </div>
     </div>
   );
 };
