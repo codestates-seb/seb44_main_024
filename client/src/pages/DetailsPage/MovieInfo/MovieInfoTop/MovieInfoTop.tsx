@@ -35,7 +35,9 @@ const MovieInfoTop = () => {
           <p className="mr-3 text-2xl font-bold">평점</p>
           <AiFillStar className="mr-1 text-4xl text-theme1" />
           <p className="mr-2 text-3xl font-bold text-theme1">{movieDetail?.movie.score}</p>
-          <p className="text-sm font-medium text-theme3">({movieDetail?.movie.review_count}명)</p>
+          <p className="text-sm font-medium text-theme3">
+            ({movieDetail?.pageInfo.totalElements}명)
+          </p>
         </div>
         <p className="mb-5 font-semibold text-theme3">{movieDetail?.movie.description}</p>
         <p className="mb-4 text-2xl font-bold">감독</p>
