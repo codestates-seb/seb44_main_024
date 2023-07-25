@@ -3,6 +3,7 @@ interface props {
 }
 
 const ProfileImg = ({ url }: props) => {
+  console.log(url);
   return (
     <div className="flex content-center justify-center overflow-hidden">
       <img
