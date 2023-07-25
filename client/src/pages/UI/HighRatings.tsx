@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MoviePoster from './MoivePoster';
+import { BsFillStarFill } from 'react-icons/bs';
 
 interface Movie {
   title: string;
@@ -48,7 +49,8 @@ const HighRatings: React.FC = () => {
 
     return (
       <div className="flex flex-col">
-        <h2 className="ml-14 text-3xl font-bold">
+        <h2 className="ml-14 flex gap-2 text-3xl font-bold">
+          <BsFillStarFill />
           별점 높은 순{' '}
           {showAllMovies ? (
             <button
@@ -61,7 +63,7 @@ const HighRatings: React.FC = () => {
             <></>
           )}
         </h2>
-        <div className="mx-10 -mb-4 flex flex-row flex-wrap justify-between">
+        <div className="mx-10 mb-4 flex flex-row flex-wrap justify-between shadow-lg">
           {moviesToRender.map((movie, index) => (
             <MoviePoster
               key={index}

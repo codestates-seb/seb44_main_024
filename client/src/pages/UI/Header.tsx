@@ -35,7 +35,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-mainyellow px-10 py-6 text-mainblack ">
+    <div className="flex items-center justify-between bg-mainyellow px-10 py-6 text-mainblack shadow-lg">
       <div className="flex flex-row">
         <div className="mr-16 cursor-pointer text-4xl font-bold">
           <Link to="/">MOVIE LOG</Link>

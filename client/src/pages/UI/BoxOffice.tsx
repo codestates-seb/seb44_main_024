@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MoviePoster from './MoivePoster';
+import { BsFillTrophyFill } from 'react-icons/bs';
 
 interface Movie {
   title: string;
@@ -47,7 +48,8 @@ const BoxOfficeMovies: React.FC = () => {
     const moviesToRender = showAllMovies ? movies : movies.slice(0, 5);
     return (
       <div className="flex flex-col">
-        <h2 className="ml-14 mt-14 text-3xl font-bold">
+        <h2 className="ml-14 mt-14 flex gap-2 text-3xl font-bold">
+          <BsFillTrophyFill />
           박스오피스 순위{' '}
           {showAllMovies ? (
             <button
@@ -60,7 +62,7 @@ const BoxOfficeMovies: React.FC = () => {
             <></>
           )}
         </h2>
-        <div className="mx-10 -mb-4 flex flex-row flex-wrap justify-between">
+        <div className="mx-10 mb-4 flex flex-row flex-wrap justify-between shadow-lg">
           {moviesToRender.map((movie, index) => (
             <MoviePoster
               key={index}
