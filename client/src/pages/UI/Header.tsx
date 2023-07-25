@@ -37,14 +37,11 @@ const Header = () => {
   return (
     <div className="flex items-center justify-between bg-mainyellow px-10 py-6 text-mainblack ">
       <div className="flex flex-row">
-        <div className="mr-16 cursor-pointer text-4xl font-bold hover:bg-maingray">
-          <Link to="/">MovieLog</Link>
+        <div className="mr-16 cursor-pointer text-4xl font-bold">
+          <Link to="/">MOVIE LOG</Link>
         </div>
         <div className="flex flex-col">
-          <button
-            onClick={OpenCategoryModal}
-            className="mt-2 cursor-pointer text-2xl font-bold  hover:bg-maingray "
-          >
+          <button onClick={OpenCategoryModal} className="mt-2 cursor-pointer text-2xl font-bold">
             Categories
           </button>
           {isCategoryOpen && (
@@ -63,22 +60,22 @@ const Header = () => {
             onChange={handleSearchInputChange}
             type="text"
             placeholder="검색"
-            className="w-32 border-b-2 border-maindarkgray bg-mainyellow px-4 py-2" //focus:outline-none
+            className="w-32 border-b-2 border-maindarkgray bg-mainyellow p-2 focus:outline-none"
           />
           <button
             type="submit"
-            className="mt-2 border-b-2 border-maindarkgray px-4 py-2 text-mainblack hover:bg-maingray"
+            className="mt-2 border-b-2 border-maindarkgray px-4 py-2 text-mainblack"
           >
             <BsSearch />
           </button>
         </form>
         {!getCookie('jwtToken') ? (
           <div className="flex flex-row">
-            <div className="mr-4 mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
-              <Link to="/login">Login</Link>
+            <div className="mr-3 mt-3 cursor-pointer rounded border-2 border-mainblack bg-mainblack p-2 font-semibold text-white hover:border-solid hover:border-mainblack hover:bg-transparent hover:text-mainblack">
+              <Link to="/login">로그인</Link>
             </div>
-            <div className="mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
-              <Link to="/signup">Sign Up</Link>
+            <div className="mt-3 cursor-pointer rounded border-2 border-mainblack bg-mainblack p-2 font-semibold text-white hover:border-solid hover:border-mainblack hover:bg-transparent hover:text-mainblack">
+              <Link to="/signup">회원가입</Link>
             </div>
           </div>
         ) : (
