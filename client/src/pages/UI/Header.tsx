@@ -60,7 +60,7 @@ const Header = () => {
             onChange={handleSearchInputChange}
             type="text"
             placeholder="검색"
-            className="w-32 border-b-2 border-maindarkgray bg-mainyellow p-2 focus:outline-none"
+            className="w-48 border-b-2 border-maindarkgray bg-mainyellow p-2 focus:outline-none"
           />
           <button
             type="submit"
@@ -80,7 +80,7 @@ const Header = () => {
           </div>
         ) : (
           <div className="flex flex-row">
-            <div className="mr-4 mt-3 cursor-pointer text-xl font-bold text-mainblack hover:bg-maingray">
+            <div className="mr-4 mt-3 cursor-pointer text-xl font-bold text-mainblack">
               <Link to="/mypage">MyPage</Link>
             </div>
             <div className="w-36">

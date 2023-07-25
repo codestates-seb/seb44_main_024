@@ -82,7 +82,7 @@ const DetailsPage = () => {
               <p className="text-xl font-medium">리뷰 {movieDetail?.pageInfo.totalElements}개</p>
               <button
                 onClick={openModal}
-                className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
+                className="w-24 rounded-lg bg-theme2 text-theme4 hover:bg-theme3"
               >
                 리뷰등록
               </button>
