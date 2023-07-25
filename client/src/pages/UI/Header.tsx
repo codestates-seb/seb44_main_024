@@ -37,9 +37,9 @@ const Header = () => {
   return (
     <div className="flex items-center justify-between bg-mainyellow px-10 py-6 text-mainblack shadow-lg">
       <div className="flex flex-row">
-        <div className="mr-16 cursor-pointer text-4xl font-bold">
+        <h1 className="mr-16 cursor-pointer text-4xl font-extrabold">
           <Link to="/">MOVIE LOG</Link>
-        </div>
+        </h1>
         <div className="flex flex-col">
           <button onClick={OpenCategoryModal} className="mt-2 cursor-pointer text-2xl font-bold">
             Categories
