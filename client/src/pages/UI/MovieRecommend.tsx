@@ -48,17 +48,20 @@ const MovieRecommend: React.FC = () => {
 
     return (
       <div className="flex flex-col">
-        <h2 className="ml-5 mt-5 text-3xl font-medium">
+        <h2 className="ml-14 mt-14 flex gap-2 text-2xl font-bold">
           이런 영화는 어떠신가요?{' '}
           {showAllMovies ? (
-            <button className="ml-5 text-xl hover:bg-mainyellow" onClick={handleShowMoreMovies}>
+            <button
+              className="ml-5 text-xl text-maindarkgray hover:bg-mainyellow"
+              onClick={handleShowMoreMovies}
+            >
               더보기 접기
             </button>
           ) : (
             <></>
           )}
         </h2>
-        <div className="mx-10 -mb-4 flex flex-row flex-wrap justify-between p-2">
+        <div className="mx-10 flex flex-row flex-wrap justify-between">
           {moviesToRender.map((movie, index) => (
             <MoviePoster
               key={index}
@@ -79,8 +82,11 @@ const MovieRecommend: React.FC = () => {
     <div className="p-2">
       {renderMovies()}
       {!showAllMovies && movies.length > 5 && (
-        <button className="mb-10 ml-24 text-2xl hover:bg-mainyellow" onClick={handleShowMoreMovies}>
-          관련 영화 더보기
+        <button
+          className="mb-10 ml-14 text-xl font-semibold hover:bg-mainyellow"
+          onClick={handleShowMoreMovies}
+        >
+          관련 영화 더보기 ▾
         </button>
       )}
     </div>
