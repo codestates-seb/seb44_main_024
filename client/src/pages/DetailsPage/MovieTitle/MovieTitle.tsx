@@ -21,7 +21,7 @@ const MovieTitle = () => {
       }}
     >
       <div
-        className={`mx-auto ${
+        className={`mx-auto drop-shadow-lg ${
           movieDetail?.movie.backdrop ? 'mt-60' : 'mt-32'
         }  w-[1320px] px-8 text-white`}
       >

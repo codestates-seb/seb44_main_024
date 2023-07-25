@@ -16,6 +16,9 @@ const SocialLogin = () => {
         <img className="cursor-pointer" src={facebook} alt="facebook_icon" />
         <img className="cursor-pointer" src={apple} alt="apple_icon" />
       </div>
+      <p className="mt-4 text-sm text-mainblack">
+        SNS 로그인은 준비 중인 기능입니다. 다음에 만나요!
+      </p>
     </aside>
   );
 };

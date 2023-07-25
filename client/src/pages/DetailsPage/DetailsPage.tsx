@@ -82,7 +82,7 @@ const DetailsPage = () => {
               <p className="text-xl font-medium">리뷰 {movieDetail?.pageInfo.totalElements}개</p>
               <button
                 onClick={openModal}
-                className="w-24 rounded-lg bg-theme1 text-white hover:bg-yellow-200"
+                className="w-24 rounded-lg bg-theme2 text-theme4 hover:bg-theme3"
               >
                 리뷰등록
               </button>
@@ -96,7 +96,7 @@ const DetailsPage = () => {
           </div>
           {/* 추천영화 */}
           <div className="mx-auto my-0 max-w-[1320px] p-8">
-            <p className="text-xl font-bold">비슷한 장르의 영화</p>
+            <p className="ml-6 text-xl font-bold">비슷한 장르의 영화</p>
             <div className="flex justify-between">
               {movieDetail?.recommended_movies &&
                 movieDetail?.recommended_movies.map((movie, index) => (
