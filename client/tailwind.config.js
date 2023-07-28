@@ -6,6 +6,7 @@ export default {
       bp1: { max: '640px' },
       bp2: { max: '817px' },
       bp3: { max: '980px' },
+      bp4: { min: '640px' },
     },
     extend: {
       colors: {
