@@ -20,6 +20,9 @@ export default {
         maindarkgray: '#5A5A5A',
         maingray: '#F2F2F2',
       },
+      backgroundImage: {
+        gradient: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
+      },
     },
   },
   plugins: [],

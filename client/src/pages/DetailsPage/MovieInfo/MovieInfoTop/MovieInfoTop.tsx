@@ -23,10 +23,10 @@ const MovieInfoTop = () => {
                 }`
           }
           target="_blank"
-          className="flex h-14 items-center justify-center rounded-xl bg-theme1 hover:bg-yellow-200 bp1:mb-7 bp1:w-full"
+          className="flex h-14 items-center justify-center rounded-xl bg-theme2 hover:bg-theme3 bp1:mb-7 bp1:w-full"
           rel="noreferrer"
         >
-          <FaPlay className=" text-2xl text-white" />
+          <FaPlay className=" text-2xl text-theme4" />
         </a>
       </div>
 
