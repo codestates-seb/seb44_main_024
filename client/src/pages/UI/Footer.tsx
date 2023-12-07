@@ -1,12 +1,13 @@
 const Footer = () => {
   return (
-    <div className="mt-16 flex flex-col items-center bg-mainyellow">
-      <div className="text-4xl">MovieLog</div>
-      <div className="text-xs	">Made by </div>
-
-      <div className="text-xs	">FE 동빈, 윤경, 유빈, 승현</div>
-      <div className="text-xs	">BE 어진, 세빈, 성재</div>
-    </div>
+    <footer className="mt-28 flex w-full flex-row items-center justify-between bg-gray-700 px-6 py-2">
+      <div className="cursor-pointer text-4xl font-bold text-mainyellow">MOVIE LOG</div>
+      <div className="text-right text-maingray">
+        Made by
+        <div className="">FE 동빈, 윤경, 유빈, 승현</div>
+        <div className="">BE 어진, 세빈, 성재</div>
+      </div>
+    </footer>
   );
 };
 

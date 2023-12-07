@@ -131,7 +131,7 @@ const Review = ({ review, pageNumber }: ReviewProps) => {
             <IoMdArrowDropdown onClick={expandOpenHandler} className="cursor-pointer text-2xl" />
           )}
 
-          <p>댓글 (댓글 개수)개</p>
+          <p>댓글 기능은 준비 중입니다..</p>
         </div>
         {isExpandOpen ? (
           <>

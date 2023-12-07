@@ -29,7 +29,7 @@ const CommentForm = ({ prevCommentInput }: PrevCommentInputProps) => {
         className="mr-3 grow resize-none border border-solid p-1 text-sm"
       ></textarea>
       <div className="flex items-center">
-        <button type="submit" className="rounded-lg bg-theme1 px-5 py-1 text-white">
+        <button type="submit" className="rounded-lg bg-theme2 px-5 py-1 text-white">
           {prevCommentInput ? '수정' : '등록'}
         </button>
       </div>

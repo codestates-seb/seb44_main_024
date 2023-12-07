@@ -1,7 +1,7 @@
 <h1>🎬MovieLog🎬</h1>
 
 <div  align="center">
-  <img width="70%" src="client\public\img\logo.png">
+  <img width="70%" src="client\public\img\logo2.png">
 </div>
 </br>
 
